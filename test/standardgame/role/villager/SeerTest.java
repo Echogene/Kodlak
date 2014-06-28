@@ -2,21 +2,30 @@ package standardgame.role.villager;
 
 import model.choice.single.FirstSingleChoiceFactory;
 import model.effect.Effect;
-import org.junit.Test;
-import org.mockito.ArgumentCaptor;
+import model.message.ListMessageSender;
 import model.player.Player;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Collections;
 
-import static standardgame.alignment.VillagerWerewolfAlignment.VILLAGER;
-import static standardgame.alignment.VillagerWerewolfAlignment.WEREWOLF;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+import static standardgame.alignment.VillagerWerewolfAlignment.VILLAGER;
+import static standardgame.alignment.VillagerWerewolfAlignment.WEREWOLF;
 import static standardgame.phase.DayNightPhase.NIGHT;
 
 public class SeerTest {
+
+	private ListMessageSender messageSender;
+
+	@Before
+	public void setUp() throws Exception {
+		messageSender = new ListMessageSender();
+	}
 
 	@Test
 	public void testSeerCanSeeThemselves() throws Exception {
@@ -24,13 +33,16 @@ public class SeerTest {
 		when(player.getName()).thenReturn("Player");
 		when(player.getVisibleAlignment()).thenReturn(VILLAGER);
 
-		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
-		Seer seerRole = new Seer(player, Collections.singletonList(player), new FirstSingleChoiceFactory<>());
+		Seer seerRole = new Seer(
+				player,
+				Collections.singletonList(player),
+				new FirstSingleChoiceFactory<>(),
+				messageSender
+		);
 		Effect effect = seerRole.getEffect(NIGHT);
 		effect.perform();
 
-		verify(player).sendMessage(captor.capture());
-		String messageSentToSeer = captor.getValue();
+		String messageSentToSeer = messageSender.getSentMessages().get(0);
 		assertTrue(messageSentToSeer.contains("VILLAGER"));
 	}
 
@@ -43,17 +55,16 @@ public class SeerTest {
 		when(otherPlayer.getName()).thenReturn("Player");
 		when(otherPlayer.getVisibleAlignment()).thenReturn(VILLAGER);
 
-		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
 		Seer seerRole = new Seer(
 				seer,
 				Arrays.asList(otherPlayer, seer),
-				new FirstSingleChoiceFactory<>()
+				new FirstSingleChoiceFactory<>(),
+				messageSender
 		);
 		Effect effect = seerRole.getEffect(NIGHT);
 		effect.perform();
 
-		verify(seer).sendMessage(captor.capture());
-		String messageSentToSeer = captor.getValue();
+		String messageSentToSeer = messageSender.getSentMessages().get(0);
 		assertTrue(messageSentToSeer.contains("VILLAGER"));
 	}
 
@@ -66,17 +77,16 @@ public class SeerTest {
 		when(otherPlayer.getName()).thenReturn("Player");
 		when(otherPlayer.getVisibleAlignment()).thenReturn(WEREWOLF);
 
-		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
 		Seer seerRole = new Seer(
 				seer,
 				Arrays.asList(otherPlayer, seer),
-				new FirstSingleChoiceFactory<>()
+				new FirstSingleChoiceFactory<>(),
+				messageSender
 		);
 		Effect effect = seerRole.getEffect(NIGHT);
 		effect.perform();
 
-		verify(seer).sendMessage(captor.capture());
-		String messageSentToSeer = captor.getValue();
+		String messageSentToSeer = messageSender.getSentMessages().get(0);
 		assertTrue(messageSentToSeer.contains("WEREWOLF"));
 	}
 
@@ -88,7 +98,8 @@ public class SeerTest {
 		Seer seerRole = new Seer(
 				seer,
 				Arrays.asList(seer),
-				new FirstSingleChoiceFactory<>()
+				new FirstSingleChoiceFactory<>(),
+				messageSender
 		);
 
 		assertEquals(VILLAGER, seerRole.getAlignment());
