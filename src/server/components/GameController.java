@@ -39,6 +39,17 @@ public class GameController {
 		newPlayer.setLeft(left);
 	}
 
+	@RequestMapping(value = "/editPlayer.do", method = POST)
+	@ResponseBody
+	public void editPlayer(
+			@RequestParam("id") String id,
+			@RequestParam("name") String name
+	) {
+
+		StandardPlayer player = game.getPlayerById(id);
+		player.setName(name);
+	}
+
 	@RequestMapping(value = "/getPlayers.do", method = GET, produces = APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public Set<StandardPlayer> getPlayers() {

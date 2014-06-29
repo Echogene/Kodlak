@@ -16,18 +16,46 @@ button {
 	background: #f0f0f0;
 }
 
+.control {
+	>input {
+		font-size: large;
+		width: 100px;
+	}
+}
+
 .control.addPlayer {
 	text-align: center;
 
 	>input {
 		display: block;
-		width: 100px;
-		font-size: large;
 	}
 	>button {
 		display: block;
 		margin-left: auto;
 		margin-right: auto;
+	}
+}
+
+.control.player {
+	&.edit {
+		>input {
+			display: block;
+		}
+		>span {
+			display: none;
+		}
+	}
+	&.read {
+		>input {
+			display: none;
+		}
+		>span {
+			border: 1px solid #777;
+			min-width: 100px;
+			text-align: center;
+			padding: 5px 0px 5px 0px;
+			display: block;
+		}
 	}
 }
 

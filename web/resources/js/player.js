@@ -66,3 +66,67 @@ AddPlayerControl.prototype._onSuccess = function() {
 AddPlayerControl.prototype.cancel = function() {
 	this.control.remove();
 };
+
+//----------------------------------------------------------------------------------------------------------------------
+
+function PlayerControl(player) {
+	this.player = player;
+	this.mode = 'read';
+}
+
+PlayerControl.prototype.create = function() {
+	var control = $('<div/>').addClass('player control ' + this.mode);
+	control.css({
+		position: 'absolute',
+		top: this.player.top + '%',
+		left: this.player.left + '%'
+	});
+	this.control = control;
+
+	var input = $('<input/>');
+	input.val(this.player.name);
+	var owner = this;
+	input.keypress(function(e) {
+		if (e.keyCode === 13) {
+			owner.finish();
+		} else if (e.keyCode === 27) {
+			owner.cancel();
+		}
+	});
+	this.input = input;
+	control.append(input);
+
+	var text = $('<span/>');
+	text.text(this.player.name);
+	text.dblclick(function(e) {
+		owner.control.removeClass('read');
+		owner.mode = 'edit';
+		owner.control.addClass('edit');
+		owner.input.select();
+		e.stopPropagation();
+	});
+	this.text = text;
+	control.append(text);
+
+	return control;
+};
+
+PlayerControl.prototype.finish = function() {
+	this.player.name = this.input.val();
+	var owner = this;
+	$.post(
+		"editPlayer.do",
+		{
+			id: owner.player.id,
+			name: owner.player.name
+		}
+	);
+	this.text.text(this.player.name);
+	this.cancel();
+};
+
+PlayerControl.prototype.cancel = function() {
+	this.control.removeClass('edit');
+	this.mode = 'read';
+	this.control.addClass('read');
+};

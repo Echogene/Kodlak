@@ -47,12 +47,8 @@ PlayerCanvas.prototype.refresh = function() {
 };
 
 PlayerCanvas.prototype._renderPlayer = function(player) {
-	var playerDiv = $('<div/>').addClass('player');
-	playerDiv.text(player.name);
-	playerDiv.css({
-		position: 'absolute',
-		top: player.top + '%',
-		left: player.left + '%'
-	});
-	this.canvas.append(playerDiv);
+	var playerControl = new PlayerControl(player);
+
+	var control =  playerControl.create();
+	this.canvas.append(control);
 };

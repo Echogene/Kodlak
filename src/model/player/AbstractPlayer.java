@@ -15,7 +15,7 @@ import java.util.List;
 public abstract class AbstractPlayer<P extends Phase, A extends Alignment, S extends Status>
 		implements Player<P, A, S> {
 
-	protected final String name;
+	protected String name;
 
 	protected final List<Role<P, A>> roles = new ArrayList<>();
 
@@ -36,6 +36,10 @@ public abstract class AbstractPlayer<P extends Phase, A extends Alignment, S ext
 	@Override
 	public String getName() {
 		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override

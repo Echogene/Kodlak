@@ -23,6 +23,8 @@ public class StandardGame<S extends PlayerMessageSender>
 	private final MessageSenderFactory<S> messageSenderFactory;
 	private final Map<Player<?, ?, ?>, S> messageSenders = new HashMap<>();
 
+	private int currentId = 0;
+
 	public StandardGame(MessageSenderFactory<S> messageSenderFactory) {
 		this.messageSenderFactory = messageSenderFactory;
 	}
@@ -33,12 +35,23 @@ public class StandardGame<S extends PlayerMessageSender>
 		StandardPlayer player = new StandardPlayer(
 				name,
 				resolver,
-				new StandardStatus()
+				new StandardStatus(),
+				Integer.toString(currentId++)
 		);
 		players.add(player);
 
 		S messageSender = messageSenderFactory.create(player);
 		messageSenders.put(player, messageSender);
 		return player;
+	}
+
+	public StandardPlayer getPlayerById(String id) {
+
+		for (StandardPlayer player : players) {
+			if (id.equals(player.getId())) {
+				return player;
+			}
+		}
+		return null;
 	}
 }

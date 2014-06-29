@@ -11,15 +11,18 @@ import standardgame.player.status.StandardStatus;
  */
 public class StandardPlayer extends AbstractPlayer<DayNightPhase,VillagerWerewolfAlignment,StandardStatus> {
 
+	private final String id;
 	private double top;
 	private double left;
 
 	public StandardPlayer(
 			String name,
 			AlignmentResolver<VillagerWerewolfAlignment> resolver,
-			StandardStatus startingStatus
+			StandardStatus startingStatus,
+			String id
 	) {
 		super(name, resolver, startingStatus);
+		this.id = id;
 	}
 
 	public double getTop() {
@@ -36,5 +39,9 @@ public class StandardPlayer extends AbstractPlayer<DayNightPhase,VillagerWerewol
 
 	public void setLeft(double left) {
 		this.left = left;
+	}
+
+	public String getId() {
+		return id;
 	}
 }
