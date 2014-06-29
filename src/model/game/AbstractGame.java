@@ -14,12 +14,13 @@ import java.util.Set;
 /**
  * @author Steven Weston
  */
-public abstract class AbstractGame<P extends Phase, A extends Alignment, S extends Status> implements Game<P, A, S> {
+public abstract class AbstractGame<P extends Phase, A extends Alignment, S extends Status, Y extends Player<P, A, S>>
+		implements Game<P, A, S, Y> {
 
 	/**
 	 * The set of players in the game.
 	 */
-	protected final Set<Player<P, A, S>> players = new HashSet<>();
+	protected final Set<Y> players = new HashSet<>();
 
 	/**
 	 * A list of roles in order of priority.
@@ -30,7 +31,7 @@ public abstract class AbstractGame<P extends Phase, A extends Alignment, S exten
 	public abstract void addPlayer(String name);
 
 	@Override
-	public Set<Player<P, A, S>> getPlayers() {
+	public Set<Y> getPlayers() {
 		return players;
 	}
 }

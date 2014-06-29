@@ -10,7 +10,7 @@ import java.util.Set;
 /**
  * @author Steven Weston
  */
-public interface Game<P extends Phase, A extends Alignment, S extends Status> {
+public interface Game<P extends Phase, A extends Alignment, S extends Status, Y extends Player<P, A, S>> {
 
-	Set<Player<P, A, S>> getPlayers();
+	Set<Y> getPlayers();
 }

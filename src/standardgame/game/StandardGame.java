@@ -17,7 +17,7 @@ import java.util.Map;
  * @author Steven Weston
  */
 public class StandardGame<S extends PlayerMessageSender>
-		extends AbstractGame<DayNightPhase, VillagerWerewolfAlignment, StandardStatus> {
+		extends AbstractGame<DayNightPhase, VillagerWerewolfAlignment, StandardStatus, StandardPlayer> {
 
 	private final VillagerWerewolfAlignmentResolver resolver = new VillagerWerewolfAlignmentResolver();
 	private final MessageSenderFactory<S> messageSenderFactory;

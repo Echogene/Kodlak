@@ -15,13 +15,13 @@ import java.util.List;
 public abstract class AbstractPlayer<P extends Phase, A extends Alignment, S extends Status>
 		implements Player<P, A, S> {
 
-	private final String name;
+	protected final String name;
 
-	private final List<Role<P, A>> roles = new ArrayList<>();
+	protected final List<Role<P, A>> roles = new ArrayList<>();
 
 	private final AlignmentResolver<A> resolver;
 
-	private final S status;
+	protected final S status;
 
 	protected AbstractPlayer(
 			String name,
