@@ -1,15 +1,10 @@
-var testAjax = function() {
-	$.getJSON("getPlayers.do", {
-			parameter: $("#nameInput").val()
-		},
-		function() {
-			$(document.body).append($('<div/>').text("hello"));
-		}
-	);
-};
-
-function AddPlayerControl() {
+/**
+ * @param {function(string)=} onSuccess a function that takes the name of the added player
+ * @constructor
+ */
+function AddPlayerControl(onSuccess) {
 	this.name = "";
+	this.onSuccess = onSuccess;
 }
 
 AddPlayerControl.prototype.create = function() {
@@ -20,8 +15,10 @@ AddPlayerControl.prototype.create = function() {
 	input.val(this.name);
 	var owner = this;
 	input.keypress(function(e) {
-		if (e.which === 13) {
+		if (e.keyCode === 13) {
 			owner._submit();
+		} else if (e.keyCode === 27) {
+			owner.cancel();
 		}
 	});
 	this.input = input;
@@ -46,8 +43,8 @@ AddPlayerControl.prototype._submit = function() {
 			"addPlayer.do",
 			{
 				name: owner.name,
-				top: owner.control.position().top / owner.control.parent().height() * 100,
-				left: owner.control.position().left / owner.control.parent().width() * 100
+				top: getPercentageTop(owner.control),
+				left: getPercentageLeft(owner.control)
 			},
 			owner._onSuccess.bind(owner)
 		);
@@ -55,12 +52,17 @@ AddPlayerControl.prototype._submit = function() {
 };
 
 AddPlayerControl.prototype._onSuccess = function() {
-	this.name = "";
-	this.input.val(this.name);
-
+	if (this.onSuccess) {
+		this.onSuccess(this.name);
+	}
 	this.control.remove();
+	this.name = "";
 //	this.button.finish();
 //	var oldBackgroundColor = this.button.css("background-color");
 //	this.button.css("background-color", "#20f020");
 //	this.button.animate({"background-color": oldBackgroundColor}, 1000);
+};
+
+AddPlayerControl.prototype.cancel = function() {
+	this.control.remove();
 };

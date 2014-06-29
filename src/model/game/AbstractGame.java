@@ -28,7 +28,7 @@ public abstract class AbstractGame<P extends Phase, A extends Alignment, S exten
 	protected final List<Role> roles = new ArrayList<>();
 
 
-	public abstract void addPlayer(String name);
+	public abstract Y addPlayer(String name);
 
 	@Override
 	public Set<Y> getPlayers() {

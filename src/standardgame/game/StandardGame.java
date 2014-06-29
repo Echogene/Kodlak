@@ -28,7 +28,7 @@ public class StandardGame<S extends PlayerMessageSender>
 	}
 
 	@Override
-	public void addPlayer(String name) {
+	public StandardPlayer addPlayer(String name) {
 
 		StandardPlayer player = new StandardPlayer(
 				name,
@@ -39,5 +39,6 @@ public class StandardGame<S extends PlayerMessageSender>
 
 		S messageSender = messageSenderFactory.create(player);
 		messageSenders.put(player, messageSender);
+		return player;
 	}
 }

@@ -28,8 +28,15 @@ public class GameController {
 
 	@RequestMapping(value = "/addPlayer.do", method = POST)
 	@ResponseBody
-	public void addPlayer(@RequestParam("name") String name) {
-		game.addPlayer(name);
+	public void addPlayer(
+			@RequestParam("name") String name,
+			@RequestParam("top") Double top,
+			@RequestParam("left") Double left
+	) {
+
+		StandardPlayer newPlayer = game.addPlayer(name);
+		newPlayer.setTop(top);
+		newPlayer.setLeft(left);
 	}
 
 	@RequestMapping(value = "/getPlayers.do", method = GET, produces = APPLICATION_JSON_VALUE)

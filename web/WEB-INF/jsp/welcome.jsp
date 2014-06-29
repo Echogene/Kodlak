@@ -3,17 +3,19 @@
 <head>
     <title>Welcome</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main.css" />
+    <script type="text/javascript" src = "${pageContext.request.contextPath}/resources/js/util.js"></script>
     <script type="text/javascript" src = "${pageContext.request.contextPath}/resources/js/player.js"></script>
+    <script type="text/javascript" src = "${pageContext.request.contextPath}/resources/js/player_canvas.js"></script>
     <script type="text/javascript" src = "/webjars/jquery/2.1.1/jquery.min.js"></script>
     <script type="text/javascript" src = "/webjars/jquery-ui/1.11.0/jquery-ui.min.js"></script>
 </head>
 <body>
-    <div id="addPlayerContainer"></div>
+    <div id="playerCanvasContainer"></div>
     <script>
-        var addPlayer = new AddPlayerControl();
-        var control = addPlayer.create();
-        $('#addPlayerContainer').append(control);
+        var playerCanvas = new PlayerCanvas();
+        var canvas = playerCanvas.create();
+        $('#playerCanvasContainer').append(canvas);
+        playerCanvas.refresh();
     </script>
-    Hello world!
 </body>
 </html>
