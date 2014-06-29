@@ -27,6 +27,7 @@ public class GameController {
 	private final StandardGame<LoggedMessageSender> game = new StandardGame<>(messageSenderFactory);
 
 	@RequestMapping(value = "/addPlayer.do", method = POST)
+	@ResponseBody
 	public void addPlayer(@RequestParam("name") String name) {
 		game.addPlayer(name);
 	}
@@ -34,7 +35,6 @@ public class GameController {
 	@RequestMapping(value = "/getPlayers.do", method = GET, produces = APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public Set<StandardPlayer> getPlayers() {
-
 		return game.getPlayers();
 	}
 }
