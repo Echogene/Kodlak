@@ -79,13 +79,19 @@ PlayerControl.prototype.create = function() {
 	control.css({
 		position: 'absolute',
 		top: this.player.top + '%',
-		left: this.player.left + '%'
+		left: this.player.left + '%',
+		cursor: 'move'
+	});
+	var owner = this;
+	control.draggable({
+		stop: function() {
+			owner.finish();
+		}
 	});
 	this.control = control;
 
 	var input = $('<input/>');
 	input.val(this.player.name);
-	var owner = this;
 	input.keypress(function(e) {
 		if (e.keyCode === 13) {
 			owner.finish();
@@ -113,13 +119,12 @@ PlayerControl.prototype.create = function() {
 
 PlayerControl.prototype.finish = function() {
 	this.player.name = this.input.val();
+	this.player.top = getPercentageTop(this.control);
+	this.player.left = getPercentageLeft(this.control);
 	var owner = this;
 	$.post(
 		"editPlayer.do",
-		{
-			id: owner.player.id,
-			name: owner.player.name
-		}
+		owner.player
 	);
 	this.text.text(this.player.name);
 	this.cancel();
