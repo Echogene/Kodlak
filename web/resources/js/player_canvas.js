@@ -12,12 +12,8 @@ PlayerCanvas.prototype.create = function() {
 	canvas.dblclick(function(e) {
 		var relativeX = (e.pageX - canvas.position().left) / canvas.width() * 100;
 		var relativeY = (e.pageY - canvas.position().top) / canvas.height() * 100;
-		var addPlayerControl = new AddPlayerControl(function(name) {
-			owner._renderPlayer({
-				name: name,
-				top: relativeY,
-				left: relativeX
-			});
+		var addPlayerControl = new AddPlayerControl(function(player) {
+			owner._renderPlayer(player);
 		});
 		var control = addPlayerControl.create();
 		canvas.append(control);

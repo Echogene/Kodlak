@@ -26,9 +26,9 @@ public class GameController {
 	private final LoggedMessageSenderFactory messageSenderFactory = new LoggedMessageSenderFactory(log);
 	private final StandardGame<LoggedMessageSender> game = new StandardGame<>(messageSenderFactory);
 
-	@RequestMapping(value = "/addPlayer.do", method = POST)
+	@RequestMapping(value = "/addPlayer.do", method = GET)
 	@ResponseBody
-	public void addPlayer(
+	public StandardPlayer addPlayer(
 			@RequestParam("name") String name,
 			@RequestParam("top") Double top,
 			@RequestParam("left") Double left
@@ -37,7 +37,7 @@ public class GameController {
 		StandardPlayer newPlayer = game.addPlayer(name);
 		newPlayer.setTop(top);
 		newPlayer.setLeft(left);
-		// todo: send down the player object
+		return newPlayer;
 	}
 
 	@RequestMapping(value = "/editPlayer.do", method = POST)

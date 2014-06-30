@@ -1,5 +1,7 @@
+
+
 /**
- * @param {function(string)=} onSuccess a function that takes the name of the added player
+ * @param {function(Player)=} onSuccess a function that takes the name of the added player
  * @constructor
  */
 function AddPlayerControl(onSuccess) {
@@ -39,7 +41,7 @@ AddPlayerControl.prototype._submit = function() {
 	this.name = this.input.val();
 	if (this.name.trim() !== "") {
 		var owner = this;
-		$.post(
+		$.getJSON(
 			"addPlayer.do",
 			{
 				name: owner.name,
@@ -51,9 +53,9 @@ AddPlayerControl.prototype._submit = function() {
 	}
 };
 
-AddPlayerControl.prototype._onSuccess = function() {
+AddPlayerControl.prototype._onSuccess = function(player) {
 	if (this.onSuccess) {
-		this.onSuccess(this.name);
+		this.onSuccess(player);
 	}
 	this.control.remove();
 	this.name = "";
