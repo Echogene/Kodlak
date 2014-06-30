@@ -37,6 +37,7 @@ public class GameController {
 		StandardPlayer newPlayer = game.addPlayer(name);
 		newPlayer.setTop(top);
 		newPlayer.setLeft(left);
+		// todo: send down the player object
 	}
 
 	@RequestMapping(value = "/editPlayer.do", method = POST)
