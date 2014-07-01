@@ -79,10 +79,8 @@ function PlayerControl(player) {
 PlayerControl.prototype.create = function() {
 	var control = $('<div/>').addClass('player control ' + this.mode);
 	control.css({
-		position: 'absolute',
 		top: this.player.top + '%',
-		left: this.player.left + '%',
-		cursor: 'move'
+		left: this.player.left + '%'
 	});
 	var owner = this;
 	control.draggable({
@@ -129,6 +127,10 @@ PlayerControl.prototype.finish = function() {
 	this.player.name = this.input.val();
 	this.player.top = getPercentageTop(this.control);
 	this.player.left = getPercentageLeft(this.control);
+	this.control.css({
+		top: this.player.top + '%',
+		left: this.player.left + '%'
+	});
 	var owner = this;
 	$.post(
 		"editPlayer.do",
