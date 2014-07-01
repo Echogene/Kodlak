@@ -60,4 +60,10 @@ public class GameController {
 	public Set<StandardPlayer> getPlayers() {
 		return game.getPlayers();
 	}
+
+	@RequestMapping(value = "/deletePlayer.do", method = POST)
+	@ResponseBody
+	public void deletePlayer(@RequestParam("id") String id) {
+		game.deletePlayer(id);
+	}
 }

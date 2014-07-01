@@ -90,6 +90,11 @@ PlayerControl.prototype.create = function() {
 			owner.finish();
 		}
 	});
+	control.mouseup(function(e) {
+		if (e.which == 2) {
+			owner.delete();
+		}
+	});
 	this.control = control;
 
 	var input = $('<input/>');
@@ -130,6 +135,15 @@ PlayerControl.prototype.finish = function() {
 	);
 	this.text.text(this.player.name);
 	this.cancel();
+};
+
+PlayerControl.prototype.delete = function() {
+	var owner = this;
+	$.post(
+		"deletePlayer.do",
+		{id: owner.player.id}
+	);
+	this.control.remove();
 };
 
 PlayerControl.prototype.cancel = function() {

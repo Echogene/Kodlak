@@ -54,4 +54,9 @@ public class StandardGame<S extends PlayerMessageSender>
 		}
 		return null;
 	}
+
+	public void deletePlayer(String id) {
+
+		players.remove(getPlayerById(id));
+	}
 }
