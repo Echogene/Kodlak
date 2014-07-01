@@ -1,6 +1,7 @@
+@borderColor: #777;
+
 button {
-	border: 1px solid #777;
-	border-radius: 6px;
+	border: 1px solid @borderColor;
 	background-color: #ccc;
 	box-shadow: inset 0 0 2px 2px #bbb;
 	padding: 3px;
@@ -10,10 +11,26 @@ button {
 	}
 }
 
+@sidebarWidth: 300px;
+#sidebarContainer {
+	height: 100%;
+	width: @sidebarWidth;
+	float: left;
+	background: #e0e0e0;
+	position: relative;
+}
+
+#playerCanvasContainer {
+	height: 100%;
+	width: calc(~"100% - @{sidebarWidth}");
+	float: right;
+	background: #f0f0f0;
+	position: relative;
+}
+
 .playerCanvas {
 	height: 100%;
 	width: 100%;
-	background: #f0f0f0;
 }
 
 .control {
@@ -25,6 +42,7 @@ button {
 
 .control.addPlayer {
 	text-align: center;
+	display: inline-block;
 
 	>input {
 		display: block;
@@ -37,9 +55,11 @@ button {
 }
 
 .control.player {
+	display: inline-block;
+
 	&.edit {
 		>input {
-			display: block;
+			display: inline-block;
 		}
 		>span {
 			display: none;
@@ -50,23 +70,21 @@ button {
 			display: none;
 		}
 		>span {
-			border: 1px solid #777;
+			border: 1px solid @borderColor;
 			min-width: 100px;
 			text-align: center;
 			padding: 5px 0px 5px 0px;
-			display: block;
+			display: inline-block;
 		}
 	}
 }
 
 * {
 	font-family: 'Ubuntu', sans-serif;
-	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
 
 body {
-	position: absolute;
 	margin: 0;
 	height: 100%;
 	width: 100%;

@@ -10,12 +10,19 @@
     <script type="text/javascript" src="/webjars/jquery-ui/1.11.0/jquery-ui.min.js"></script>
 </head>
 <body>
-    <div id="playerCanvasContainer"></div>
+    <div id="main">
+        <div id="sidebarContainer"></div>
+        <div id="playerCanvasContainer"></div>
+    </div>
     <script>
         var playerCanvas = new PlayerCanvas();
         var canvas = playerCanvas.create();
         $('#playerCanvasContainer').append(canvas);
         playerCanvas.refresh();
+
+//        var sidebar = new SideBar();
+//        var sidebarContent = sidebar.create();
+//        $('#sidebarContainer').append(sidebarContent);
     </script>
 </body>
 </html>

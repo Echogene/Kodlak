@@ -88,7 +88,8 @@ PlayerControl.prototype.create = function() {
 	control.draggable({
 		stop: function() {
 			owner.finish();
-		}
+		},
+		containment: 'parent'
 	});
 	control.mouseup(function(e) {
 		if (e.which == 2) {
