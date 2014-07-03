@@ -1,13 +1,26 @@
-
+/**
+ * @typedef {{
+ *     id: string,
+ *     name: string,
+ *     top: number,
+ *     left: number
+ * }}
+ */
+var Player;
 
 /**
  * @param {function(Player)=} onSuccess a function that takes the name of the added player
  * @constructor
+ * @implements Control
  */
 function AddPlayerControl(onSuccess) {
+	Control.call(this);
 	this.name = "";
 	this.onSuccess = onSuccess;
 }
+
+AddPlayerControl.prototype = Object.create(Control.prototype);
+AddPlayerControl.prototype.constructor = AddPlayerControl;
 
 AddPlayerControl.prototype.create = function() {
 	var control = $('<div/>').addClass('addPlayer control');
@@ -91,7 +104,7 @@ PlayerControl.prototype.create = function() {
 	});
 	control.mouseup(function(e) {
 		if (e.which == 2) {
-			owner.delete();
+			owner.remove();
 		}
 	});
 	this.control = control;
@@ -140,7 +153,7 @@ PlayerControl.prototype.finish = function() {
 	this.cancel();
 };
 
-PlayerControl.prototype.delete = function() {
+PlayerControl.prototype.remove = function() {
 	var owner = this;
 	$.post(
 		"deletePlayer.do",

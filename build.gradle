@@ -8,6 +8,12 @@ repositories {
     mavenCentral()
 }
 
+task closureCompiler(type:Exec) {
+    workingDir '.'
+
+    commandLine './closure-compiler.sh'
+}
+
 dependencies {
     compile 'org.springframework:spring-context:4.0.5.RELEASE'
     compile 'org.springframework:spring-web:4.0.5.RELEASE'
