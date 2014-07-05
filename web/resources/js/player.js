@@ -9,7 +9,8 @@
 var Player;
 
 /**
- * @param {function(Player)=} onSuccess a function that takes the name of the added player
+ * A control that adds a player to the game upon finishing.
+ * @param {function(Player)=} onSuccess a function that takes the added player returned from the server
  * @constructor
  * @implements Control
  */
@@ -22,6 +23,10 @@ function AddPlayerControl(onSuccess) {
 AddPlayerControl.prototype = Object.create(Control.prototype);
 AddPlayerControl.prototype.constructor = AddPlayerControl;
 
+/**
+ * @inheritDoc
+ * @return {HTMLElement}
+ */
 AddPlayerControl.prototype.create = function() {
 	var control = $('<div/>').addClass('addPlayer control');
 	this.control = control;
@@ -31,7 +36,7 @@ AddPlayerControl.prototype.create = function() {
 	var owner = this;
 	input.keypress(function(e) {
 		if (e.keyCode === 13) {
-			owner._submit();
+			owner.finish();
 		} else if (e.keyCode === 27) {
 			owner.cancel();
 		}
@@ -42,7 +47,7 @@ AddPlayerControl.prototype.create = function() {
 	var button = $('<button/>');
 	button.text("Add player");
 	button.click(function() {
-		owner._submit();
+		owner.finish();
 	});
 	this.button = button;
 	control.append(button);
@@ -50,7 +55,10 @@ AddPlayerControl.prototype.create = function() {
 	return control;
 };
 
-AddPlayerControl.prototype._submit = function() {
+/**
+ * @inheritDoc
+ */
+AddPlayerControl.prototype.finish = function() {
 	this.name = this.input.val();
 	if (this.name.trim() !== "") {
 		var owner = this;
@@ -66,29 +74,48 @@ AddPlayerControl.prototype._submit = function() {
 	}
 };
 
+/**
+ * What to do after the player when it has been returned from the server.  Use the function passed into the constructor.
+ * And afterwards, remove the control.
+ * @param {Player} player the player passed down from the server
+ * @private
+ */
 AddPlayerControl.prototype._onSuccess = function(player) {
 	if (this.onSuccess) {
 		this.onSuccess(player);
 	}
 	this.control.remove();
 	this.name = "";
-//	this.button.finish();
-//	var oldBackgroundColor = this.button.css("background-color");
-//	this.button.css("background-color", "#20f020");
-//	this.button.animate({"background-color": oldBackgroundColor}, 1000);
 };
 
+/**
+ * @inheritDoc
+ */
 AddPlayerControl.prototype.cancel = function() {
 	this.control.remove();
 };
 
 //----------------------------------------------------------------------------------------------------------------------
 
+/**
+ *
+ * @param player
+ * @constructor
+ * @implements Control
+ */
 function PlayerControl(player) {
+	Control.call(this);
 	this.player = player;
 	this.mode = 'read';
 }
 
+PlayerControl.prototype = Object.create(Control.prototype);
+PlayerControl.prototype.constructor = PlayerControl;
+
+/**
+ * @inheritDoc
+ * @returns {HTMLElement}
+ */
 PlayerControl.prototype.create = function() {
 	var control = $('<div/>').addClass('player control ' + this.mode);
 	control.css({
@@ -136,6 +163,9 @@ PlayerControl.prototype.create = function() {
 	return control;
 };
 
+/**
+ * @inheritDoc
+ */
 PlayerControl.prototype.finish = function() {
 	this.player.name = this.input.val();
 	this.player.top = getPercentageTop(this.control);
@@ -153,6 +183,9 @@ PlayerControl.prototype.finish = function() {
 	this.cancel();
 };
 
+/**
+ * Delete the player and remove the control.
+ */
 PlayerControl.prototype.remove = function() {
 	var owner = this;
 	$.post(
@@ -162,6 +195,9 @@ PlayerControl.prototype.remove = function() {
 	this.control.remove();
 };
 
+/**
+ * @inheritDoc
+ */
 PlayerControl.prototype.cancel = function() {
 	this.control.removeClass('edit');
 	this.mode = 'read';
