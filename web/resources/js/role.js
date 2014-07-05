@@ -19,6 +19,7 @@ function RoleControl(role, number) {
 
 RoleControl.prototype.create = function() {
 	var control = $('<div/>').addClass('role control');
+	control.data('role', this._role);
 	this._control = control;
 
 	var name = $('<span/>').addClass('text');
@@ -40,6 +41,7 @@ RoleControl.prototype._setupDragging = function() {
 	if (this._number > 0) {
 		this._control.draggable({
 			stop: function() {
+				// todo: revert if not dropped onto player
 				owner.decrease();
 			},
 			helper: 'clone',

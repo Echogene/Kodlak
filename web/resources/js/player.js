@@ -16,7 +16,7 @@ var Player;
  */
 function AddPlayerControl(onSuccess) {
 	EditableControl.call(this);
-	this.name = "";
+	this.name = '';
 	this.onSuccess = onSuccess;
 }
 
@@ -45,7 +45,7 @@ AddPlayerControl.prototype.create = function() {
 	control.append(input);
 
 	var button = $('<button/>');
-	button.text("Add player");
+	button.text('Add player');
 	button.click(function() {
 		owner.finish();
 	});
@@ -60,10 +60,10 @@ AddPlayerControl.prototype.create = function() {
  */
 AddPlayerControl.prototype.finish = function() {
 	this.name = this.input.val();
-	if (this.name.trim() !== "") {
+	if (this.name.trim() !== '') {
 		var owner = this;
 		$.getJSON(
-			"addPlayer.do",
+			'addPlayer.do',
 			{
 				name: owner.name,
 				top: getPercentageTop(owner.control),
@@ -85,7 +85,7 @@ AddPlayerControl.prototype._onSuccess = function(player) {
 		this.onSuccess(player);
 	}
 	this.control.remove();
-	this.name = "";
+	this.name = '';
 };
 
 /**
@@ -129,6 +129,30 @@ PlayerControl.prototype.create = function() {
 		},
 		containment: 'parent'
 	});
+	control.droppable({
+		drop: function(event, ui) {
+			var role = ui.draggable.data('role');
+			owner.addRole(role);
+			control.removeClass('dropping');
+			control.finish();
+			var oldBackgroundColor = control.css('background-color');
+			control.css('background-color', '#20f020');
+			control.animate(
+				{'background-color': oldBackgroundColor},
+				1000,
+				function() {
+					control.css('background-color', '');
+				}
+			);
+		},
+		over: function() {
+			control.addClass('dropping');
+		},
+		out: function() {
+			control.removeClass('dropping');
+		},
+		tolerance: 'pointer'
+	});
 	control.mouseup(function(e) {
 		if (e.which == 2) {
 			owner.remove();
@@ -164,6 +188,13 @@ PlayerControl.prototype.create = function() {
 };
 
 /**
+ * @param {Role} role
+ */
+PlayerControl.prototype.addRole = function(role) {
+	alert('Add ' + role.name + ' to ' + this.player.name);
+};
+
+/**
  * @inheritDoc
  */
 PlayerControl.prototype.finish = function() {
@@ -176,7 +207,7 @@ PlayerControl.prototype.finish = function() {
 	});
 	var owner = this;
 	$.post(
-		"editPlayer.do",
+		'editPlayer.do',
 		owner.player
 	);
 	this.text.text(this.player.name);
@@ -189,7 +220,7 @@ PlayerControl.prototype.finish = function() {
 PlayerControl.prototype.remove = function() {
 	var owner = this;
 	$.post(
-		"deletePlayer.do",
+		'deletePlayer.do',
 		{id: owner.player.id}
 	);
 	this.control.remove();
