@@ -14,11 +14,15 @@ Sidebar.prototype.create = function() {
 	var control = $('<div/>').addClass('sidebar control');
 	this._control = control;
 
-	$.each(this._sections, function() {
-		// Here, "this" is the section over which we are iterating.
-		//noinspection JSPotentiallyInvalidUsageOfThis
-		control.append(this.create());
-	});
+	$.each(
+		this._sections,
+		/**
+		 * @this {SidebarSection}
+		 */
+		function() {
+			control.append(this.create());
+		}
+	);
 
 	return control;
 };

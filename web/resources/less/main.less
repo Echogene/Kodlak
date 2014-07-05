@@ -12,11 +12,12 @@ button {
 }
 
 @sidebarWidth: 300px;
+@sidebarColor: #e0e0e0;
 #sidebarContainer {
 	height: 100%;
 	width: @sidebarWidth;
 	float: left;
-	background: #e0e0e0;
+	background: @sidebarColor;
 	position: relative;
 }
 
@@ -78,6 +79,29 @@ button {
 			padding: 5px 0px 5px 0px;
 			display: inline-block;
 		}
+	}
+}
+
+.section {
+	>.heading {
+		text-align: center;
+		font-size: large;
+		padding: 5px 0px;
+	}
+}
+
+.control.role {
+	width: @sidebarWidth;
+	border-bottom: 1px solid @borderColor;
+	border-left: 1px solid @borderColor;
+	border-right: 1px solid @borderColor;
+	background-color: @sidebarColor;
+	text-align: center;
+	padding: 5px 0px;
+	cursor: move;
+
+	&.first, &.ui-draggable-dragging {
+		border-top: 1px solid @borderColor;
 	}
 }
 

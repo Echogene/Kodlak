@@ -7,6 +7,8 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/control.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/player.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/player_canvas.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/sidebar.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/role.js"></script>
     <script type="text/javascript" src="/webjars/jquery/2.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/jquery-ui/1.11.0/jquery-ui.min.js"></script>
 </head>
@@ -21,9 +23,15 @@
         $('#playerCanvasContainer').append(canvas);
         playerCanvas.refresh();
 
-//        var sidebar = new SideBar();
-//        var sidebarContent = sidebar.create();
-//        $('#sidebarContainer').append(sidebarContent);
+        var roleSection = new RoleSection();
+        roleSection.addRole({name: 'Seer'});
+        roleSection.addRole({name: 'Villager'});
+        roleSection.addRole({name: 'Werewolf'});
+
+        var sidebar = new Sidebar();
+        sidebar.addSection(roleSection);
+        var sidebarContent = sidebar.create();
+        $('#sidebarContainer').append(sidebarContent);
     </script>
 </body>
 </html>
