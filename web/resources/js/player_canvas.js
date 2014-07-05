@@ -34,6 +34,9 @@ PlayerCanvas.prototype.create = function() {
 	return canvas;
 };
 
+/**
+ * Refresh the canvas.  Get all players from the server and render a control for each of them.
+ */
 PlayerCanvas.prototype.refresh = function() {
 	var owner = this;
 	$.getJSON(
@@ -48,6 +51,11 @@ PlayerCanvas.prototype.refresh = function() {
 	);
 };
 
+/**
+ * Create a control for the given player, placing it on the canvas.
+ * @param {Player} player
+ * @private
+ */
 PlayerCanvas.prototype._renderPlayer = function(player) {
 	var playerControl = new PlayerControl(player);
 
