@@ -98,8 +98,8 @@ AddPlayerControl.prototype.cancel = function() {
 //----------------------------------------------------------------------------------------------------------------------
 
 /**
- *
- * @param player
+ * A control representing a player.  Double click to edit the name and middle click to delete it.
+ * @param {Player} player
  * @constructor
  * @implements EditableControl
  */
