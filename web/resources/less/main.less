@@ -100,8 +100,25 @@ button {
 	padding: 5px 0px;
 	cursor: move;
 
-	&.first, &.ui-draggable-dragging {
+	&.empty {
+		cursor: default;
+	}
+
+	&:first-child, &.ui-draggable-dragging, &.ui-draggable-dragging + * {
 		border-top: 1px solid @borderColor;
+	}
+
+	>* {
+		display: inline-block;
+	}
+
+	>.text {
+		width: 85%;
+	}
+
+	>.number {
+		width: 15%;
+		border-left: 1px solid @borderColor;
 	}
 }
 

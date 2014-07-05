@@ -8,21 +8,60 @@ var Role;
 /**
  * A control representing a role.  AKA "Controle"
  * @param {Role} role
+ * @param {number} number
  * @constructor
  * @implements Control
  */
-function RoleControl(role) {
+function RoleControl(role, number) {
 	this._role = role;
+	this._number = number;
 }
 
 RoleControl.prototype.create = function() {
 	var control = $('<div/>').addClass('role control');
+	this._control = control;
 
-	control.text(this._role.name);
+	var name = $('<span/>').addClass('text');
+	name.text(this._role.name);
+	control.append(name);
 
-	control.draggable({helper: 'clone', zIndex: 100, opacity: 0.75});
+	var number = $('<span/>').addClass('number');
+	number.text(this._number);
+	this._numberSpan = number;
+	control.append(number);
+
+	this._setupDragging();
 
 	return control;
+};
+
+RoleControl.prototype._setupDragging = function() {
+	var owner = this;
+	if (this._number > 0) {
+		this._control.draggable({
+			stop: function() {
+				owner.decrease();
+			},
+			helper: 'clone',
+			zIndex: 100,
+			opacity: 0.75
+		});
+	} else {
+		this._control.draggable('disable');
+	}
+};
+
+RoleControl.prototype.decrease = function() {
+	this._number = this._number - 1;
+	this._setupDragging();
+	this._numberSpan.text(this._number);
+	if (this._number === 0) {
+		this._control.addClass('empty');
+	}
+};
+
+RoleControl.prototype._finishDragging = function() {
+	this._control.remove();
 };
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -34,10 +73,10 @@ RoleControl.prototype.create = function() {
  */
 function RoleSection() {
 	/**
-	 * @type {Array.<Role>}
+	 * @type {Object.<string, {role: Role, number: number}>}
 	 * @private
 	 */
-	this._roles = [];
+	this._roles = {};
 }
 
 RoleSection.prototype.create = function() {
@@ -48,20 +87,18 @@ RoleSection.prototype.create = function() {
 	heading.text('Roles');
 	control.append(heading);
 
-	var first = true;
+	var roles = $('<div/>').addClass('roles');
+	control.append(roles);
+
 	$.each(
 		this._roles,
 		/**
-		 * @this {Role}
+		 * @this {{role: Role, number: number}}
 		 */
 		function() {
-			var controle = new RoleControl(this);
+			var controle = new RoleControl(this.role, this.number);
 			var controleContent = controle.create();
-			if (first) {
-				controleContent.addClass('first');
-			}
-			control.append(controleContent);
-			first = false;
+			roles.append(controleContent);
 		}
 	);
 
@@ -73,9 +110,14 @@ RoleSection.prototype.create = function() {
  * @param {Role} role
  */
 RoleSection.prototype.addRole = function(role) {
-	this._roles.push(role);
+	var name = role.name;
+	if (this._roles[name]) {
+		this._roles[name].number = this._roles[name].number + 1;
+	} else {
+		this._roles[name] = {role: role, number: 1};
+	}
 	if (this._control) {
-		var controle = new RoleControl(role);
+		var controle = new RoleControl(role, this._roles[name].number);
 		this._control.append(controle.create());
 	}
 };

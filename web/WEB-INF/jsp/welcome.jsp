@@ -26,6 +26,9 @@
         var roleSection = new RoleSection();
         roleSection.addRole({name: 'Seer'});
         roleSection.addRole({name: 'Villager'});
+        roleSection.addRole({name: 'Villager'});
+        roleSection.addRole({name: 'Villager'});
+        roleSection.addRole({name: 'Werewolf'});
         roleSection.addRole({name: 'Werewolf'});
 
         var sidebar = new Sidebar();
