@@ -12,15 +12,15 @@ var Player;
  * A control that adds a player to the game upon finishing.
  * @param {function(Player)=} onSuccess a function that takes the added player returned from the server
  * @constructor
- * @implements Control
+ * @implements EditableControl
  */
 function AddPlayerControl(onSuccess) {
-	Control.call(this);
+	EditableControl.call(this);
 	this.name = "";
 	this.onSuccess = onSuccess;
 }
 
-AddPlayerControl.prototype = Object.create(Control.prototype);
+AddPlayerControl.prototype = Object.create(EditableControl.prototype);
 AddPlayerControl.prototype.constructor = AddPlayerControl;
 
 /**
@@ -101,15 +101,15 @@ AddPlayerControl.prototype.cancel = function() {
  *
  * @param player
  * @constructor
- * @implements Control
+ * @implements EditableControl
  */
 function PlayerControl(player) {
-	Control.call(this);
+	EditableControl.call(this);
 	this.player = player;
 	this.mode = 'read';
 }
 
-PlayerControl.prototype = Object.create(Control.prototype);
+PlayerControl.prototype = Object.create(EditableControl.prototype);
 PlayerControl.prototype.constructor = PlayerControl;
 
 /**

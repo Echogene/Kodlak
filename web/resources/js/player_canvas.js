@@ -1,9 +1,15 @@
-
-
+/**
+ * A canvas on which players can be created, edited and deleted.
+ * @constructor
+ * @implements Control
+ */
 function PlayerCanvas() {
-	this.players = [];
 }
 
+/**
+ * @inheritDoc
+ * @returns {HTMLElement}
+ */
 PlayerCanvas.prototype.create = function() {
 	var canvas = $('<div/>').addClass('playerCanvas');
 	this.canvas = canvas;

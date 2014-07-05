@@ -10,11 +10,22 @@ function Control() {}
 Control.prototype.create = function() {};
 
 /**
+ * @interface
+ * @extends {Control}
+ */
+function EditableControl() {
+	Control.call(this);
+}
+
+EditableControl.prototype = Object.create(Control.prototype);
+EditableControl.prototype.constructor = EditableControl;
+
+/**
  * Finish editing the control, submit data and revert the control to the default state.
  */
-Control.prototype.finish = function() {};
+EditableControl.prototype.finish = function() {};
 
 /**
  * Cancel editing the control and revert the control to the default state.
  */
-Control.prototype.cancel = function() {};
+EditableControl.prototype.cancel = function() {};
