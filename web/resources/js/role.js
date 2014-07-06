@@ -40,9 +40,14 @@ RoleControl.prototype._setupDragging = function() {
 	var owner = this;
 	if (this._number > 0) {
 		this._control.draggable({
+			start: function() {
+				owner._control.data('dropped', false);
+			},
+			revert: "invalid",
 			stop: function() {
-				// todo: revert if not dropped onto player
-				owner.decrease();
+				if (owner._control.data('dropped')) {
+					owner.decrease();
+				}
 			},
 			helper: 'clone',
 			zIndex: 100,
@@ -57,6 +62,7 @@ RoleControl.prototype.decrease = function() {
 	this._number = this._number - 1;
 	this._setupDragging();
 	this._numberSpan.text(this._number);
+	flashBackground(this._numberSpan, '#a0a0a0');
 	if (this._number === 0) {
 		this._control.addClass('empty');
 	}

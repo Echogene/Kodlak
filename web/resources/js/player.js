@@ -131,19 +131,12 @@ PlayerControl.prototype.create = function() {
 	});
 	control.droppable({
 		drop: function(event, ui) {
+			ui.draggable.data('dropped', true);
+
 			var role = ui.draggable.data('role');
 			owner.addRole(role);
 			control.removeClass('dropping');
-			control.finish();
-			var oldBackgroundColor = control.css('background-color');
-			control.css('background-color', '#20f020');
-			control.animate(
-				{'background-color': oldBackgroundColor},
-				1000,
-				function() {
-					control.css('background-color', '');
-				}
-			);
+			flashBackground(control, '#20f020');
 		},
 		over: function() {
 			control.addClass('dropping');
@@ -191,7 +184,7 @@ PlayerControl.prototype.create = function() {
  * @param {Role} role
  */
 PlayerControl.prototype.addRole = function(role) {
-	alert('Add ' + role.name + ' to ' + this.player.name);
+//	alert('Add ' + role.name + ' to ' + this.player.name);
 };
 
 /**
