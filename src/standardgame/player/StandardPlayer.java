@@ -44,4 +44,9 @@ public class StandardPlayer extends AbstractPlayer<DayNightPhase,VillagerWerewol
 	public String getId() {
 		return id;
 	}
+
+	@Override
+	public String toString() {
+		return name;
+	}
 }
