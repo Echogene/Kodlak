@@ -1,11 +1,9 @@
 package model.choice.group;
 
-import model.choice.AbstractChoice;
 import com.sun.istack.internal.NotNull;
-import model.player.Player;
+import model.choice.AbstractChoice;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -13,9 +11,9 @@ import java.util.Set;
  */
 public class GroupChoice<T> extends AbstractChoice<T> {
 
-	protected final @NotNull Set<Player> choosers;
+	protected final @NotNull Set<T> choosers;
 
-	public GroupChoice(@NotNull Set<Player> choosers, @NotNull List<T> choices) {
+	public GroupChoice(@NotNull Set<T> choosers, @NotNull Set<T> choices) {
 		super(choices);
 		if (choosers.isEmpty()) {
 			throw new IllegalArgumentException("There must be at least one chooser.");

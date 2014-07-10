@@ -1,12 +1,10 @@
 package server.components;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import server.components.messagesender.LoggedMessageSender;
-import server.components.messagesender.LoggedMessageSenderFactory;
-import server.components.messagesender.MessageLog;
 import standardgame.game.StandardGame;
 import standardgame.player.StandardPlayer;
 
@@ -22,9 +20,12 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @Controller
 public class GameController {
 
-	private final MessageLog log = new MessageLog();
-	private final LoggedMessageSenderFactory messageSenderFactory = new LoggedMessageSenderFactory(log);
-	private final StandardGame<LoggedMessageSender> game = new StandardGame<>(messageSenderFactory);
+	private final StandardGame game;
+
+	@Autowired
+	public GameController(StandardGame game) {
+		this.game = game;
+	}
 
 	@RequestMapping(value = "/addPlayer.do", method = GET)
 	@ResponseBody

@@ -2,7 +2,7 @@ package model.choice.single;
 
 import model.player.Player;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * @author Steven Weston
@@ -10,7 +10,7 @@ import java.util.List;
 public class FirstSingleChoiceFactory<T> implements SingleChoiceFactory<T, FirstSingleChoice<T>> {
 
 	@Override
-	public FirstSingleChoice<T> create(Player chooser, List<T> choices) {
+	public FirstSingleChoice<T> create(Player chooser, Set<T> choices) {
 
 		return new FirstSingleChoice<>(chooser, choices);
 	}

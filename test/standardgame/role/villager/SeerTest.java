@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -35,7 +36,7 @@ public class SeerTest {
 
 		Seer seerRole = new Seer(
 				player,
-				Collections.singletonList(player),
+				Collections.singleton(player),
 				new FirstSingleChoiceFactory<>(),
 				messageSender
 		);
@@ -57,7 +58,7 @@ public class SeerTest {
 
 		Seer seerRole = new Seer(
 				seer,
-				Arrays.asList(otherPlayer, seer),
+				new HashSet<>(Arrays.asList(otherPlayer, seer)),
 				new FirstSingleChoiceFactory<>(),
 				messageSender
 		);
@@ -79,7 +80,7 @@ public class SeerTest {
 
 		Seer seerRole = new Seer(
 				seer,
-				Arrays.asList(otherPlayer, seer),
+				new HashSet<>(Arrays.asList(otherPlayer, seer)),
 				new FirstSingleChoiceFactory<>(),
 				messageSender
 		);
@@ -97,7 +98,7 @@ public class SeerTest {
 
 		Seer seerRole = new Seer(
 				seer,
-				Arrays.asList(seer),
+				Collections.singleton(seer),
 				new FirstSingleChoiceFactory<>(),
 				messageSender
 		);

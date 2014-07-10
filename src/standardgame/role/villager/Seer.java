@@ -12,7 +12,7 @@ import standardgame.alignment.VillagerWerewolfAlignment;
 import standardgame.phase.DayNightPhase;
 
 import java.text.MessageFormat;
-import java.util.List;
+import java.util.Set;
 
 import static standardgame.alignment.VillagerWerewolfAlignment.VILLAGER;
 
@@ -21,13 +21,13 @@ import static standardgame.alignment.VillagerWerewolfAlignment.VILLAGER;
  */
 public class Seer extends AbstractVillagerRole {
 
-	private final List<Player> players;
+	private final Set<Player> players;
 	private final SingleChoiceFactory<Player, ? extends SingleChoice<Player>> choiceFactory;
 	private final MessageSender messageSender;
 
 	public Seer(
 			Player owner,
-			List<Player> players,
+			Set<Player> players,
 			SingleChoiceFactory<Player, ? extends SingleChoice<Player>> choiceFactory,
 			MessageSender messageSender
 	) {

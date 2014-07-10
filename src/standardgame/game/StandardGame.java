@@ -1,9 +1,9 @@
 package standardgame.game;
 
 import model.game.AbstractGame;
-import model.message.MessageSenderFactory;
-import model.message.PlayerMessageSender;
 import model.player.Player;
+import server.components.messagesender.LoggedMessageSender;
+import server.components.messagesender.LoggedMessageSenderFactory;
 import standardgame.alignment.VillagerWerewolfAlignment;
 import standardgame.alignment.VillagerWerewolfAlignmentResolver;
 import standardgame.phase.DayNightPhase;
@@ -16,16 +16,16 @@ import java.util.Map;
 /**
  * @author Steven Weston
  */
-public class StandardGame<S extends PlayerMessageSender>
+public class StandardGame
 		extends AbstractGame<DayNightPhase, VillagerWerewolfAlignment, StandardStatus, StandardPlayer> {
 
 	private final VillagerWerewolfAlignmentResolver resolver = new VillagerWerewolfAlignmentResolver();
-	private final MessageSenderFactory<S> messageSenderFactory;
-	private final Map<Player<?, ?, ?>, S> messageSenders = new HashMap<>();
+	private final LoggedMessageSenderFactory messageSenderFactory;
+	private final Map<Player<?, ?, ?>, LoggedMessageSender> messageSenders = new HashMap<>();
 
 	private int currentId = 0;
 
-	public StandardGame(MessageSenderFactory<S> messageSenderFactory) {
+	public StandardGame(LoggedMessageSenderFactory messageSenderFactory) {
 		this.messageSenderFactory = messageSenderFactory;
 	}
 
@@ -40,7 +40,7 @@ public class StandardGame<S extends PlayerMessageSender>
 		);
 		players.add(player);
 
-		S messageSender = messageSenderFactory.create(player);
+		LoggedMessageSender messageSender = messageSenderFactory.create(player);
 		messageSenders.put(player, messageSender);
 		return player;
 	}

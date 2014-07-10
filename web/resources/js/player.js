@@ -184,7 +184,14 @@ PlayerControl.prototype.create = function() {
  * @param {Role} role
  */
 PlayerControl.prototype.addRole = function(role) {
-//	alert('Add ' + role.name + ' to ' + this.player.name);
+	var owner = this;
+	$.post(
+		'addRoleToPlayer.do',
+		{
+			playerId: owner.player.id,
+			roleName: role.name.toLowerCase()
+		}
+	);
 };
 
 /**

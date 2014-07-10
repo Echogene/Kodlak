@@ -1,13 +1,13 @@
 package standardgame.role.werewolf;
 
-import standardgame.alignment.VillagerWerewolfAlignment;
 import model.choice.group.GroupChoice;
 import model.effect.Effect;
-import standardgame.phase.DayNightPhase;
 import model.player.Player;
-import model.role.AbstractRole;
+import standardgame.alignment.VillagerWerewolfAlignment;
+import standardgame.phase.DayNightPhase;
+import standardgame.player.StandardPlayer;
+import standardgame.role.StandardRole;
 
-import java.util.List;
 import java.util.Set;
 
 import static standardgame.alignment.VillagerWerewolfAlignment.WEREWOLF;
@@ -15,12 +15,12 @@ import static standardgame.alignment.VillagerWerewolfAlignment.WEREWOLF;
 /**
  * @author Steven Weston
  */
-public class Werewolf extends AbstractRole<DayNightPhase, VillagerWerewolfAlignment> {
+public class Werewolf extends StandardRole {
 
-	private final Set<Player> werewolves;
-	private final List<Player> players;
+	private final Set<StandardPlayer> werewolves;
+	private final Set<StandardPlayer> players;
 
-	public Werewolf(Player owner, Set<Player> werewolves, List<Player> players) {
+	public Werewolf(Player owner, Set<StandardPlayer> werewolves, Set<StandardPlayer> players) {
 		super(owner);
 		this.werewolves = werewolves;
 		this.players = players;
@@ -38,7 +38,7 @@ public class Werewolf extends AbstractRole<DayNightPhase, VillagerWerewolfAlignm
 
 	private void nightAction() {
 
-		GroupChoice<Player> playerChoice = new GroupChoice<>(werewolves, players);
+		GroupChoice<StandardPlayer> playerChoice = new GroupChoice<>(werewolves, players);
 		Player victim = playerChoice.getChoice();
 		victim.kill();
 	}

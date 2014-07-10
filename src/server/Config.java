@@ -1,0 +1,43 @@
+package server;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import server.components.messagesender.LoggedMessageSenderFactory;
+import server.components.messagesender.MessageLog;
+import standardgame.game.StandardGame;
+import standardgame.role.StandardRoleAssigner;
+import standardgame.role.werewolf.WerewolfFactory;
+
+/**
+ * @author Steven Weston
+ */
+@Configuration
+public class Config {
+
+	@Bean
+	public StandardRoleAssigner getRoleFactory() {
+
+		StandardRoleAssigner assigner = new StandardRoleAssigner();
+		StandardGame game = getGame();
+
+		// Add more factories here:
+		assigner.addRoleFactory(new WerewolfFactory(game.getPlayers()));
+
+		return assigner;
+	}
+
+	@Bean
+	public StandardGame getGame() {
+		return new StandardGame(getMessageFactory());
+	}
+
+	@Bean
+	public LoggedMessageSenderFactory getMessageFactory() {
+		return new LoggedMessageSenderFactory(getMessageLog());
+	}
+
+	@Bean
+	public MessageLog getMessageLog() {
+		return new MessageLog();
+	}
+}
