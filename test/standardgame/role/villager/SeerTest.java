@@ -3,9 +3,9 @@ package standardgame.role.villager;
 import model.choice.single.FirstSingleChoiceFactory;
 import model.effect.Effect;
 import model.message.ListMessageSender;
-import model.player.Player;
 import org.junit.Before;
 import org.junit.Test;
+import standardgame.player.StandardPlayer;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -30,7 +30,7 @@ public class SeerTest {
 
 	@Test
 	public void testSeerCanSeeThemselves() throws Exception {
-		Player player = mock(Player.class);
+		StandardPlayer player = mock(StandardPlayer.class);
 		when(player.getName()).thenReturn("Player");
 		when(player.getVisibleAlignment()).thenReturn(VILLAGER);
 
@@ -49,10 +49,10 @@ public class SeerTest {
 
 	@Test
 	public void testSeerCanSeeVillager() throws Exception {
-		Player seer = mock(Player.class);
+		StandardPlayer seer = mock(StandardPlayer.class);
 		when(seer.getName()).thenReturn("Seer");
 
-		Player otherPlayer = mock(Player.class);
+		StandardPlayer otherPlayer = mock(StandardPlayer.class);
 		when(otherPlayer.getName()).thenReturn("Player");
 		when(otherPlayer.getVisibleAlignment()).thenReturn(VILLAGER);
 
@@ -71,10 +71,10 @@ public class SeerTest {
 
 	@Test
 	public void testSeerCanSeeWerewolf() throws Exception {
-		Player seer = mock(Player.class);
+		StandardPlayer seer = mock(StandardPlayer.class);
 		when(seer.getName()).thenReturn("Seer");
 
-		Player otherPlayer = mock(Player.class);
+		StandardPlayer otherPlayer = mock(StandardPlayer.class);
 		when(otherPlayer.getName()).thenReturn("Player");
 		when(otherPlayer.getVisibleAlignment()).thenReturn(WEREWOLF);
 
@@ -93,7 +93,7 @@ public class SeerTest {
 
 	@Test
 	public void testSeerIsVillager() throws Exception {
-		Player seer = mock(Player.class);
+		StandardPlayer seer = mock(StandardPlayer.class);
 		when(seer.getName()).thenReturn("Seer");
 
 		Seer seerRole = new Seer(

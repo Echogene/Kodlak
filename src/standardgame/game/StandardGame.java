@@ -1,7 +1,7 @@
 package standardgame.game;
 
 import model.game.AbstractGame;
-import model.player.Player;
+import model.message.MessageSender;
 import server.components.messagesender.LoggedMessageSender;
 import server.components.messagesender.LoggedMessageSenderFactory;
 import standardgame.alignment.VillagerWerewolfAlignment;
@@ -21,7 +21,7 @@ public class StandardGame
 
 	private final VillagerWerewolfAlignmentResolver resolver = new VillagerWerewolfAlignmentResolver();
 	private final LoggedMessageSenderFactory messageSenderFactory;
-	private final Map<Player<?, ?, ?>, LoggedMessageSender> messageSenders = new HashMap<>();
+	private final Map<StandardPlayer, LoggedMessageSender> messageSenders = new HashMap<>();
 
 	private int currentId = 0;
 
@@ -58,5 +58,9 @@ public class StandardGame
 	public void deletePlayer(String id) {
 
 		players.remove(getPlayerById(id));
+	}
+
+	public MessageSender getMessageSender(StandardPlayer player) {
+		return messageSenders.get(player);
 	}
 }

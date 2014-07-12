@@ -7,9 +7,9 @@ import model.choice.single.SingleChoiceFactory;
 import model.effect.Effect;
 import model.message.Message;
 import model.message.MessageSender;
-import model.player.Player;
 import standardgame.alignment.VillagerWerewolfAlignment;
 import standardgame.phase.DayNightPhase;
+import standardgame.player.StandardPlayer;
 
 import java.text.MessageFormat;
 import java.util.Set;
@@ -21,14 +21,14 @@ import static standardgame.alignment.VillagerWerewolfAlignment.VILLAGER;
  */
 public class Seer extends AbstractVillagerRole {
 
-	private final Set<Player> players;
-	private final SingleChoiceFactory<Player, ? extends SingleChoice<Player>> choiceFactory;
+	private final Set<StandardPlayer> players;
+	private final SingleChoiceFactory<StandardPlayer, ? extends SingleChoice<StandardPlayer>> choiceFactory;
 	private final MessageSender messageSender;
 
 	public Seer(
-			Player owner,
-			Set<Player> players,
-			SingleChoiceFactory<Player, ? extends SingleChoice<Player>> choiceFactory,
+			StandardPlayer owner,
+			Set<StandardPlayer> players,
+			SingleChoiceFactory<StandardPlayer, ? extends SingleChoice<StandardPlayer>> choiceFactory,
 			MessageSender messageSender
 	) {
 		super(owner);
@@ -48,12 +48,12 @@ public class Seer extends AbstractVillagerRole {
 	}
 
 	private void nightAction() {
-		Choice<Player> playerChoice = choiceFactory.create(owner, players);
-		Player target = playerChoice.getChoice();
+		Choice<StandardPlayer> playerChoice = choiceFactory.create(owner, players);
+		StandardPlayer target = playerChoice.getChoice();
 		revealAlignmentOf(target);
 	}
 
-	private void revealAlignmentOf(Player target) {
+	private void revealAlignmentOf(StandardPlayer target) {
 
 		Alignment alignment = target.getVisibleAlignment();
 		messageSender.send(new SeerMessage(target, alignment));
@@ -66,10 +66,10 @@ public class Seer extends AbstractVillagerRole {
 
 	private static class SeerMessage implements Message {
 
-		private final Player target;
+		private final StandardPlayer target;
 		private final Alignment alignment;
 
-		private SeerMessage(Player target, Alignment alignment) {
+		private SeerMessage(StandardPlayer target, Alignment alignment) {
 			this.target = target;
 			this.alignment = alignment;
 		}
