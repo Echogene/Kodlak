@@ -13,17 +13,17 @@ var Role;
  * @implements Control
  */
 function RoleControl(role, number) {
-	this._role = role;
+	this.role = role;
 	this._number = number;
 }
 
 RoleControl.prototype.create = function() {
 	var control = $('<div/>').addClass('role control');
-	control.data('role', this._role);
+	control.data('controle', this);
 	this._control = control;
 
 	var name = $('<span/>').addClass('text');
-	name.text(this._role.name);
+	name.text(this.role.name);
 	control.append(name);
 
 	var number = $('<span/>').addClass('number');
@@ -40,15 +40,7 @@ RoleControl.prototype._setupDragging = function() {
 	var owner = this;
 	if (this._number > 0) {
 		this._control.draggable({
-			start: function() {
-				owner._control.data('dropped', false);
-			},
 			revert: "invalid",
-			stop: function() {
-				if (owner._control.data('dropped')) {
-					owner.decrease();
-				}
-			},
 			helper: 'clone',
 			zIndex: 100,
 			opacity: 0.75

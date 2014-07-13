@@ -131,12 +131,15 @@ PlayerControl.prototype.create = function() {
 	});
 	control.droppable({
 		drop: function(event, ui) {
-			ui.draggable.data('dropped', true);
+			var controle = ui.draggable.data('controle');
 
-			var role = ui.draggable.data('role');
-			owner.addRole(role);
+			owner.addRole(controle.role, function() {
+				ui.draggable.data('dropped', true);
+				flashBackground(control, '#20f020');
+				controle.decrease();
+			});
+
 			control.removeClass('dropping');
-			flashBackground(control, '#20f020');
 		},
 		over: function() {
 			control.addClass('dropping');
@@ -182,14 +185,20 @@ PlayerControl.prototype.create = function() {
 
 /**
  * @param {Role} role
+ * @param {function} onSuccess
  */
-PlayerControl.prototype.addRole = function(role) {
+PlayerControl.prototype.addRole = function(role, onSuccess) {
 	var owner = this;
 	$.post(
 		'addRoleToPlayer.do',
 		{
 			playerId: owner.player.id,
 			roleName: role.name.toLowerCase()
+		},
+		onSuccess
+	).fail(
+		function() {
+			flashBackground(owner.control, '#f03020');
 		}
 	);
 };
