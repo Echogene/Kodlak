@@ -3,6 +3,7 @@ package standardgame.role;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
 import model.role.RoleAssigner;
+import model.role.UnavailableRoleException;
 import standardgame.alignment.VillagerWerewolfAlignment;
 import standardgame.phase.DayNightPhase;
 import standardgame.player.StandardPlayer;
@@ -32,11 +33,15 @@ public class StandardRoleAssigner
 	@Override
 	public StandardRole addRoleToPlayer(
 			StandardPlayer player, String roleName
-	) {
+	) throws UnavailableRoleException {
 
+		if (!availableRoles.contains(roleName)) {
+			throw new UnavailableRoleException();
+		}
 		StandardRoleFactory<?> factory = factories.get(roleName);
 		StandardRole role = factory.create(player);
 		player.getRoles().add(role);
+		availableRoles.remove(roleName);
 		return role;
 	}
 
@@ -44,4 +49,5 @@ public class StandardRoleAssigner
 	public Multiset<String> getAvailableRoles() {
 		return availableRoles;
 	}
+
 }

@@ -1,6 +1,7 @@
 package server.components;
 
 import com.google.common.collect.Multiset;
+import model.role.UnavailableRoleException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,7 +35,8 @@ public class RoleController {
 	public void addRoleToPlayer(
 			@RequestParam("playerId") String playerId,
 			@RequestParam("roleName") String roleName
-	) {
+	) throws UnavailableRoleException {
+
 		roleFactory.addRoleToPlayer(game.getPlayerById(playerId), roleName);
 	}
 
