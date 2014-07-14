@@ -84,6 +84,19 @@ function RoleSection() {
 }
 
 RoleSection.prototype.create = function() {
+	var owner = this;
+	$.ajax({
+		type: 'GET',
+		url: 'getAvailableRoles.do',
+		dataType: 'json',
+		success: function(data) {
+			$.each(data, function(index, name) {
+				owner._addRole(name);
+			});
+		},
+		async: false
+	});
+
 	var control = $('<div/>').addClass('role section');
 	this._control = control;
 
@@ -103,7 +116,6 @@ RoleSection.prototype.create = function() {
 
 	control.append(buttons);
 
-	var owner = this;
 	$.each(
 		this._roles,
 		function(roleName, number) {
@@ -127,22 +139,24 @@ RoleSection.prototype.addRole = function(name) {
 	$.post(
 		'addRole.do',
 		{roleName: name},
-		function() {
-			if (owner._roles[name]) {
-				owner._roles[name] = owner._roles[name] + 1;
-			} else {
-				owner._roles[name] = 1;
-			}
-			if (owner._roleSection) {
-				if (owner._controles[name]) {
-					owner._controles[name].increase();
-				} else {
-					var controle = new RoleControl(name, owner._roles[name]);
-					owner._roleSection.append(controle.create());
-
-					owner._controles[name] = controle;
-				}
-			}
-		}
+		owner._addRole.bind(owner, name)
 	);
+};
+
+RoleSection.prototype._addRole = function(name) {
+	if (this._roles[name]) {
+		this._roles[name] = this._roles[name] + 1;
+	} else {
+		this._roles[name] = 1;
+	}
+	if (this._roleSection) {
+		if (this._controles[name]) {
+			this._controles[name].increase();
+		} else {
+			var controle = new RoleControl(name, this._roles[name]);
+			this._roleSection.append(controle.create());
+
+			this._controles[name] = controle;
+		}
+	}
 };
