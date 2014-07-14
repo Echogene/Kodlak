@@ -24,12 +24,12 @@
         playerCanvas.refresh();
 
         var roleSection = new RoleSection();
-        roleSection.addRole({name: 'Seer'});
-        roleSection.addRole({name: 'Villager'});
-        roleSection.addRole({name: 'Villager'});
-        roleSection.addRole({name: 'Villager'});
-        roleSection.addRole({name: 'Werewolf'});
-        roleSection.addRole({name: 'Werewolf'});
+        roleSection.addRole('seer');
+        roleSection.addRole('villager');
+        roleSection.addRole('villager');
+        roleSection.addRole('villager');
+        roleSection.addRole('werewolf');
+        roleSection.addRole('werewolf');
 
         var sidebar = new Sidebar();
         sidebar.addSection(roleSection);

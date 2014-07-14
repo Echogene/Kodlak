@@ -131,9 +131,10 @@ PlayerControl.prototype.create = function() {
 	});
 	control.droppable({
 		drop: function(event, ui) {
+			/** @type {RoleControl} */
 			var controle = ui.draggable.data('controle');
 
-			owner.addRole(controle.role, function() {
+			owner.addRole(controle.name, function() {
 				ui.draggable.data('dropped', true);
 				flashBackground(control, '#20f020');
 				controle.decrease();
@@ -184,16 +185,16 @@ PlayerControl.prototype.create = function() {
 };
 
 /**
- * @param {Role} role
+ * @param {string} roleName
  * @param {function} onSuccess
  */
-PlayerControl.prototype.addRole = function(role, onSuccess) {
+PlayerControl.prototype.addRole = function(roleName, onSuccess) {
 	var owner = this;
 	$.post(
 		'addRoleToPlayer.do',
 		{
 			playerId: owner.player.id,
-			roleName: role.name.toLowerCase()
+			roleName: roleName.toLowerCase()
 		},
 		onSuccess
 	).fail(

@@ -1,19 +1,12 @@
 /**
- * @typedef {{
- *     name: string
- * }}
- */
-var Role;
-
-/**
  * A control representing a role.  AKA "Controle"
- * @param {Role} role
+ * @param {string} name
  * @param {number} number
  * @constructor
  * @implements Control
  */
-function RoleControl(role, number) {
-	this.role = role;
+function RoleControl(name, number) {
+	this.name = name;
 	this._number = number;
 }
 
@@ -23,7 +16,7 @@ RoleControl.prototype.create = function() {
 	this._control = control;
 
 	var name = $('<span/>').addClass('text');
-	name.text(this.role.name);
+	name.text(this.name.capitalizeFirstLetter());
 	control.append(name);
 
 	var number = $('<span/>').addClass('number');
@@ -37,7 +30,6 @@ RoleControl.prototype.create = function() {
 };
 
 RoleControl.prototype._setupDragging = function() {
-	var owner = this;
 	if (this._number > 0) {
 		this._control.draggable({
 			revert: "invalid",
@@ -60,6 +52,13 @@ RoleControl.prototype.decrease = function() {
 	}
 };
 
+RoleControl.prototype.increase = function() {
+	this._number = this._number + 1;
+	this._setupDragging();
+	this._numberSpan.text(this._number);
+	flashBackground(this._numberSpan, '#a0a0a0');
+};
+
 RoleControl.prototype._finishDragging = function() {
 	this._control.remove();
 };
@@ -73,10 +72,15 @@ RoleControl.prototype._finishDragging = function() {
  */
 function RoleSection() {
 	/**
-	 * @type {Object.<string, {role: Role, number: number}>}
+	 * @type {Object.<string, number>}
 	 * @private
 	 */
 	this._roles = {};
+	/**
+	 * @type {Object.<string, RoleControl>}
+	 * @private
+	 */
+	this._controles = {};
 }
 
 RoleSection.prototype.create = function() {
@@ -88,17 +92,26 @@ RoleSection.prototype.create = function() {
 	control.append(heading);
 
 	var roles = $('<div/>').addClass('roles');
+	this._roleSection = roles;
 	control.append(roles);
 
+	var buttons = $('<div/>').addClass('buttons');
+
+	var addRoleButton = $('<button/>').addClass('addRole');
+	addRoleButton.text("Add role");
+	buttons.append(addRoleButton);
+
+	control.append(buttons);
+
+	var owner = this;
 	$.each(
 		this._roles,
-		/**
-		 * @this {{role: Role, number: number}}
-		 */
-		function() {
-			var controle = new RoleControl(this.role, this.number);
+		function(roleName, number) {
+			var controle = new RoleControl(roleName, number);
 			var controleContent = controle.create();
 			roles.append(controleContent);
+
+			owner._controles[roleName] = controle;
 		}
 	);
 
@@ -107,17 +120,29 @@ RoleSection.prototype.create = function() {
 
 /**
  * Add a role to the section
- * @param {Role} role
+ * @param {string} name The name of the role
  */
-RoleSection.prototype.addRole = function(role) {
-	var name = role.name;
-	if (this._roles[name]) {
-		this._roles[name].number = this._roles[name].number + 1;
-	} else {
-		this._roles[name] = {role: role, number: 1};
-	}
-	if (this._control) {
-		var controle = new RoleControl(role, this._roles[name].number);
-		this._control.append(controle.create());
-	}
+RoleSection.prototype.addRole = function(name) {
+	var owner = this;
+	$.post(
+		'addRole.do',
+		{roleName: name},
+		function() {
+			if (owner._roles[name]) {
+				owner._roles[name] = owner._roles[name] + 1;
+			} else {
+				owner._roles[name] = 1;
+			}
+			if (owner._roleSection) {
+				if (owner._controles[name]) {
+					owner._controles[name].increase();
+				} else {
+					var controle = new RoleControl(name, owner._roles[name]);
+					owner._roleSection.append(controle.create());
+
+					owner._controles[name] = controle;
+				}
+			}
+		}
+	);
 };

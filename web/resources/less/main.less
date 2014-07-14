@@ -93,35 +93,44 @@ button {
 	}
 }
 
-.control.role {
-	width: @sidebarWidth;
-	border-bottom: 1px solid @borderColor;
-	border-left: 1px solid @borderColor;
-	border-right: 1px solid @borderColor;
-	background-color: @sidebarColor;
-	text-align: center;
-	cursor: move;
-
-	&.empty {
-		cursor: default;
-	}
-
-	&:first-child, &.ui-draggable-dragging, &.ui-draggable-dragging + * {
-		border-top: 1px solid @borderColor;
-	}
-
-	>* {
-		display: inline-block;
-		padding: 5px 0px;
-	}
-
-	>.text {
-		width: 85%;
-	}
-
-	>.number {
-		width: 15%;
+.role.section {
+	.control.role {
+		width: @sidebarWidth;
+		border-bottom: 1px solid @borderColor;
 		border-left: 1px solid @borderColor;
+		border-right: 1px solid @borderColor;
+		background-color: @sidebarColor;
+		text-align: center;
+		cursor: move;
+
+		&.empty {
+			cursor: default;
+		}
+
+		&:first-child, &.ui-draggable-dragging, &.ui-draggable-dragging + * {
+			border-top: 1px solid @borderColor;
+		}
+
+		> * {
+			display: inline-block;
+			padding: 5px 0px;
+		}
+
+		> .text {
+			width: 85%;
+		}
+
+		> .number {
+			width: 15%;
+			border-left: 1px solid @borderColor;
+		}
+	}
+
+	>.buttons {
+		padding-top: 5px;
+		>button.addRole {
+			width: 100%;
+		}
 	}
 }
 
