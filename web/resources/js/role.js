@@ -110,9 +110,9 @@ RoleSection.prototype.create = function() {
 
 	var buttons = $('<div/>').addClass('buttons');
 
-	var addRoleButton = $('<button/>').addClass('addRole');
-	addRoleButton.text("Add role");
-	buttons.append(addRoleButton);
+	var addRoleControl = new AddRoleControl(this.addRole.bind(this));
+	this._addRoleControl = addRoleControl;
+	buttons.append(addRoleControl.create());
 
 	control.append(buttons);
 
@@ -140,7 +140,7 @@ RoleSection.prototype.addRole = function(name) {
 		'addRole.do',
 		{roleName: name},
 		owner._addRole.bind(owner, name)
-	);
+	).fail(owner._addRoleControl.fail.bind(owner._addRoleControl));
 };
 
 RoleSection.prototype._addRole = function(name) {
@@ -159,4 +159,70 @@ RoleSection.prototype._addRole = function(name) {
 			this._controles[name] = controle;
 		}
 	}
+};
+
+//----------------------------------------------------------------------------------------------------------------------
+
+/**
+ * @param {function(string)=} onSuccess
+ * @constructor
+ * @implements {EditableControl}
+ */
+function AddRoleControl(onSuccess) {
+	EditableControl.call(this);
+
+	this._onSuccess = onSuccess;
+
+	this._mode = 'read';
+}
+
+AddRoleControl.prototype.create = function() {
+	var owner = this;
+	var control = $('<div/>').addClass('control addRole ' + this._mode);
+
+	var addRoleButton = $('<button/>');
+	addRoleButton.text("Add role");
+	addRoleButton.click(function() {
+		owner._updateMode('edit');
+		owner._addRoleInput.select();
+	});
+	this._addRoleButton = addRoleButton;
+	control.append(addRoleButton);
+
+	var addRoleInput = $('<input/>');
+	this._addRoleInput = addRoleInput;
+	addRoleInput.keypress(function(e) {
+		if (e.keyCode === 13) {
+			owner.finish();
+		} else if (e.keyCode === 27) {
+			owner.cancel();
+		}
+	});
+	this._control = control;
+	control.append(addRoleInput);
+
+	return control;
+};
+
+AddRoleControl.prototype._updateMode = function(mode) {
+	this._control.removeClass(this._mode);
+	this._mode = mode;
+	this._control.addClass(this._mode);
+
+};
+
+AddRoleControl.prototype.cancel = function() {
+	this._updateMode('read');
+};
+
+AddRoleControl.prototype.finish = function() {
+	this._updateMode('read');
+	var roleName = this._addRoleInput.val().trim();
+	if (this._onSuccess && roleName !== '') {
+		this._onSuccess(roleName);
+	}
+};
+
+AddRoleControl.prototype.fail = function() {
+	flashBackground(this._addRoleButton, '#f03020');
 };

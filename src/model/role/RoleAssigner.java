@@ -15,6 +15,8 @@ public interface RoleAssigner<P extends Phase, A extends Alignment, T extends Ro
 
 	Multiset<String> getAvailableRoles();
 
+	boolean isRoleSupported(String roleName);
+
 	default void addRole(String roleName) {
 		getAvailableRoles().add(roleName);
 	}

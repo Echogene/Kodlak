@@ -128,8 +128,29 @@ button {
 
 	>.buttons {
 		padding-top: 5px;
-		>button.addRole {
-			width: 100%;
+		>.addRole.control {
+			>* {
+				width: 100%;
+			}
+
+			&.edit {
+				>button {
+					display: none;
+				}
+
+				>input {
+					display: block;
+				}
+			}
+			&.read {
+				>button {
+					display: block;
+				}
+
+				>input {
+					display: none;
+				}
+			}
 		}
 	}
 }

@@ -50,4 +50,8 @@ public class StandardRoleAssigner
 		return availableRoles;
 	}
 
+	@Override
+	public boolean isRoleSupported(String roleName) {
+		return factories.keySet().contains(roleName);
+	}
 }

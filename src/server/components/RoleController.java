@@ -44,7 +44,11 @@ public class RoleController {
 	@ResponseBody
 	public void addRoleToPlayer(
 			@RequestParam("roleName") String roleName
-	) {
+	) throws UnavailableRoleException {
+
+		if (!roleFactory.isRoleSupported(roleName)) {
+			throw new UnavailableRoleException();
+		}
 		roleFactory.addRole(roleName);
 	}
 
