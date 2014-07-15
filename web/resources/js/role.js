@@ -181,7 +181,7 @@ AddRoleControl.prototype.create = function() {
 	var control = $('<div/>').addClass('control addRole ' + this._mode);
 
 	var addRoleButton = $('<button/>');
-	addRoleButton.text("Add role");
+	addRoleButton.text("Add roles");
 	addRoleButton.click(function() {
 		owner._updateMode('edit');
 		owner._addRoleInput.select();
@@ -216,13 +216,13 @@ AddRoleControl.prototype.cancel = function() {
 };
 
 AddRoleControl.prototype.finish = function() {
-	this._updateMode('read');
-	var roleName = this._addRoleInput.val().trim();
+	var roleName = this._addRoleInput.val().trim().toLowerCase();
 	if (this._onSuccess && roleName !== '') {
 		this._onSuccess(roleName);
 	}
+	this._addRoleInput.select();
 };
 
 AddRoleControl.prototype.fail = function() {
-	flashBackground(this._addRoleButton, '#f03020');
+	flashBackground(this._addRoleInput, '#f03020');
 };
