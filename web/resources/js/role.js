@@ -81,6 +81,12 @@ function RoleSection() {
 	 * @private
 	 */
 	this._controles = {};
+
+	/**
+	 * @type {Array.<string>}
+	 * @private
+	 */
+	this._rolesInOrder = [];
 }
 
 RoleSection.prototype.create = function() {
@@ -117,13 +123,9 @@ RoleSection.prototype.create = function() {
 	control.append(buttons);
 
 	$.each(
-		this._roles,
-		function(roleName, number) {
-			var controle = new RoleControl(roleName, number);
-			var controleContent = controle.create();
-			roles.append(controleContent);
-
-			owner._controles[roleName] = controle;
+		this._rolesInOrder,
+		function(index, roleName) {
+			owner._addControle(roleName, owner._roles[roleName]);
 		}
 	);
 
@@ -131,7 +133,7 @@ RoleSection.prototype.create = function() {
 };
 
 /**
- * Add a role to the section
+ * Add a role to the section and post up this fact to the server.
  * @param {string} name The name of the role
  */
 RoleSection.prototype.addRole = function(name) {
@@ -148,17 +150,26 @@ RoleSection.prototype._addRole = function(name) {
 		this._roles[name] = this._roles[name] + 1;
 	} else {
 		this._roles[name] = 1;
+		this._rolesInOrder.push(name);
+		this._rolesInOrder.sort();
 	}
 	if (this._roleSection) {
 		if (this._controles[name]) {
 			this._controles[name].increase();
 		} else {
-			var controle = new RoleControl(name, this._roles[name]);
-			this._roleSection.append(controle.create());
-
-			this._controles[name] = controle;
+			this._addControle(name, this._roles[name]);
 		}
 	}
+};
+
+RoleSection.prototype._addControle = function(name, number) {
+	var controle = new RoleControl(name, number);
+	var controleContent = controle.create();
+
+	var index = this._rolesInOrder.indexOf(name);
+	insertElementAt(this._roleSection, controleContent, index);
+
+	this._controles[name] = controle;
 };
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -208,7 +219,6 @@ AddRoleControl.prototype._updateMode = function(mode) {
 	this._control.removeClass(this._mode);
 	this._mode = mode;
 	this._control.addClass(this._mode);
-
 };
 
 AddRoleControl.prototype.cancel = function() {

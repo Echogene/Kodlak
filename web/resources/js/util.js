@@ -24,3 +24,17 @@ var flashBackground = function(element, color) {
 String.prototype.capitalizeFirstLetter = function() {
 	return this.charAt(0).toUpperCase() + this.slice(1);
 };
+
+/**
+ * @param {jQuery} element
+ * @param {jQuery} toInsert
+ * @param {number} index
+ */
+var insertElementAt = function(element, toInsert, index) {
+	var children = element.children();
+	if (index === 0) {
+		element.prepend(toInsert);
+	} else if (index < children.length) {
+		children.eq(index - 1).after(toInsert);
+	}
+};
