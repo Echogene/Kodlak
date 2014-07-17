@@ -12,7 +12,9 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
 import org.springframework.stereotype.Component;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.nio.charset.Charset;
 
@@ -27,7 +29,7 @@ public class GsonHttpMessageConverter extends AbstractHttpMessageConverter<Objec
 
 	public static final Charset DEFAULT_CHARSET = Charset.forName("UTF-8");
 
-	private GsonBuilder gsonBuilder = new GsonBuilder()
+	private final GsonBuilder gsonBuilder = new GsonBuilder()
 			.excludeFieldsWithoutExposeAnnotation()
 			.setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
 
