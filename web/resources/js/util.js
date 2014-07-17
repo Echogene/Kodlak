@@ -36,5 +36,7 @@ var insertElementAt = function(element, toInsert, index) {
 		element.prepend(toInsert);
 	} else if (index < children.length) {
 		children.eq(index - 1).after(toInsert);
+	} else if (index == children.length) {
+		element.append(toInsert);
 	}
 };
