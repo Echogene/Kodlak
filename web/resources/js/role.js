@@ -37,6 +37,9 @@ RoleControl.prototype._setupDragging = function() {
 			zIndex: 100,
 			opacity: 0.75
 		});
+		if (this._control.draggable('option', 'disabled')) {
+			this._control.draggable('enable');
+		}
 	} else {
 		this._control.draggable('disable');
 	}
@@ -57,6 +60,9 @@ RoleControl.prototype.increase = function() {
 	this._setupDragging();
 	this._numberSpan.text(this._number);
 	flashBackground(this._numberSpan, '#a0a0a0');
+	if (this._number === 1) {
+		this._control.removeClass('empty');
+	}
 };
 
 RoleControl.prototype._finishDragging = function() {
