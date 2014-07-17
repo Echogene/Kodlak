@@ -73,6 +73,9 @@ RoleControl.prototype.increase = function() {
 };
 
 RoleControl.prototype.removeRole = function() {
+	if (this._number === 0) {
+		return;
+	}
 	var owner = this;
 	$.post(
 		'removeRole.do',
