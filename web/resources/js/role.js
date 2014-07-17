@@ -24,6 +24,13 @@ RoleControl.prototype.create = function() {
 	this._numberSpan = number;
 	control.append(number);
 
+	var owner = this;
+	control.mouseup(function(e) {
+		if (e.which == 2) {
+			owner.removeRole();
+		}
+	});
+
 	this._setupDragging();
 
 	return control;
@@ -65,8 +72,13 @@ RoleControl.prototype.increase = function() {
 	}
 };
 
-RoleControl.prototype._finishDragging = function() {
-	this._control.remove();
+RoleControl.prototype.removeRole = function() {
+	var owner = this;
+	$.post(
+		'removeRole.do',
+		{roleName: owner.name},
+		owner.decrease.bind(owner)
+	)
 };
 
 //----------------------------------------------------------------------------------------------------------------------

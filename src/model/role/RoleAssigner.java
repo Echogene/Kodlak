@@ -20,4 +20,8 @@ public interface RoleAssigner<P extends Phase, A extends Alignment, T extends Ro
 	default void addRole(String roleName) {
 		getAvailableRoles().add(roleName);
 	}
+
+	default void removeRole(String roleName) {
+		getAvailableRoles().remove(roleName);
+	}
 }

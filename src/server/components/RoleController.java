@@ -42,7 +42,7 @@ public class RoleController {
 
 	@RequestMapping(value = "/addRole.do", method = POST)
 	@ResponseBody
-	public void addRoleToPlayer(
+	public void addRole(
 			@RequestParam("roleName") String roleName
 	) throws UnavailableRoleException {
 
@@ -50,6 +50,15 @@ public class RoleController {
 			throw new UnavailableRoleException();
 		}
 		roleFactory.addRole(roleName);
+	}
+
+	@RequestMapping(value = "/removeRole.do", method = POST)
+	@ResponseBody
+	public void removeRole(
+			@RequestParam("roleName") String roleName
+	) throws UnavailableRoleException {
+
+		roleFactory.removeRole(roleName);
 	}
 
 	@RequestMapping(value = "/getAvailableRoles.do", method = GET, produces = APPLICATION_JSON_VALUE)
