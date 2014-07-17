@@ -117,6 +117,37 @@ PlayerControl.prototype.constructor = PlayerControl;
  * @returns {HTMLElement}
  */
 PlayerControl.prototype.create = function() {
+	var control = this._createMainControl();
+	var owner = this;
+
+	var input = $('<input/>');
+	input.val(this.player.name);
+	input.keypress(function(e) {
+		if (e.keyCode === 13) {
+			owner.finish();
+		} else if (e.keyCode === 27) {
+			owner.cancel();
+		}
+	});
+	this.input = input;
+	control.append(input);
+
+	var text = $('<span/>');
+	text.text(this.player.name);
+	text.dblclick(function(e) {
+		owner.control.removeClass('read');
+		owner.mode = 'edit';
+		owner.control.addClass('edit');
+		owner.input.select();
+		e.stopPropagation();
+	});
+	this.text = text;
+	control.append(text);
+
+	return control;
+};
+
+PlayerControl.prototype._createMainControl = function() {
 	var control = $('<div/>').addClass('player control ' + this.mode);
 	control.css({
 		top: this.player.top + '%',
@@ -156,31 +187,6 @@ PlayerControl.prototype.create = function() {
 		}
 	});
 	this.control = control;
-
-	var input = $('<input/>');
-	input.val(this.player.name);
-	input.keypress(function(e) {
-		if (e.keyCode === 13) {
-			owner.finish();
-		} else if (e.keyCode === 27) {
-			owner.cancel();
-		}
-	});
-	this.input = input;
-	control.append(input);
-
-	var text = $('<span/>');
-	text.text(this.player.name);
-	text.dblclick(function(e) {
-		owner.control.removeClass('read');
-		owner.mode = 'edit';
-		owner.control.addClass('edit');
-		owner.input.select();
-		e.stopPropagation();
-	});
-	this.text = text;
-	control.append(text);
-
 	return control;
 };
 
