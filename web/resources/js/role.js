@@ -87,7 +87,7 @@ RoleControl.prototype.removeRole = function() {
 //----------------------------------------------------------------------------------------------------------------------
 
 /**
- *
+ * A section of the side bar for addition and assignment of roles.
  * @constructor
  * @implements SidebarSection
  */
@@ -196,6 +196,7 @@ RoleSection.prototype._addControle = function(name, number) {
 //----------------------------------------------------------------------------------------------------------------------
 
 /**
+ * A control to add a role to the role section.
  * @param {function(string)=} onSuccess
  * @constructor
  * @implements {EditableControl}
