@@ -10,6 +10,9 @@ function RoleControl(name, number) {
 	this._number = number;
 }
 
+/**
+ * @inheritDoc
+ */
 RoleControl.prototype.create = function() {
 	var control = $('<div/>').addClass('role control');
 	control.data('controle', this);
@@ -110,6 +113,9 @@ function RoleSection() {
 	this._rolesInOrder = [];
 }
 
+/**
+ * @inheritDoc
+ */
 RoleSection.prototype.create = function() {
 	var owner = this;
 	$.ajax({
@@ -209,6 +215,9 @@ function AddRoleControl(onSuccess) {
 	this._mode = 'read';
 }
 
+/**
+ * @inheritDoc
+ */
 AddRoleControl.prototype.create = function() {
 	var owner = this;
 	var control = $('<div/>').addClass('control addRole ' + this._mode);
