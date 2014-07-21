@@ -145,9 +145,7 @@ PlayerControl.prototype.create = function() {
 	this.text = text;
 	control.append(text);
 
-	var roles = $('<div/>');
-
-	control.append(roles);
+	control.append(this._createRoles());
 
 	return control;
 };
@@ -193,6 +191,23 @@ PlayerControl.prototype._createMainControl = function() {
 	});
 	this.control = control;
 	return control;
+};
+
+PlayerControl.prototype._createRoles = function() {
+	var roles = $('<div/>').addClass('roles');
+	var owner = this;
+	$.each(
+		this.player.roles,
+		function(index, roleName) {
+			roles.append(owner._createRoleText(roleName));
+		}
+	);
+	return roles;
+};
+
+PlayerControl.prototype._createRoleText = function(rawRoleName) {
+	var roleText = $('<div/>');
+	return roleText.text(rawRoleName.capitalizeFirstLetter())
 };
 
 /**
