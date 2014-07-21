@@ -177,8 +177,7 @@ RoleSection.prototype._addRole = function(name) {
 		this._roles[name] = this._roles[name] + 1;
 	} else {
 		this._roles[name] = 1;
-		this._rolesInOrder.push(name);
-		this._rolesInOrder.sort();
+		insertIntoSortedArray(name, this._rolesInOrder);
 	}
 	if (this._roleSection) {
 		if (this._controles[name]) {

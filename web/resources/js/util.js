@@ -40,3 +40,45 @@ var insertElementAt = function(element, toInsert, index) {
 		element.append(toInsert);
 	}
 };
+
+/**
+ * Find the index where an item should fit into an array (with splice).
+ * @see http://stackoverflow.com/questions/1344500/efficient-way-to-insert-a-number-into-a-sorted-array-of-numbers
+ * @param {T} item
+ * @param {Array.<T>} array
+ * @param {function(T, T): boolean} comparator
+ * @returns {number} the index of the array into which the given item would fit
+ * @template T
+ */
+var findLocationFor = function(item, array, comparator) {
+	var low = 0,
+		high = array.length;
+
+	while (low < high) {
+		var mid = low + high >>> 1;
+		if (comparator(array[mid], item)) {
+			low = mid + 1;
+		} else {
+			high = mid;
+		}
+	}
+	return low;
+};
+
+/**
+ * Find the index where an item should fit into an array (with splice).
+ * @param {T} item
+ * @param {Array.<T>} sortedArray
+ * @param {function(T, T): boolean=} comparator
+ * @returns {number} the index of the array into which the given item would fit
+ * @template T
+ */
+var insertIntoSortedArray = function(item, sortedArray, comparator) {
+	if (!comparator) {
+		comparator = function(a, b) {
+			return a < b;
+		};
+	}
+	var index = findLocationFor(item, sortedArray, comparator);
+	sortedArray.splice(index, 0, item);
+};
