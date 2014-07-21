@@ -3,7 +3,8 @@
  *     id: string,
  *     name: string,
  *     top: number,
- *     left: number
+ *     left: number,
+ *     roles: Array.<String>
  * }}
  */
 var Player;
@@ -143,6 +144,10 @@ PlayerControl.prototype.create = function() {
 	});
 	this.text = text;
 	control.append(text);
+
+	var roles = $('<div/>');
+
+	control.append(roles);
 
 	return control;
 };

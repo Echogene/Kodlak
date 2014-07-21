@@ -5,6 +5,8 @@ import model.alignment.AlignmentResolver;
 import model.phase.Phase;
 import model.player.status.Status;
 import model.role.Role;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +19,7 @@ public abstract class AbstractPlayer<P extends Phase, A extends Alignment, S ext
 
 	protected String name;
 
+	@JsonSerialize(using = RoleListSerializer.class)
 	protected final List<Role<P, A>> roles = new ArrayList<>();
 
 	private final AlignmentResolver<A> resolver;
@@ -53,11 +56,13 @@ public abstract class AbstractPlayer<P extends Phase, A extends Alignment, S ext
 	}
 
 	@Override
+	@JsonIgnore
 	public A getAlignment() {
 		return resolver.resolveAlignment(getRoles());
 	}
 
 	@Override
+	@JsonIgnore
 	public A getVisibleAlignment() {
 		return resolver.resolveVisibleAlignment(getRoles());
 	}

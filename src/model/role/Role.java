@@ -20,4 +20,8 @@ public interface Role<P extends Phase, A extends Alignment> extends Aligned<A> {
 	 * @return the Player that has this role.
 	 */
 	Player getOwner();
+
+	default String getName() {
+		return this.getClass().getSimpleName().toLowerCase();
+	}
 }
