@@ -108,6 +108,7 @@ function PlayerControl(player) {
 	EditableControl.call(this);
 	this.player = player;
 	this.mode = 'read';
+	this._rolesInOrder = [];
 }
 
 PlayerControl.prototype = Object.create(EditableControl.prototype);
@@ -168,11 +169,7 @@ PlayerControl.prototype._createMainControl = function() {
 			/** @type {RoleControl} */
 			var controle = ui.draggable.data('controle');
 
-			owner.addRole(controle.name, function() {
-				ui.draggable.data('dropped', true);
-				flashBackground(control, '#20f020');
-				controle.decrease();
-			});
+			owner.addRole(controle);
 
 			control.removeClass('dropping');
 		},
@@ -195,11 +192,12 @@ PlayerControl.prototype._createMainControl = function() {
 
 PlayerControl.prototype._createRoles = function() {
 	var roles = $('<div/>').addClass('roles');
+	this._roles = roles;
 	var owner = this;
 	$.each(
 		this.player.roles,
 		function(index, roleName) {
-			roles.append(owner._createRoleText(roleName));
+			owner._addRole(roleName);
 		}
 	);
 	return roles;
@@ -211,23 +209,32 @@ PlayerControl.prototype._createRoleText = function(rawRoleName) {
 };
 
 /**
- * @param {string} roleName
- * @param {function} onSuccess
+ * @param {RoleControl} controle
  */
-PlayerControl.prototype.addRole = function(roleName, onSuccess) {
+PlayerControl.prototype.addRole = function(controle) {
 	var owner = this;
 	$.post(
 		'addRoleToPlayer.do',
 		{
 			playerId: owner.player.id,
-			roleName: roleName.toLowerCase()
+			roleName: controle.name.toLowerCase()
 		},
-		onSuccess
+		function() {
+			flashBackground(owner.control, '#20f020');
+			controle.decrease();
+
+			owner._addRole(controle.name);
+		}
 	).fail(
 		function() {
 			flashBackground(owner.control, '#f03020');
 		}
 	);
+};
+
+PlayerControl.prototype._addRole = function(roleName) {
+	var index = insertIntoSortedArray(roleName, this._rolesInOrder);
+	insertElementAt(this._roles, this._createRoleText(roleName), index);
 };
 
 /**

@@ -70,7 +70,7 @@ var findLocationFor = function(item, array, comparator) {
  * @param {T} item
  * @param {Array.<T>} sortedArray
  * @param {function(T, T): boolean=} comparator
- * @returns {number} the index of the array into which the given item would fit
+ * @returns {number} the index of the array into which the given item was fit
  * @template T
  */
 var insertIntoSortedArray = function(item, sortedArray, comparator) {
@@ -81,4 +81,5 @@ var insertIntoSortedArray = function(item, sortedArray, comparator) {
 	}
 	var index = findLocationFor(item, sortedArray, comparator);
 	sortedArray.splice(index, 0, item);
+	return index;
 };
