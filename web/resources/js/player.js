@@ -206,7 +206,7 @@ PlayerControl.prototype._createRoles = function() {
 };
 
 PlayerControl.prototype._createRoleText = function(rawRoleName) {
-	var roleText = $('<div/>');
+	var roleText = $('<div/>').addClass('role');
 	return roleText.text(rawRoleName.capitalizeFirstLetter())
 };
 

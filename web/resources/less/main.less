@@ -56,6 +56,7 @@ button {
 }
 
 .control.player {
+	border: 1px solid @borderColor;
 	display: inline-block;
 	position: absolute;
 	cursor: move;
@@ -73,7 +74,6 @@ button {
 			display: none;
 		}
 		>span {
-			border: 1px solid @borderColor;
 			min-width: 100px;
 			text-align: center;
 			padding: 5px 0px 5px 0px;
@@ -82,6 +82,16 @@ button {
 	}
 	&.dropping {
 		box-shadow: 0 0 3px 3px #aaa, inset 0 0 3px 3px #aaa;
+	}
+	>.roles {
+		>.role {
+			text-align: center;
+			padding: 5px 0px 5px 0px;
+		}
+
+		&:not(:empty) {
+			border-top: 1px solid @borderColor;
+		}
 	}
 }
 
