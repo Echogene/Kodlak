@@ -1,9 +1,11 @@
 /**
  * A canvas on which players can be created, edited and deleted.
+ * @param {RoleSection} roleSection
  * @constructor
  * @implements Control
  */
-function PlayerCanvas() {
+function PlayerCanvas(roleSection) {
+	this._roleSection = roleSection;
 }
 
 /**
@@ -57,7 +59,7 @@ PlayerCanvas.prototype.refresh = function() {
  * @private
  */
 PlayerCanvas.prototype._renderPlayer = function(player) {
-	var playerControl = new PlayerControl(player);
+	var playerControl = new PlayerControl(player, this._roleSection.getRoleControlMap());
 
 	var control =  playerControl.create();
 	this.canvas.append(control);

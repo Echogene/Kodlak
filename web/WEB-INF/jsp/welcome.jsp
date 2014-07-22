@@ -18,12 +18,12 @@
         <div id="playerCanvasContainer"></div>
     </div>
     <script>
-        var playerCanvas = new PlayerCanvas();
+        var roleSection = new RoleSection();
+
+        var playerCanvas = new PlayerCanvas(roleSection);
         var canvas = playerCanvas.create();
         $('#playerCanvasContainer').append(canvas);
         playerCanvas.refresh();
-
-        var roleSection = new RoleSection();
 
         var sidebar = new Sidebar();
         sidebar.addSection(roleSection);

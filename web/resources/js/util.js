@@ -41,6 +41,11 @@ var insertElementAt = function(element, toInsert, index) {
 	}
 };
 
+var removeElementAt = function(element, index) {
+	var children = element.children();
+	children.eq(index).remove();
+};
+
 /**
  * Find the index where an item should fit into an array (with splice).
  * @see http://stackoverflow.com/questions/1344500/efficient-way-to-insert-a-number-into-a-sorted-array-of-numbers

@@ -198,6 +198,10 @@ RoleSection.prototype._addControle = function(name, number) {
 	this._controles[name] = controle;
 };
 
+RoleSection.prototype.getRoleControlMap = function() {
+	return this._controles;
+};
+
 //----------------------------------------------------------------------------------------------------------------------
 
 /**

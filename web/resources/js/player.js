@@ -101,14 +101,16 @@ AddPlayerControl.prototype.cancel = function() {
 /**
  * A control representing a player.  Double click to edit the name and middle click to delete it.
  * @param {Player} player
+ * @param {Object.<string, RoleControl>} roleControlMap
  * @constructor
  * @implements EditableControl
  */
-function PlayerControl(player) {
+function PlayerControl(player, roleControlMap) {
 	EditableControl.call(this);
 	this.player = player;
 	this.mode = 'read';
 	this._rolesInOrder = [];
+	this._roleControls = roleControlMap;
 }
 
 PlayerControl.prototype = Object.create(EditableControl.prototype);
@@ -224,11 +226,17 @@ PlayerControl.prototype._unassignRole = function(roleName) {
 		},
 		function() {
 			flashBackground(owner.control, '#20f020');
-//			controle.increase();
+			owner._roleControls[roleName].increase();
 
-//			owner._removeRole(roleName);
+			owner._removeRole(roleName);
 		}
 	)
+};
+
+PlayerControl.prototype._removeRole = function(roleName) {
+	var index = this._rolesInOrder.indexOf(roleName);
+	this._rolesInOrder.splice(index, 1);
+	removeElementAt(this._roles, index);
 };
 
 /**
