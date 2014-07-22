@@ -11,7 +11,7 @@ public interface RoleFactory<
 		P extends Phase,
 		A extends Alignment,
 		R extends Role<P, A>,
-		Y extends Player<P, A, ?>
+		Y extends Player<P, A, ?, ? extends Role<P, A>>
 > {
 
 	String getRoleName();

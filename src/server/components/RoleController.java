@@ -8,7 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import standardgame.game.StandardGame;
+import standardgame.player.StandardPlayer;
+import standardgame.role.StandardRole;
 import standardgame.role.StandardRoleAssigner;
+
+import java.util.Iterator;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -38,6 +42,24 @@ public class RoleController {
 	) throws UnavailableRoleException {
 
 		roleFactory.addRoleToPlayer(game.getPlayerById(playerId), roleName);
+	}
+
+	@RequestMapping(value = "/removeRoleFromPlayer.do", method = POST)
+	@ResponseBody
+	public void removeRoleFromPlayer(
+			@RequestParam("playerId") String playerId,
+			@RequestParam("roleName") String roleName
+	) throws UnavailableRoleException {
+
+		StandardPlayer player = game.getPlayerById(playerId);
+		for (Iterator<StandardRole> iterator = player.getRoles().iterator(); iterator.hasNext(); ) {
+			StandardRole role = iterator.next();
+			if (role.getName().equals(roleName)) {
+				iterator.remove();
+				break;
+			}
+		}
+		addRole(roleName);
 	}
 
 	@RequestMapping(value = "/addRole.do", method = POST)

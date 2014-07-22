@@ -9,9 +9,9 @@ import model.player.Player;
  * Assign a role to a player.
  * @author Steven Weston
  */
-public interface RoleAssigner<P extends Phase, A extends Alignment, T extends Role<P, A>, Y extends Player<P, A, ?>> {
+public interface RoleAssigner<P extends Phase, A extends Alignment, R extends Role<P, A>, Y extends Player<P, A, ?, R>> {
 
-	T addRoleToPlayer(Y player, String roleName) throws UnavailableRoleException;
+	R addRoleToPlayer(Y player, String roleName) throws UnavailableRoleException;
 
 	Multiset<String> getAvailableRoles();
 

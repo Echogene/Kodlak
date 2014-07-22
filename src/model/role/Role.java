@@ -1,5 +1,6 @@
 package model.role;
 
+import com.sun.istack.internal.NotNull;
 import model.alignment.Aligned;
 import model.alignment.Alignment;
 import model.effect.Effect;
@@ -21,6 +22,7 @@ public interface Role<P extends Phase, A extends Alignment> extends Aligned<A> {
 	 */
 	Player getOwner();
 
+	@NotNull
 	default String getName() {
 		return this.getClass().getSimpleName().toLowerCase();
 	}

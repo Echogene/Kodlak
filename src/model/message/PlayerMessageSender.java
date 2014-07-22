@@ -7,5 +7,5 @@ import model.player.Player;
  */
 public interface PlayerMessageSender extends MessageSender {
 
-	void setPlayer(Player<?, ?, ?> player);
+	void setPlayer(Player<?, ?, ?, ?> player);
 }

@@ -144,6 +144,11 @@ PlayerControl.prototype.create = function() {
 		e.stopPropagation();
 	});
 	this.text = text;
+	text.mouseup(function(e) {
+		if (e.which == 2) {
+			owner.remove();
+		}
+	});
 	control.append(text);
 
 	control.append(this._createRoles());
@@ -181,11 +186,6 @@ PlayerControl.prototype._createMainControl = function() {
 		},
 		tolerance: 'pointer'
 	});
-	control.mouseup(function(e) {
-		if (e.which == 2) {
-			owner.remove();
-		}
-	});
 	this.control = control;
 	return control;
 };
@@ -205,7 +205,30 @@ PlayerControl.prototype._createRoles = function() {
 
 PlayerControl.prototype._createRoleText = function(rawRoleName) {
 	var roleText = $('<div/>').addClass('role');
+	var owner = this;
+	roleText.mouseup(function(e) {
+		if (e.which == 2) {
+			owner._unassignRole(rawRoleName);
+		}
+	});
 	return roleText.text(rawRoleName.capitalizeFirstLetter())
+};
+
+PlayerControl.prototype._unassignRole = function(roleName) {
+	var owner = this;
+	$.post(
+		'removeRoleFromPlayer.do',
+		{
+			playerId: owner.player.id,
+			roleName: roleName
+		},
+		function() {
+			flashBackground(owner.control, '#20f020');
+//			controle.increase();
+
+//			owner._removeRole(roleName);
+		}
+	)
 };
 
 /**

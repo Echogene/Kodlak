@@ -14,8 +14,13 @@ import java.util.Set;
 /**
  * @author Steven Weston
  */
-public abstract class AbstractGame<P extends Phase, A extends Alignment, S extends Status, Y extends Player<P, A, S>>
-		implements Game<P, A, S, Y> {
+public abstract class AbstractGame<
+		P extends Phase,
+		A extends Alignment,
+		S extends Status,
+		R extends Role<P, A>,
+		Y extends Player<P, A, S, R>
+> implements Game<P, A, S, R, Y> {
 
 	/**
 	 * The set of players in the game.

@@ -14,13 +14,13 @@ import java.util.List;
 /**
  * @author Steven Weston
  */
-public abstract class AbstractPlayer<P extends Phase, A extends Alignment, S extends Status>
-		implements Player<P, A, S> {
+public abstract class AbstractPlayer<P extends Phase, A extends Alignment, S extends Status, R extends Role<P, A>>
+		implements Player<P, A, S, R> {
 
 	protected String name;
 
 	@JsonSerialize(using = RoleListSerializer.class)
-	protected final List<Role<P, A>> roles = new ArrayList<>();
+	protected final List<R> roles = new ArrayList<>();
 
 	private final AlignmentResolver<A> resolver;
 
@@ -46,7 +46,7 @@ public abstract class AbstractPlayer<P extends Phase, A extends Alignment, S ext
 	}
 
 	@Override
-	public List<Role<P, A>> getRoles() {
+	public List<R> getRoles() {
 		return roles;
 	}
 

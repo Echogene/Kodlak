@@ -9,6 +9,7 @@ import standardgame.alignment.VillagerWerewolfAlignmentResolver;
 import standardgame.phase.DayNightPhase;
 import standardgame.player.StandardPlayer;
 import standardgame.player.status.StandardStatus;
+import standardgame.role.StandardRole;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +18,7 @@ import java.util.Map;
  * @author Steven Weston
  */
 public class StandardGame
-		extends AbstractGame<DayNightPhase, VillagerWerewolfAlignment, StandardStatus, StandardPlayer> {
+		extends AbstractGame<DayNightPhase, VillagerWerewolfAlignment, StandardStatus, StandardRole, StandardPlayer> {
 
 	private final VillagerWerewolfAlignmentResolver resolver = new VillagerWerewolfAlignmentResolver();
 	private final LoggedMessageSenderFactory messageSenderFactory;

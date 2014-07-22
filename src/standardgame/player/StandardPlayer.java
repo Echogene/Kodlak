@@ -5,11 +5,12 @@ import model.player.AbstractPlayer;
 import standardgame.alignment.VillagerWerewolfAlignment;
 import standardgame.phase.DayNightPhase;
 import standardgame.player.status.StandardStatus;
+import standardgame.role.StandardRole;
 
 /**
  * @author Steven Weston
  */
-public class StandardPlayer extends AbstractPlayer<DayNightPhase,VillagerWerewolfAlignment,StandardStatus> {
+public class StandardPlayer extends AbstractPlayer<DayNightPhase, VillagerWerewolfAlignment, StandardStatus, StandardRole> {
 
 	private final String id;
 	private double top;

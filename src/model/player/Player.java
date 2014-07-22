@@ -11,11 +11,11 @@ import java.util.List;
 /**
  * @author Steven Weston
  */
-public interface Player<P extends Phase, A extends Alignment, S extends Status> extends Aligned<A> {
+public interface Player<P extends Phase, A extends Alignment, S extends Status, R extends Role<P, A>> extends Aligned<A> {
 
 	String getName();
 
-	List<Role<P, A>> getRoles();
+	List<R> getRoles();
 
 	void kill();
 }
