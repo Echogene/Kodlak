@@ -160,7 +160,8 @@ RoleSection.prototype.create = function() {
 };
 
 /**
- * Add a role to the section and post up this fact to the server.
+ * Post up an add role request to the server and if it succeeds (the role name is accepted by the server), then add the
+ * role to this section.  If it fails, show that in the add role control.
  * @param {string} name The name of the role
  */
 RoleSection.prototype.addRole = function(name) {
@@ -172,6 +173,11 @@ RoleSection.prototype.addRole = function(name) {
 	).fail(owner._addRoleControl.fail.bind(owner._addRoleControl));
 };
 
+/**
+ * Add a role to the section.  If a control already exists for the given name, then that control gets its number
+ * incremented.
+ * @param {string} name
+ */
 RoleSection.prototype.addRoleWithoutPost = function(name) {
 	if (this._roles[name]) {
 		this._roles[name] = this._roles[name] + 1;
@@ -196,10 +202,6 @@ RoleSection.prototype._addControle = function(name, number) {
 	insertElementAt(this._roleSection, controleContent, index);
 
 	this._controles[name] = controle;
-};
-
-RoleSection.prototype.getRoleControlMap = function() {
-	return this._controles;
 };
 
 //----------------------------------------------------------------------------------------------------------------------
