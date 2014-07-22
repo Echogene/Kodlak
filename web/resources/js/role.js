@@ -124,7 +124,7 @@ RoleSection.prototype.create = function() {
 		dataType: 'json',
 		success: function(data) {
 			$.each(data, function(index, name) {
-				owner._addRole(name);
+				owner.addRoleWithoutPost(name);
 			});
 		},
 		async: false
@@ -168,11 +168,11 @@ RoleSection.prototype.addRole = function(name) {
 	$.post(
 		'addRole.do',
 		{roleName: name},
-		owner._addRole.bind(owner, name)
+		owner.addRoleWithoutPost.bind(owner, name)
 	).fail(owner._addRoleControl.fail.bind(owner._addRoleControl));
 };
 
-RoleSection.prototype._addRole = function(name) {
+RoleSection.prototype.addRoleWithoutPost = function(name) {
 	if (this._roles[name]) {
 		this._roles[name] = this._roles[name] + 1;
 	} else {

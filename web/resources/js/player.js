@@ -101,16 +101,16 @@ AddPlayerControl.prototype.cancel = function() {
 /**
  * A control representing a player.  Double click to edit the name and middle click to delete it.
  * @param {Player} player
- * @param {Object.<string, RoleControl>} roleControlMap
+ * @param {RoleSection} roleSection
  * @constructor
  * @implements EditableControl
  */
-function PlayerControl(player, roleControlMap) {
+function PlayerControl(player, roleSection) {
 	EditableControl.call(this);
 	this.player = player;
 	this.mode = 'read';
 	this._rolesInOrder = [];
-	this._roleControls = roleControlMap;
+	this._roleSection = roleSection;
 }
 
 PlayerControl.prototype = Object.create(EditableControl.prototype);
@@ -199,7 +199,7 @@ PlayerControl.prototype._createRoles = function() {
 	$.each(
 		this.player.roles,
 		function(index, roleName) {
-			owner._addRole(roleName);
+			owner.addRoleWithoutPost(roleName);
 		}
 	);
 	return roles;
@@ -226,7 +226,7 @@ PlayerControl.prototype._unassignRole = function(roleName) {
 		},
 		function() {
 			flashBackground(owner.control, '#20f020');
-			owner._roleControls[roleName].increase();
+			owner._roleSection.addRoleWithoutPost(roleName);
 
 			owner._removeRole(roleName);
 		}
@@ -254,7 +254,7 @@ PlayerControl.prototype.addRole = function(controle) {
 			flashBackground(owner.control, '#20f020');
 			controle.decrease();
 
-			owner._addRole(controle.name);
+			owner.addRoleWithoutPost(controle.name);
 		}
 	).fail(
 		function() {
@@ -263,7 +263,7 @@ PlayerControl.prototype.addRole = function(controle) {
 	);
 };
 
-PlayerControl.prototype._addRole = function(roleName) {
+PlayerControl.prototype.addRoleWithoutPost = function(roleName) {
 	var index = insertIntoSortedArray(roleName, this._rolesInOrder);
 	insertElementAt(this._roles, this._createRoleText(roleName), index);
 };

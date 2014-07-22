@@ -59,7 +59,7 @@ PlayerCanvas.prototype.refresh = function() {
  * @private
  */
 PlayerCanvas.prototype._renderPlayer = function(player) {
-	var playerControl = new PlayerControl(player, this._roleSection.getRoleControlMap());
+	var playerControl = new PlayerControl(player, this._roleSection);
 
 	var control =  playerControl.create();
 	this.canvas.append(control);
