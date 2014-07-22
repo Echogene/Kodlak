@@ -5,7 +5,8 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main.css" />
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/util.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/control.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/player.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/player_control.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/add_player_control.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/player_canvas.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/sidebar.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/role_control.js"></script>
