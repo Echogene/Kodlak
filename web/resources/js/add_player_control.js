@@ -1,6 +1,7 @@
 /**
- * A control that adds a player to the game upon finishing.
- * @param {function(Player)=} onSuccess a function that takes the added player returned from the server
+ * A control with a single input box that takes the content of the box and creates a player with a name equal to the
+ * content.
+ * @param {function(Player)=} onSuccess a function that takes the new player object returned from the server
  * @constructor
  * @implements EditableControl
  */
@@ -65,8 +66,8 @@ AddPlayerControl.prototype.finish = function() {
 };
 
 /**
- * What to do after the player when it has been returned from the server.  Use the function passed into the constructor.
- * And afterwards, remove the control.
+ * What to do with the new player when it has been returned from the server.  Use the function originally passed into
+ * the constructor, and remove the control.
  * @param {Player} player the player passed down from the server
  * @private
  */
