@@ -1,6 +1,7 @@
 /**
- * A control to add a role to the role section.
- * @param {function(string)=} onSuccess
+ * A control with a single input box that takes the content of the box and adds a role to the role section with a name
+ * equal to the content.
+ * @param {function(string)=} onSuccess a function that takes the new role name
  * @constructor
  * @implements {EditableControl}
  */
