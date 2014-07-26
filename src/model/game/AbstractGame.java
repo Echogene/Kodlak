@@ -32,11 +32,24 @@ public abstract class AbstractGame<
 	 */
 	protected final List<Role> roles = new ArrayList<>();
 
+	/**
+	 * The current phase of the game.
+	 */
+	protected final P currentPhase;
+
+	protected AbstractGame(P currentPhase) {
+		this.currentPhase = currentPhase;
+	}
 
 	public abstract Y addPlayer(String name);
 
 	@Override
 	public Set<Y> getPlayers() {
 		return players;
+	}
+
+	@Override
+	public P getCurrentPhase() {
+		return currentPhase;
 	}
 }

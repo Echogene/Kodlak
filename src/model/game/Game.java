@@ -20,4 +20,6 @@ public interface Game<
 > {
 
 	Set<Y> getPlayers();
+
+	P getCurrentPhase();
 }

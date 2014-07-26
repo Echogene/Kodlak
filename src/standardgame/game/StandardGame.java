@@ -14,6 +14,8 @@ import standardgame.role.StandardRole;
 import java.util.HashMap;
 import java.util.Map;
 
+import static standardgame.phase.DayNightPhase.Phase.NIGHT;
+
 /**
  * @author Steven Weston
  */
@@ -27,6 +29,8 @@ public class StandardGame
 	private int currentId = 0;
 
 	public StandardGame(LoggedMessageSenderFactory messageSenderFactory) {
+
+		super(new DayNightPhase(NIGHT));
 		this.messageSenderFactory = messageSenderFactory;
 	}
 

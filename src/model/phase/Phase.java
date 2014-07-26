@@ -5,4 +5,5 @@ package model.phase;
  */
 public interface Phase {
 
+	void advance();
 }
