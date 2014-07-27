@@ -10,7 +10,7 @@ import model.player.Player;
 public class LoggedMessageSender implements PlayerMessageSender {
 
 	private final MessageLog log;
-	private Player<?, ?, ?, ?> player;
+	private Player<?, ?, ?, ?, ?> player;
 
 	public LoggedMessageSender(MessageLog log) {
 		this.log = log;
@@ -23,7 +23,7 @@ public class LoggedMessageSender implements PlayerMessageSender {
 	}
 
 	@Override
-	public void setPlayer(Player<?, ?, ?, ?> player) {
+	public void setPlayer(Player<?, ?, ?, ?, ?> player) {
 		this.player = player;
 	}
 }

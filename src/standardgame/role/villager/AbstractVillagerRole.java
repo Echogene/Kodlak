@@ -1,7 +1,7 @@
 package standardgame.role.villager;
 
-import model.player.Player;
 import standardgame.alignment.VillagerWerewolfAlignment;
+import standardgame.player.StandardPlayer;
 import standardgame.role.StandardRole;
 
 import static standardgame.alignment.VillagerWerewolfAlignment.VILLAGER;
@@ -11,7 +11,7 @@ import static standardgame.alignment.VillagerWerewolfAlignment.VILLAGER;
  */
 public abstract class AbstractVillagerRole extends StandardRole {
 
-	public AbstractVillagerRole(Player owner) {
+	public AbstractVillagerRole(StandardPlayer owner) {
 		super(owner);
 	}
 

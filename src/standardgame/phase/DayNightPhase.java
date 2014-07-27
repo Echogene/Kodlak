@@ -13,6 +13,10 @@ public class DayNightPhase implements Phase {
 		this.phase = phase;
 	}
 
+	public Phase getPhase() {
+		return phase;
+	}
+
 	@Override
 	public void advance() {
 

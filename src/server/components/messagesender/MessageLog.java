@@ -11,9 +11,9 @@ import java.util.Map;
  */
 public class MessageLog {
 
-	private final Map<Player<?, ?, ?, ?>, Message> messages = new HashMap<>();
+	private final Map<Player<?, ?, ?, ?, ?>, Message> messages = new HashMap<>();
 
-	public void logMessage(Player<?, ?, ?, ?> player, Message message) {
+	public void logMessage(Player<?, ?, ?, ?, ?> player, Message message) {
 		messages.put(player, message);
 	}
 }

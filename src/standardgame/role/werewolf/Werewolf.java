@@ -20,7 +20,7 @@ public class Werewolf extends StandardRole {
 	private final Set<StandardPlayer> werewolves;
 	private final Set<StandardPlayer> players;
 
-	public Werewolf(Player owner, Set<StandardPlayer> werewolves, Set<StandardPlayer> players) {
+	public Werewolf(StandardPlayer owner, Set<StandardPlayer> werewolves, Set<StandardPlayer> players) {
 		super(owner);
 		this.werewolves = werewolves;
 		this.players = players;
@@ -28,7 +28,7 @@ public class Werewolf extends StandardRole {
 
 	@Override
 	public Effect getEffect(DayNightPhase phase) {
-		switch (phase) {
+		switch (phase.getPhase()) {
 			case NIGHT:
 				return this::nightAction;
 			default:
@@ -38,7 +38,7 @@ public class Werewolf extends StandardRole {
 
 	private void nightAction() {
 
-		GroupChoice<StandardPlayer> playerChoice = new GroupChoice<>(werewolves, players);
+		GroupChoice<StandardPlayer, StandardPlayer> playerChoice = new GroupChoice<>(werewolves, players);
 		Player victim = playerChoice.getChoice();
 		victim.kill();
 	}

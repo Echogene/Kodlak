@@ -10,7 +10,8 @@ import standardgame.role.StandardRole;
 /**
  * @author Steven Weston
  */
-public class StandardPlayer extends AbstractPlayer<DayNightPhase, VillagerWerewolfAlignment, StandardStatus, StandardRole> {
+public class StandardPlayer
+		extends AbstractPlayer<DayNightPhase, VillagerWerewolfAlignment, StandardStatus, StandardRole, StandardPlayer> {
 
 	private final String id;
 	private double top;

@@ -2,12 +2,12 @@ package model.choice.single;
 
 import model.player.Player;
 
-import java.util.Set;
+import java.util.Collection;
 
 /**
  * @author Steven Weston
  */
-public interface SingleChoiceFactory<T, C extends SingleChoice<T>> {
+public interface SingleChoiceFactory<P extends Player, T, C extends SingleChoice<P, T>> {
 
-	C create(Player chooser, Set<T> choices);
+	C create(P chooser, Collection<T> choices);
 }

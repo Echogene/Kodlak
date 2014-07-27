@@ -1,17 +1,18 @@
 package model.choice;
 
 import com.sun.istack.internal.NotNull;
+import model.player.Player;
 
-import java.util.Set;
+import java.util.Collection;
 
 /**
  * @author Steven Weston
  */
-public abstract class AbstractChoice<T> implements Choice<T> {
+public abstract class AbstractChoice<P extends Player, T> implements Choice<P, T> {
 
-	protected final @NotNull Set<T> choices;
+	protected final @NotNull Collection<T> choices;
 
-	public AbstractChoice(@NotNull Set<T> choices) {
+	public AbstractChoice(@NotNull Collection<T> choices) {
 		if (choices.isEmpty()) {
 			throw new IllegalArgumentException("Cannot choose from empty list.");
 		}

@@ -1,7 +1,6 @@
 package standardgame.role.villager;
 
 import model.alignment.Alignment;
-import model.choice.Choice;
 import model.choice.single.SingleChoice;
 import model.choice.single.SingleChoiceFactory;
 import model.effect.Effect;
@@ -12,7 +11,7 @@ import standardgame.phase.DayNightPhase;
 import standardgame.player.StandardPlayer;
 
 import java.text.MessageFormat;
-import java.util.Set;
+import java.util.Collection;
 
 import static standardgame.alignment.VillagerWerewolfAlignment.VILLAGER;
 
@@ -21,14 +20,24 @@ import static standardgame.alignment.VillagerWerewolfAlignment.VILLAGER;
  */
 public class Seer extends AbstractVillagerRole {
 
-	private final Set<StandardPlayer> players;
-	private final SingleChoiceFactory<StandardPlayer, ? extends SingleChoice<StandardPlayer>> choiceFactory;
+	private final Collection<StandardPlayer> players;
+
+	private final SingleChoiceFactory<
+			StandardPlayer,
+			StandardPlayer,
+			? extends SingleChoice<StandardPlayer, StandardPlayer>
+	> choiceFactory;
+
 	private final MessageSender messageSender;
 
 	public Seer(
 			StandardPlayer owner,
-			Set<StandardPlayer> players,
-			SingleChoiceFactory<StandardPlayer, ? extends SingleChoice<StandardPlayer>> choiceFactory,
+			Collection<StandardPlayer> players,
+			SingleChoiceFactory<
+					StandardPlayer,
+					StandardPlayer,
+					? extends SingleChoice<StandardPlayer, StandardPlayer>
+			> choiceFactory,
 			MessageSender messageSender
 	) {
 		super(owner);
@@ -39,7 +48,7 @@ public class Seer extends AbstractVillagerRole {
 
 	@Override
 	public Effect getEffect(DayNightPhase phase) {
-		switch (phase) {
+		switch (phase.getPhase()) {
 			case NIGHT:
 				return this::nightAction;
 			default:
@@ -48,7 +57,7 @@ public class Seer extends AbstractVillagerRole {
 	}
 
 	private void nightAction() {
-		Choice<StandardPlayer> playerChoice = choiceFactory.create(owner, players);
+		SingleChoice<StandardPlayer, StandardPlayer> playerChoice = choiceFactory.create(owner, players);
 		StandardPlayer target = playerChoice.getChoice();
 		revealAlignmentOf(target);
 	}

@@ -15,8 +15,8 @@ public interface Game<
 		P extends Phase,
 		A extends Alignment,
 		S extends Status,
-		R extends Role<P, A>,
-		Y extends Player<P, A, S, R>
+		R extends Role<P, A, Y>,
+		Y extends Player<P, A, S, R, Y>
 > {
 
 	Set<Y> getPlayers();

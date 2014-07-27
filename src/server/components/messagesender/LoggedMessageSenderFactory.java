@@ -15,7 +15,7 @@ public class LoggedMessageSenderFactory implements MessageSenderFactory<LoggedMe
 	}
 
 	@Override
-	public LoggedMessageSender create(Player<?, ?, ?, ?> player) {
+	public LoggedMessageSender create(Player<?, ?, ?, ?, ?> player) {
 
 		return new LoggedMessageSender(log);
 	}

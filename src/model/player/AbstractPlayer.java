@@ -14,8 +14,13 @@ import java.util.List;
 /**
  * @author Steven Weston
  */
-public abstract class AbstractPlayer<P extends Phase, A extends Alignment, S extends Status, R extends Role<P, A>>
-		implements Player<P, A, S, R> {
+public abstract class AbstractPlayer<
+		P extends Phase,
+		A extends Alignment,
+		S extends Status,
+		R extends Role<P, A, Y>,
+		Y extends Player<P, A, S, R, Y>
+> implements Player<P, A, S, R, Y> {
 
 	protected String name;
 

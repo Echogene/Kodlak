@@ -10,8 +10,8 @@ import model.player.Player;
 public interface RoleFactory<
 		P extends Phase,
 		A extends Alignment,
-		R extends Role<P, A>,
-		Y extends Player<P, A, ?, ? extends Role<P, A>>
+		R extends Role<P, A, Y>,
+		Y extends Player<P, A, ?, ? extends Role<P, A, Y>, Y>
 > {
 
 	String getRoleName();

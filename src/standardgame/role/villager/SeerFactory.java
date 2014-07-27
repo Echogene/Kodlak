@@ -1,8 +1,7 @@
 package standardgame.role.villager;
 
-import model.choice.single.SingleChoice;
-import model.choice.single.SingleChoiceFactory;
 import model.message.MessageSender;
+import standardgame.choice.StandardSinglePlayerChoiceFactory;
 import standardgame.game.StandardGame;
 import standardgame.player.StandardPlayer;
 import standardgame.role.StandardRoleFactory;
@@ -16,12 +15,12 @@ public class SeerFactory extends StandardRoleFactory<Seer> {
 
 	public static final String SEER = "seer";
 	private final Set<StandardPlayer> players;
-	private final SingleChoiceFactory<StandardPlayer, ? extends SingleChoice<StandardPlayer>> choiceFactory;
+	private final StandardSinglePlayerChoiceFactory choiceFactory;
 	private final StandardGame game;
 
 	public SeerFactory(
 			Set<StandardPlayer> players,
-			SingleChoiceFactory<StandardPlayer, ? extends SingleChoice<StandardPlayer>> choiceFactory,
+			StandardSinglePlayerChoiceFactory choiceFactory,
 			StandardGame game
 	) {
 		this.players = players;

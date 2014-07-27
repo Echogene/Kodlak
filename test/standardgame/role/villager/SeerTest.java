@@ -5,11 +5,11 @@ import model.effect.Effect;
 import model.message.ListMessageSender;
 import org.junit.Before;
 import org.junit.Test;
+import standardgame.phase.DayNightPhase;
 import standardgame.player.StandardPlayer;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -17,7 +17,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static standardgame.alignment.VillagerWerewolfAlignment.VILLAGER;
 import static standardgame.alignment.VillagerWerewolfAlignment.WEREWOLF;
-import static standardgame.phase.DayNightPhase.NIGHT;
+import static standardgame.phase.DayNightPhase.Phase.NIGHT;
 
 public class SeerTest {
 
@@ -40,7 +40,7 @@ public class SeerTest {
 				new FirstSingleChoiceFactory<>(),
 				messageSender
 		);
-		Effect effect = seerRole.getEffect(NIGHT);
+		Effect effect = seerRole.getEffect(new DayNightPhase(NIGHT));
 		effect.perform();
 
 		String messageSentToSeer = messageSender.getSentMessages().get(0);
@@ -58,11 +58,11 @@ public class SeerTest {
 
 		Seer seerRole = new Seer(
 				seer,
-				new HashSet<>(Arrays.asList(otherPlayer, seer)),
+				Arrays.asList(otherPlayer, seer),
 				new FirstSingleChoiceFactory<>(),
 				messageSender
 		);
-		Effect effect = seerRole.getEffect(NIGHT);
+		Effect effect = seerRole.getEffect(new DayNightPhase(NIGHT));
 		effect.perform();
 
 		String messageSentToSeer = messageSender.getSentMessages().get(0);
@@ -80,11 +80,11 @@ public class SeerTest {
 
 		Seer seerRole = new Seer(
 				seer,
-				new HashSet<>(Arrays.asList(otherPlayer, seer)),
+				Arrays.asList(otherPlayer, seer),
 				new FirstSingleChoiceFactory<>(),
 				messageSender
 		);
-		Effect effect = seerRole.getEffect(NIGHT);
+		Effect effect = seerRole.getEffect(new DayNightPhase(NIGHT));
 		effect.perform();
 
 		String messageSentToSeer = messageSender.getSentMessages().get(0);
@@ -98,7 +98,7 @@ public class SeerTest {
 
 		Seer seerRole = new Seer(
 				seer,
-				Collections.singleton(seer),
+				Collections.singletonList(seer),
 				new FirstSingleChoiceFactory<>(),
 				messageSender
 		);

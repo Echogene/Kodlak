@@ -1,22 +1,21 @@
 package standardgame.choice;
 
 import model.choice.single.SingleChoiceFactory;
-import model.player.Player;
 import standardgame.player.StandardPlayer;
 
-import java.util.Set;
+import java.util.Collection;
 
 /**
  * @author Steven Weston
  */
-public class StandardSinglePlayerChoiceFactory implements SingleChoiceFactory<StandardPlayer, StandardSinglePlayerChoice> {
+public class StandardSinglePlayerChoiceFactory implements SingleChoiceFactory<StandardPlayer, StandardPlayer, StandardSinglePlayerChoice> {
 
 	public StandardSinglePlayerChoiceFactory() {
 	}
 
 	@Override
 	public StandardSinglePlayerChoice create(
-			Player chooser, Set<StandardPlayer> choices
+			StandardPlayer chooser, Collection<StandardPlayer> choices
 	) {
 		return new StandardSinglePlayerChoice(chooser, choices);
 	}

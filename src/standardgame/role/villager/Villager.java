@@ -1,9 +1,9 @@
 package standardgame.role.villager;
 
-import standardgame.alignment.VillagerWerewolfAlignment;
 import model.effect.Effect;
+import standardgame.alignment.VillagerWerewolfAlignment;
 import standardgame.phase.DayNightPhase;
-import model.player.Player;
+import standardgame.player.StandardPlayer;
 
 import static standardgame.alignment.VillagerWerewolfAlignment.VILLAGER;
 
@@ -12,7 +12,7 @@ import static standardgame.alignment.VillagerWerewolfAlignment.VILLAGER;
  */
 public class Villager extends AbstractVillagerRole {
 
-	public Villager(Player owner) {
+	public Villager(StandardPlayer owner) {
 		super(owner);
 	}
 

@@ -1,16 +1,16 @@
 package standardgame.role;
 
-import model.player.Player;
 import model.role.AbstractRole;
 import standardgame.alignment.VillagerWerewolfAlignment;
 import standardgame.phase.DayNightPhase;
+import standardgame.player.StandardPlayer;
 
 /**
  * @author Steven Weston
  */
-public abstract class StandardRole extends AbstractRole<DayNightPhase, VillagerWerewolfAlignment> {
+public abstract class StandardRole extends AbstractRole<DayNightPhase, VillagerWerewolfAlignment, StandardPlayer> {
 
-	public StandardRole(Player owner) {
+	public StandardRole(StandardPlayer owner) {
 		super(owner);
 	}
 }

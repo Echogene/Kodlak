@@ -1,14 +1,11 @@
 package server;
 
-import model.choice.single.SingleChoiceFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import server.components.messagesender.LoggedMessageSenderFactory;
 import server.components.messagesender.MessageLog;
-import standardgame.choice.StandardSinglePlayerChoice;
 import standardgame.choice.StandardSinglePlayerChoiceFactory;
 import standardgame.game.StandardGame;
-import standardgame.player.StandardPlayer;
 import standardgame.role.StandardRoleAssigner;
 import standardgame.role.villager.SeerFactory;
 import standardgame.role.villager.VillagerFactory;
@@ -50,7 +47,7 @@ public class Config {
 	}
 
 	@Bean
-	public SingleChoiceFactory<StandardPlayer, StandardSinglePlayerChoice> getSinglePlayerChoiceFactory() {
+	public StandardSinglePlayerChoiceFactory getSinglePlayerChoiceFactory() {
 		return new StandardSinglePlayerChoiceFactory();
 	}
 }

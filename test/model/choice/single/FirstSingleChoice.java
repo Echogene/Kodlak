@@ -1,16 +1,16 @@
 package model.choice.single;
 
 import com.sun.istack.internal.NotNull;
-import model.player.Player;
+import standardgame.player.StandardPlayer;
 
-import java.util.Set;
+import java.util.Collection;
 
 /**
  * Choose the first thing in the list.  For <s>science!</s> testing.
  */
-public class FirstSingleChoice<T> extends SingleChoice<T> {
+public class FirstSingleChoice<T> extends SingleChoice<StandardPlayer, T> {
 
-	public FirstSingleChoice(@NotNull Player chooser, @NotNull Set<T> choices) {
+	public FirstSingleChoice(@NotNull StandardPlayer chooser, @NotNull Collection<T> choices) {
 		super(chooser, choices);
 	}
 

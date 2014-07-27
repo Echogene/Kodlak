@@ -10,7 +10,7 @@ import model.player.Player;
 /**
  * @author Steven Weston
  */
-public interface Role<P extends Phase, A extends Alignment> extends Aligned<A> {
+public interface Role<P extends Phase, A extends Alignment, Y extends Player> extends Aligned<A> {
 
 	/**
 	 * @return the effect this role has during the given phase
@@ -20,7 +20,7 @@ public interface Role<P extends Phase, A extends Alignment> extends Aligned<A> {
 	/**
 	 * @return the Player that has this role.
 	 */
-	Player getOwner();
+	Y getOwner();
 
 	@NotNull
 	default String getName() {

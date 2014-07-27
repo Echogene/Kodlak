@@ -7,5 +7,5 @@ import model.player.Player;
  */
 public interface MessageSenderFactory<S extends MessageSender> {
 
-	S create(Player<?, ?, ?, ?> player);
+	S create(Player<?, ?, ?, ?, ?> player);
 }
