@@ -18,12 +18,12 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
  * @author Steven Weston
  */
 @Controller
-public class GameController {
+public class PlayerController {
 
 	private final StandardGame game;
 
 	@Autowired
-	public GameController(StandardGame game) {
+	public PlayerController(StandardGame game) {
 		this.game = game;
 	}
 
