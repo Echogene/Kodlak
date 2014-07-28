@@ -1,6 +1,7 @@
 package standardgame.role.villager;
 
 import model.alignment.Alignment;
+import model.choice.ChoiceException;
 import model.choice.single.SingleChoice;
 import model.choice.single.SingleChoiceFactory;
 import model.effect.Effect;
@@ -56,7 +57,7 @@ public class Seer extends AbstractVillagerRole {
 		}
 	}
 
-	private void nightAction() {
+	private void nightAction() throws ChoiceException {
 		SingleChoice<StandardPlayer, StandardPlayer> playerChoice = choiceFactory.create(owner, players);
 		StandardPlayer target = playerChoice.getChoice();
 		revealAlignmentOf(target);

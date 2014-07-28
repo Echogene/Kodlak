@@ -6,7 +6,7 @@ package model.effect;
 @FunctionalInterface
 public interface Effect {
 
-	void perform();
+	void perform() throws Exception;
 
 	static Effect doNothing() {
 		return () -> {};
