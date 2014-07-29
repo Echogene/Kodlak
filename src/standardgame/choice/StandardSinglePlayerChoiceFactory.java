@@ -4,17 +4,16 @@ import model.choice.single.SingleChoiceFactory;
 import standardgame.player.StandardPlayer;
 
 import java.util.Collection;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @author Steven Weston
  */
 public class StandardSinglePlayerChoiceFactory implements SingleChoiceFactory<StandardPlayer, StandardPlayer, StandardSinglePlayerChoice> {
 
-	private final Lock lock = new ReentrantLock();
+	private final ChoiceLock lock;
 
-	public StandardSinglePlayerChoiceFactory() {
+	public StandardSinglePlayerChoiceFactory(ChoiceLock lock) {
+		this.lock = lock;
 	}
 
 	@Override

@@ -28,6 +28,11 @@ public class GroupChoice<P extends Player, T> extends AbstractChoice<P, T> {
 	}
 
 	@Override
+	public boolean hasChosen() {
+		throw new NotImplementedException();
+	}
+
+	@Override
 	public Set<P> getChoosers() {
 		return choosers;
 	}

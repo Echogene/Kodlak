@@ -12,4 +12,6 @@ public interface Choice<P extends Player, T> {
 	public Set<P> getChoosers();
 
 	public T getChoice() throws ChoiceException;
+
+	boolean hasChosen();
 }

@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import server.components.messagesender.LoggedMessageSenderFactory;
 import server.components.messagesender.MessageLog;
+import standardgame.choice.ChoiceLock;
 import standardgame.choice.StandardSinglePlayerChoiceFactory;
 import standardgame.game.StandardGame;
 import standardgame.role.StandardRoleAssigner;
@@ -48,6 +49,11 @@ public class Config {
 
 	@Bean
 	public StandardSinglePlayerChoiceFactory getSinglePlayerChoiceFactory() {
-		return new StandardSinglePlayerChoiceFactory();
+		return new StandardSinglePlayerChoiceFactory(getChoiceLock());
+	}
+
+	@Bean
+	public ChoiceLock getChoiceLock() {
+		return new ChoiceLock();
 	}
 }

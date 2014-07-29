@@ -18,4 +18,9 @@ public class FirstSingleChoice<T> extends SingleChoice<StandardPlayer, T> {
 	public T getChoice() {
 		return choices.iterator().next();
 	}
+
+	@Override
+	public boolean hasChosen() {
+		return true;
+	}
 }

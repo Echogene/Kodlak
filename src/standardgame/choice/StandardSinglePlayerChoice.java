@@ -6,8 +6,8 @@ import model.choice.single.SingleChoice;
 import standardgame.player.StandardPlayer;
 
 import java.util.Collection;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
+
+import static standardgame.choice.ChoiceLock.ChoiceCondition;
 
 /**
  * @author Steven Weston
@@ -15,43 +15,28 @@ import java.util.concurrent.locks.Lock;
 public class StandardSinglePlayerChoice extends SingleChoice<StandardPlayer, StandardPlayer> {
 
 	private StandardPlayer choice = null;
-	private final Lock lock;
-	private final Condition chosen;
+	private final ChoiceLock lock;
+	private final ChoiceCondition chosen;
 
 	public StandardSinglePlayerChoice(
 			@NotNull StandardPlayer chooser,
 			@NotNull Collection<StandardPlayer> choices,
-			Lock lock
+			ChoiceLock lock
 	) {
 		super(chooser, choices);
 		this.lock = lock;
-		this.chosen = lock.newCondition();
+		this.chosen = lock.newCondition(this);
 	}
 
 	@Override
 	public StandardPlayer getChoice() throws ChoiceException {
-		if (hasNotChosenYet()) {
-			waitForChoice();
-		}
-		assert !hasNotChosenYet();
+		lock.waitUntilConditionMet(chosen);
+		assert hasChosen();
 		return choice;
 	}
 
-	private void waitForChoice() throws ChoiceException {
-		lock.lock();
-		try {
-			while (hasNotChosenYet()) {
-				chosen.await();
-			}
-		} catch (InterruptedException e) {
-			throw new ChoiceException(e);
-		} finally {
-			lock.unlock();
-		}
-	}
-
 	public synchronized void choose(@NotNull StandardPlayer choice) throws ChoiceException {
-		if (hasNotChosenYet()) {
+		if (!hasChosen()) {
 			this.choice = choice;
 			chosen.signal();
 		} else {
@@ -59,7 +44,8 @@ public class StandardSinglePlayerChoice extends SingleChoice<StandardPlayer, Sta
 		}
 	}
 
-	private boolean hasNotChosenYet() {
-		return choice == null;
+	@Override
+	public boolean hasChosen() {
+		return choice != null;
 	}
 }
