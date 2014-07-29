@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import standardgame.choice.ChoiceLock;
 import standardgame.game.StandardGame;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
@@ -18,10 +18,12 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 public class GameController {
 
 	private final StandardGame game;
+	private final ChoiceLock lock;
 
 	@Autowired
-	public GameController(StandardGame game) {
+	public GameController(StandardGame game, ChoiceLock lock) {
 		this.game = game;
+		this.lock = lock;
 	}
 
 	@RequestMapping(value = "/getPhase.do", method = GET)
@@ -34,6 +36,6 @@ public class GameController {
 	@RequestMapping(value = "/getCurrentChoice.do", method = GET)
 	@ResponseBody
 	public Choice getCurrentChoice() {
-		throw new NotImplementedException();
+		return lock.getCurrentlyWaiting();
 	}
 }
