@@ -21,6 +21,10 @@ var flashBackground = function(element, color) {
 	);
 };
 
+/**
+ * Capitalise the first letter of this string.
+ * @returns {string}
+ */
 String.prototype.capitalizeFirstLetter = function() {
 	return this.charAt(0).toUpperCase() + this.slice(1);
 };
