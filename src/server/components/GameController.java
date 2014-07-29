@@ -29,7 +29,6 @@ public class GameController {
 	@RequestMapping(value = "/getPhase.do", method = GET)
 	@ResponseBody
 	public Phase getCurrentPhase() {
-
 		return game.getCurrentPhase();
 	}
 
