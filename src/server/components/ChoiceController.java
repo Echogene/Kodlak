@@ -6,11 +6,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import server.components.dao.StandardChoiceDao;
 import server.components.dao.StandardPlayerDao;
 import standardgame.choice.ChoiceLock;
 import standardgame.game.StandardGame;
 import standardgame.player.StandardPlayer;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -24,12 +24,19 @@ public class ChoiceController {
 	private final StandardGame game;
 	private final ChoiceLock lock;
 	private final StandardPlayerDao playerDao;
+	private final StandardChoiceDao choiceDao;
 
 	@Autowired
-	public ChoiceController(StandardGame game, ChoiceLock lock, StandardPlayerDao playerDao) {
+	public ChoiceController(
+			StandardGame game,
+			ChoiceLock lock,
+			StandardPlayerDao playerDao,
+			StandardChoiceDao choiceDao
+	) {
 		this.game = game;
 		this.lock = lock;
 		this.playerDao = playerDao;
+		this.choiceDao = choiceDao;
 	}
 
 	@RequestMapping(value = "/getCurrentChoice.do", method = GET)
@@ -46,6 +53,6 @@ public class ChoiceController {
 	) {
 
 		StandardPlayer player = playerDao.getById(playerId);
-		throw new NotImplementedException();
+		Choice choice = choiceDao.getById(choiceId);
 	}
 }

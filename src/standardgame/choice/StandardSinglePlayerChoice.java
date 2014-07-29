@@ -4,6 +4,7 @@ import com.sun.istack.internal.NotNull;
 import model.choice.ChoiceException;
 import model.choice.single.SingleChoice;
 import standardgame.player.StandardPlayer;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.Collection;
 
@@ -12,7 +13,8 @@ import static standardgame.choice.ChoiceLock.ChoiceCondition;
 /**
  * @author Steven Weston
  */
-public class StandardSinglePlayerChoice extends SingleChoice<StandardPlayer, StandardPlayer> {
+public class StandardSinglePlayerChoice extends SingleChoice<StandardPlayer, StandardPlayer>
+		implements StandardChoice<StandardPlayer, StandardPlayer> {
 
 	private StandardPlayer choice = null;
 	private final ChoiceLock lock;
@@ -47,5 +49,10 @@ public class StandardSinglePlayerChoice extends SingleChoice<StandardPlayer, Sta
 	@Override
 	public boolean hasChosen() {
 		return choice != null;
+	}
+
+	@Override
+	public String getId() {
+		throw new NotImplementedException();
 	}
 }
