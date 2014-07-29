@@ -2,6 +2,7 @@ package standardgame.player;
 
 import model.alignment.AlignmentResolver;
 import model.player.AbstractPlayer;
+import server.components.dao.Identifiable;
 import standardgame.alignment.VillagerWerewolfAlignment;
 import standardgame.phase.DayNightPhase;
 import standardgame.player.status.StandardStatus;
@@ -11,7 +12,8 @@ import standardgame.role.StandardRole;
  * @author Steven Weston
  */
 public class StandardPlayer
-		extends AbstractPlayer<DayNightPhase, VillagerWerewolfAlignment, StandardStatus, StandardRole, StandardPlayer> {
+		extends AbstractPlayer<DayNightPhase, VillagerWerewolfAlignment, StandardStatus, StandardRole, StandardPlayer>
+		implements Identifiable {
 
 	private final String id;
 	private double top;
@@ -43,6 +45,7 @@ public class StandardPlayer
 		this.left = left;
 	}
 
+	@Override
 	public String getId() {
 		return id;
 	}

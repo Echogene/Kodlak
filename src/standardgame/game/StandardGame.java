@@ -50,21 +50,6 @@ public class StandardGame
 		return player;
 	}
 
-	public StandardPlayer getPlayerById(String id) {
-
-		for (StandardPlayer player : players) {
-			if (id.equals(player.getId())) {
-				return player;
-			}
-		}
-		return null;
-	}
-
-	public void deletePlayer(String id) {
-
-		players.remove(getPlayerById(id));
-	}
-
 	public MessageSender getMessageSender(StandardPlayer player) {
 		return messageSenders.get(player);
 	}

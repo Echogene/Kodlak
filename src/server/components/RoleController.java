@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import server.components.dao.StandardPlayerDao;
 import standardgame.game.StandardGame;
 import standardgame.player.StandardPlayer;
 import standardgame.role.StandardRole;
@@ -26,12 +27,14 @@ public class RoleController {
 
 	private final StandardGame game;
 	private final StandardRoleAssigner roleFactory;
+	private final StandardPlayerDao playerDao;
 
 	@Autowired
-	public RoleController(StandardGame game, StandardRoleAssigner roleFactory) {
+	public RoleController(StandardGame game, StandardRoleAssigner roleFactory, StandardPlayerDao playerDao) {
 
 		this.game = game;
 		this.roleFactory = roleFactory;
+		this.playerDao = playerDao;
 	}
 
 	@RequestMapping(value = "/addRoleToPlayer.do", method = POST)
@@ -41,7 +44,7 @@ public class RoleController {
 			@RequestParam("roleName") String roleName
 	) throws UnavailableRoleException {
 
-		roleFactory.addRoleToPlayer(game.getPlayerById(playerId), roleName);
+		roleFactory.addRoleToPlayer(playerDao.getById(playerId), roleName);
 	}
 
 	@RequestMapping(value = "/removeRoleFromPlayer.do", method = POST)
@@ -51,7 +54,7 @@ public class RoleController {
 			@RequestParam("roleName") String roleName
 	) throws UnavailableRoleException {
 
-		StandardPlayer player = game.getPlayerById(playerId);
+		StandardPlayer player = playerDao.getById(playerId);
 		for (Iterator<StandardRole> iterator = player.getRoles().iterator(); iterator.hasNext(); ) {
 			StandardRole role = iterator.next();
 			if (role.getName().equals(roleName)) {
