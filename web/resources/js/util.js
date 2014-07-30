@@ -3,6 +3,10 @@ var getPercentageTop = function(element) {
 	return (element.offset().top  - parent.offset().top) / parent.height() * 100;
 };
 
+/**
+ * @param element
+ * @returns {number} the percentage left of the given element inside its parent
+ */
 var getPercentageLeft = function(element) {
 	var parent = element.parent();
 	return (element.offset().left - parent.offset().left) / parent.width() * 100;
