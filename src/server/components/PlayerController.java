@@ -47,7 +47,7 @@ public class PlayerController {
 	@RequestMapping(value = "/editPlayer.do", method = POST)
 	@ResponseBody
 	public void editPlayer(
-			@RequestParam("id") String id,
+			@RequestParam("id") long id,
 			@RequestParam("name") String name,
 			@RequestParam("top") Double top,
 			@RequestParam("left") Double left
@@ -67,7 +67,7 @@ public class PlayerController {
 
 	@RequestMapping(value = "/deletePlayer.do", method = POST)
 	@ResponseBody
-	public void deletePlayer(@RequestParam("id") String id) {
+	public void deletePlayer(@RequestParam("id") long id) {
 		playerDao.delete(id);
 	}
 }

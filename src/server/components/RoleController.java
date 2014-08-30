@@ -40,7 +40,7 @@ public class RoleController {
 	@RequestMapping(value = "/addRoleToPlayer.do", method = POST)
 	@ResponseBody
 	public void addRoleToPlayer(
-			@RequestParam("playerId") String playerId,
+			@RequestParam("playerId") long playerId,
 			@RequestParam("roleName") String roleName
 	) throws UnavailableRoleException {
 
@@ -50,7 +50,7 @@ public class RoleController {
 	@RequestMapping(value = "/removeRoleFromPlayer.do", method = POST)
 	@ResponseBody
 	public void removeRoleFromPlayer(
-			@RequestParam("playerId") String playerId,
+			@RequestParam("playerId") long  playerId,
 			@RequestParam("roleName") String roleName
 	) throws UnavailableRoleException {
 

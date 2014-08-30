@@ -3,11 +3,9 @@ package server.components.dao;
 /**
  * @author Steven Weston
  */
-public interface Dao<T extends Identifiable, B extends Builder<T>> {
+public interface Dao<T extends Identifiable, B extends Builder<T>> extends Reader<T> {
 
-	T getById(String id);
-
-	void delete(String id);
+	void delete(long id);
 
 	B create();
 }

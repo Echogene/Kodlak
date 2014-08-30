@@ -34,10 +34,11 @@ public class StandardPlayerDao implements PlayerDao<StandardPlayer, StandardPlay
 	}
 
 	@Override
-	public StandardPlayer getById(String id) {
+	public StandardPlayer getById(long id) {
 
+		// todo: use a map
 		for (StandardPlayer player : players) {
-			if (id.equals(player.getId())) {
+			if (id == player.getId()) {
 				return player;
 			}
 		}
@@ -45,7 +46,7 @@ public class StandardPlayerDao implements PlayerDao<StandardPlayer, StandardPlay
 	}
 
 	@Override
-	public void delete(String id) {
+	public void delete(long id) {
 		players.remove(getById(id));
 	}
 

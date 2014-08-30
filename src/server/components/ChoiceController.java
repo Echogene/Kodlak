@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import server.components.dao.choice.StandardChoiceDao;
+import server.components.dao.choice.StandardChoiceReader;
 import server.components.dao.player.StandardPlayerDao;
 import standardgame.choice.ChoiceLock;
 import standardgame.game.StandardGame;
@@ -24,14 +24,14 @@ public class ChoiceController {
 	private final StandardGame game;
 	private final ChoiceLock lock;
 	private final StandardPlayerDao playerDao;
-	private final StandardChoiceDao choiceDao;
+	private final StandardChoiceReader choiceDao;
 
 	@Autowired
 	public ChoiceController(
 			StandardGame game,
 			ChoiceLock lock,
 			StandardPlayerDao playerDao,
-			StandardChoiceDao choiceDao
+			StandardChoiceReader choiceDao
 	) {
 		this.game = game;
 		this.lock = lock;
@@ -48,8 +48,8 @@ public class ChoiceController {
 	@RequestMapping(value = "/choosePlayer.do", method = POST)
 	@ResponseBody
 	public void choose(
-			@RequestParam("choiceId") String choiceId,
-			@RequestParam("playerId") String playerId
+			@RequestParam("choiceId") long choiceId,
+			@RequestParam("playerId") long playerId
 	) {
 
 		StandardPlayer player = playerDao.getById(playerId);
