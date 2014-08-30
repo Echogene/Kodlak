@@ -1,5 +1,6 @@
 package server;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import server.components.messagesender.LoggedMessageSenderFactory;
@@ -18,6 +19,9 @@ import standardgame.role.werewolf.WerewolfFactory;
 @Configuration
 public class Config {
 
+	@Autowired
+	private StandardSinglePlayerChoiceFactory singlePlayerChoiceFactory;
+
 	@Bean
 	public StandardRoleAssigner getRoleFactory() {
 
@@ -27,7 +31,7 @@ public class Config {
 		// Add more factories here:
 		assigner.addRoleFactory(new WerewolfFactory(game.getPlayers()));
 		assigner.addRoleFactory(new VillagerFactory());
-		assigner.addRoleFactory(new SeerFactory(game.getPlayers(), getSinglePlayerChoiceFactory(), game));
+		assigner.addRoleFactory(new SeerFactory(game.getPlayers(), singlePlayerChoiceFactory, game));
 
 		return assigner;
 	}
@@ -45,11 +49,6 @@ public class Config {
 	@Bean
 	public MessageLog getMessageLog() {
 		return new MessageLog();
-	}
-
-	@Bean
-	public StandardSinglePlayerChoiceFactory getSinglePlayerChoiceFactory() {
-		return new StandardSinglePlayerChoiceFactory(getChoiceLock());
 	}
 
 	@Bean
