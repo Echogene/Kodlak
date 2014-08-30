@@ -1,7 +1,7 @@
 package standardgame.role.villager;
 
 import model.message.MessageSender;
-import standardgame.choice.StandardSinglePlayerChoiceFactory;
+import server.components.dao.choice.StandardSinglePlayerChoiceFactory;
 import standardgame.game.StandardGame;
 import standardgame.player.StandardPlayer;
 import standardgame.role.StandardRoleFactory;

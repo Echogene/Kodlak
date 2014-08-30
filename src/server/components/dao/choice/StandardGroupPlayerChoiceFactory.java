@@ -1,4 +1,4 @@
-package standardgame.choice;
+package server.components.dao.choice;
 
 import model.choice.group.GroupChoice;
 import model.choice.group.GroupChoiceFactory;
@@ -11,7 +11,7 @@ import java.util.Set;
 /**
  * @author Steven Weston
  */
-public class StandardGroupChoiceFactory
+public class StandardGroupPlayerChoiceFactory
 		implements GroupChoiceFactory<StandardPlayer,StandardPlayer,GroupChoice<StandardPlayer,StandardPlayer>> {
 
 	@Override

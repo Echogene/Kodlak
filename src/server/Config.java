@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import server.components.messagesender.LoggedMessageSenderFactory;
 import server.components.messagesender.MessageLog;
 import standardgame.choice.ChoiceLock;
-import standardgame.choice.StandardSinglePlayerChoiceFactory;
+import server.components.dao.choice.StandardSinglePlayerChoiceFactory;
 import standardgame.game.StandardGame;
 import standardgame.role.StandardRoleAssigner;
 import standardgame.role.villager.SeerFactory;

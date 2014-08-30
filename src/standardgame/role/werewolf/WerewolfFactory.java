@@ -1,9 +1,6 @@
 package standardgame.role.werewolf;
 
-import model.choice.group.GroupChoice;
-import model.choice.group.GroupChoiceFactory;
-import standardgame.choice.StandardGroupChoiceFactory;
-import standardgame.choice.StandardSinglePlayerChoiceFactory;
+import server.components.dao.choice.StandardGroupPlayerChoiceFactory;
 import standardgame.role.StandardRoleFactory;
 import standardgame.player.StandardPlayer;
 
@@ -18,7 +15,7 @@ public class WerewolfFactory extends StandardRoleFactory<Werewolf> {
 	public static final String WEREWOLF = "werewolf";
 	private final Set<StandardPlayer> werewolves = new HashSet<>();
 	private final Set<StandardPlayer> players;
-	private StandardGroupChoiceFactory choiceFactory;
+	private StandardGroupPlayerChoiceFactory choiceFactory;
 
 	public WerewolfFactory(Set<StandardPlayer> players) {
 

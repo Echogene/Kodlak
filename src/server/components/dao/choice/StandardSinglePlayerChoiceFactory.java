@@ -1,6 +1,8 @@
-package standardgame.choice;
+package server.components.dao.choice;
 
 import model.choice.single.SingleChoiceFactory;
+import standardgame.choice.ChoiceLock;
+import standardgame.choice.StandardSinglePlayerChoice;
 import standardgame.player.StandardPlayer;
 
 import java.util.Collection;
