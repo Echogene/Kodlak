@@ -15,8 +15,8 @@ public abstract class SingleChoice<P extends Player, T> extends AbstractChoice<P
 
 	protected final @NotNull P chooser;
 
-	public SingleChoice(@NotNull P chooser, @NotNull Collection<T> choices) {
-		super(choices);
+	public SingleChoice(long id, @NotNull P chooser, @NotNull Collection<T> choices) {
+		super(id, choices);
 		this.chooser = chooser;
 	}
 

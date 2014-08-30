@@ -1,6 +1,7 @@
 package standardgame.role.werewolf;
 
 import model.choice.group.GroupChoice;
+import model.choice.group.GroupChoiceFactory;
 import model.effect.Effect;
 import model.player.Player;
 import standardgame.alignment.VillagerWerewolfAlignment;
@@ -20,10 +21,26 @@ public class Werewolf extends StandardRole {
 	private final Set<StandardPlayer> werewolves;
 	private final Set<StandardPlayer> players;
 
-	public Werewolf(StandardPlayer owner, Set<StandardPlayer> werewolves, Set<StandardPlayer> players) {
+	private final GroupChoiceFactory<
+			StandardPlayer,
+			StandardPlayer,
+			? extends GroupChoice<StandardPlayer, StandardPlayer>
+	> choiceFactory;
+
+	public Werewolf(
+			StandardPlayer owner,
+			Set<StandardPlayer> werewolves,
+			Set<StandardPlayer> players,
+			GroupChoiceFactory<
+					StandardPlayer,
+					StandardPlayer,
+					? extends GroupChoice<StandardPlayer, StandardPlayer>
+			> choiceFactory
+	) {
 		super(owner);
 		this.werewolves = werewolves;
 		this.players = players;
+		this.choiceFactory = choiceFactory;
 	}
 
 	@Override
@@ -38,7 +55,7 @@ public class Werewolf extends StandardRole {
 
 	private void nightAction() {
 
-		GroupChoice<StandardPlayer, StandardPlayer> playerChoice = new GroupChoice<>(werewolves, players);
+		GroupChoice<StandardPlayer, StandardPlayer> playerChoice = choiceFactory.create(werewolves, players);
 		Player victim = playerChoice.getChoice();
 		victim.kill();
 	}

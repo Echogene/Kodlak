@@ -3,7 +3,6 @@ package server.components.dao;
 /**
  * @author Steven Weston
  */
-public interface Identifiable {
+public interface Builder<T> {
 
-	long getId();
 }

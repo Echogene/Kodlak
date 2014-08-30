@@ -1,13 +1,14 @@
 package model.choice;
 
 import model.player.Player;
+import server.components.dao.Identifiable;
 
 import java.util.Set;
 
 /**
  * @author Steven Weston
  */
-public interface Choice<P extends Player, T> {
+public interface Choice<P extends Player, T> extends Identifiable {
 
 	public Set<P> getChoosers();
 

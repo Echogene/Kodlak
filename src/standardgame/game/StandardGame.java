@@ -41,7 +41,7 @@ public class StandardGame
 				name,
 				resolver,
 				new StandardStatus(),
-				Integer.toString(currentId++)
+				currentId++
 		);
 		players.add(player);
 

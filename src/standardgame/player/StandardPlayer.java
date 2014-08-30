@@ -15,7 +15,7 @@ public class StandardPlayer
 		extends AbstractPlayer<DayNightPhase, VillagerWerewolfAlignment, StandardStatus, StandardRole, StandardPlayer>
 		implements Identifiable {
 
-	private final String id;
+	private final long id;
 	private double top;
 	private double left;
 
@@ -23,7 +23,7 @@ public class StandardPlayer
 			String name,
 			AlignmentResolver<VillagerWerewolfAlignment> resolver,
 			StandardStatus startingStatus,
-			String id
+			long id
 	) {
 		super(name, resolver, startingStatus);
 		this.id = id;
@@ -46,7 +46,7 @@ public class StandardPlayer
 	}
 
 	@Override
-	public String getId() {
+	public long getId() {
 		return id;
 	}
 

@@ -14,8 +14,8 @@ public class GroupChoice<P extends Player, T> extends AbstractChoice<P, T> {
 
 	protected final @NotNull Set<P> choosers;
 
-	public GroupChoice(@NotNull Set<P> choosers, @NotNull Set<T> choices) {
-		super(choices);
+	public GroupChoice(long id, @NotNull Set<P> choosers, @NotNull Set<T> choices) {
+		super(id, choices);
 		if (choosers.isEmpty()) {
 			throw new IllegalArgumentException("There must be at least one chooser.");
 		}

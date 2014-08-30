@@ -10,8 +10,10 @@ import java.util.Collection;
  */
 public class FirstSingleChoice<T> extends SingleChoice<StandardPlayer, T> {
 
+	private static int currentId = 0;
+
 	public FirstSingleChoice(@NotNull StandardPlayer chooser, @NotNull Collection<T> choices) {
-		super(chooser, choices);
+		super(currentId++, chooser, choices);
 	}
 
 	@Override

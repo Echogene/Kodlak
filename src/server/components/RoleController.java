@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import server.components.dao.StandardPlayerDao;
+import server.components.dao.player.StandardPlayerDao;
 import standardgame.game.StandardGame;
 import standardgame.player.StandardPlayer;
 import standardgame.role.StandardRole;

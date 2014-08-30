@@ -21,11 +21,12 @@ public class StandardSinglePlayerChoice extends SingleChoice<StandardPlayer, Sta
 	private final ChoiceCondition chosen;
 
 	public StandardSinglePlayerChoice(
+			long id,
 			@NotNull StandardPlayer chooser,
 			@NotNull Collection<StandardPlayer> choices,
 			ChoiceLock lock
 	) {
-		super(chooser, choices);
+		super(id, chooser, choices);
 		this.lock = lock;
 		this.chosen = lock.newCondition(this);
 	}
@@ -52,7 +53,7 @@ public class StandardSinglePlayerChoice extends SingleChoice<StandardPlayer, Sta
 	}
 
 	@Override
-	public String getId() {
+	public long getId() {
 		throw new NotImplementedException();
 	}
 }

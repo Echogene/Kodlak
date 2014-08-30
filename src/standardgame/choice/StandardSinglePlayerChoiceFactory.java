@@ -20,6 +20,7 @@ public class StandardSinglePlayerChoiceFactory implements SingleChoiceFactory<St
 	public StandardSinglePlayerChoice create(
 			StandardPlayer chooser, Collection<StandardPlayer> choices
 	) {
-		return new StandardSinglePlayerChoice(chooser, choices, lock);
+		// todo: don't use 1
+		return new StandardSinglePlayerChoice(1, chooser, choices, lock);
 	}
 }
