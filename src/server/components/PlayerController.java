@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import server.components.dao.player.StandardPlayerDao;
-import standardgame.game.StandardGame;
 import standardgame.player.StandardPlayer;
 
 import java.util.Set;
@@ -21,12 +20,10 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @Controller
 public class PlayerController {
 
-	private final StandardGame game;
 	private final StandardPlayerDao playerDao;
 
 	@Autowired
-	public PlayerController(StandardGame game, StandardPlayerDao playerDao) {
-		this.game = game;
+	public PlayerController(StandardPlayerDao playerDao) {
 		this.playerDao = playerDao;
 	}
 
@@ -38,7 +35,7 @@ public class PlayerController {
 			@RequestParam("left") Double left
 	) {
 
-		StandardPlayer newPlayer = game.addPlayer(name);
+		StandardPlayer newPlayer = playerDao.create().createWithName(name);
 		newPlayer.setTop(top);
 		newPlayer.setLeft(left);
 		return newPlayer;
@@ -62,7 +59,7 @@ public class PlayerController {
 	@RequestMapping(value = "/getPlayers.do", method = GET, produces = APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public Set<StandardPlayer> getPlayers() {
-		return game.getPlayers();
+		return playerDao.getAll();
 	}
 
 	@RequestMapping(value = "/deletePlayer.do", method = POST)

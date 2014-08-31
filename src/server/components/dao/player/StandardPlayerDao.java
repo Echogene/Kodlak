@@ -5,10 +5,10 @@ import org.springframework.stereotype.Component;
 import server.components.dao.Identifier;
 import server.components.messagesender.LoggedMessageSender;
 import server.components.messagesender.LoggedMessageSenderFactory;
-import standardgame.game.StandardGame;
 import standardgame.player.StandardPlayer;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -26,10 +26,10 @@ public class StandardPlayerDao implements PlayerDao<StandardPlayer, StandardPlay
 	private final Map<StandardPlayer, LoggedMessageSender> messageSenders = new HashMap<>();
 
 	@Autowired
-	public StandardPlayerDao(StandardGame game, Identifier identifier, LoggedMessageSenderFactory messageSenderFactory) {
+	public StandardPlayerDao(Identifier identifier, LoggedMessageSenderFactory messageSenderFactory) {
 
 		this.messageSenderFactory = messageSenderFactory;
-		this.players = game.getPlayers();
+		this.players = new HashSet<>();
 		this.identifier = identifier;
 	}
 
@@ -43,6 +43,11 @@ public class StandardPlayerDao implements PlayerDao<StandardPlayer, StandardPlay
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public Set<StandardPlayer> getAll() {
+		return players;
 	}
 
 	@Override

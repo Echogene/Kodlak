@@ -6,6 +6,8 @@ import standardgame.choice.ChoiceLock;
 import standardgame.choice.StandardChoice;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.util.Set;
+
 /**
  * @author Steven Weston
  */
@@ -22,6 +24,12 @@ public class StandardChoiceReader<C extends StandardChoice> implements Reader<C>
 
 	@Override
 	public C getById(long id) {
+
+		throw new NotImplementedException();
+	}
+
+	@Override
+	public Set<C> getAll() {
 
 		throw new NotImplementedException();
 	}

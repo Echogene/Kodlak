@@ -3,10 +3,11 @@ package server;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import server.components.dao.choice.StandardSinglePlayerChoiceFactory;
+import server.components.dao.player.StandardPlayerDao;
 import server.components.messagesender.LoggedMessageSenderFactory;
 import server.components.messagesender.MessageLog;
 import standardgame.choice.ChoiceLock;
-import server.components.dao.choice.StandardSinglePlayerChoiceFactory;
 import standardgame.game.StandardGame;
 import standardgame.role.StandardRoleAssigner;
 import standardgame.role.villager.SeerFactory;
@@ -19,19 +20,18 @@ import standardgame.role.werewolf.WerewolfFactory;
 @Configuration
 public class Config {
 
-	@Autowired
-	private StandardSinglePlayerChoiceFactory singlePlayerChoiceFactory;
+	@Autowired private StandardSinglePlayerChoiceFactory singlePlayerChoiceFactory;
+	@Autowired private StandardPlayerDao playerDao;
 
 	@Bean
 	public StandardRoleAssigner getRoleFactory() {
 
 		StandardRoleAssigner assigner = new StandardRoleAssigner();
-		StandardGame game = getGame();
 
 		// Add more factories here:
-		assigner.addRoleFactory(new WerewolfFactory(game.getPlayers()));
+		assigner.addRoleFactory(new WerewolfFactory(playerDao.getAll()));
 		assigner.addRoleFactory(new VillagerFactory());
-		assigner.addRoleFactory(new SeerFactory(game.getPlayers(), singlePlayerChoiceFactory, game));
+		assigner.addRoleFactory(new SeerFactory(playerDao.getAll(), singlePlayerChoiceFactory, getGame()));
 
 		return assigner;
 	}

@@ -19,7 +19,5 @@ public interface Game<
 		Y extends Player<P, A, S, R, Y>
 > {
 
-	Set<Y> getPlayers();
-
 	P getCurrentPhase();
 }

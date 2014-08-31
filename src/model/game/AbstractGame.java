@@ -6,11 +6,6 @@ import model.player.Player;
 import model.player.status.Status;
 import model.role.Role;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 /**
  * @author Steven Weston
  */
@@ -23,29 +18,12 @@ public abstract class AbstractGame<
 > implements Game<P, A, S, R, Y> {
 
 	/**
-	 * The set of players in the game.
-	 */
-	protected final Set<Y> players = new HashSet<>();
-
-	/**
-	 * A list of roles in order of priority.
-	 */
-	protected final List<Role> roles = new ArrayList<>();
-
-	/**
 	 * The current phase of the game.
 	 */
 	protected final P currentPhase;
 
 	protected AbstractGame(P currentPhase) {
 		this.currentPhase = currentPhase;
-	}
-
-	public abstract Y addPlayer(String name);
-
-	@Override
-	public Set<Y> getPlayers() {
-		return players;
 	}
 
 	@Override

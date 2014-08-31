@@ -2,6 +2,7 @@ package standardgame.game;
 
 import model.game.AbstractGame;
 import model.message.MessageSender;
+import org.springframework.beans.factory.annotation.Autowired;
 import server.components.messagesender.LoggedMessageSender;
 import server.components.messagesender.LoggedMessageSenderFactory;
 import standardgame.alignment.VillagerWerewolfAlignment;
@@ -26,28 +27,11 @@ public class StandardGame
 	private final LoggedMessageSenderFactory messageSenderFactory;
 	private final Map<StandardPlayer, LoggedMessageSender> messageSenders = new HashMap<>();
 
-	private int currentId = 0;
-
+	@Autowired
 	public StandardGame(LoggedMessageSenderFactory messageSenderFactory) {
 
 		super(new DayNightPhase(NIGHT));
 		this.messageSenderFactory = messageSenderFactory;
-	}
-
-	@Override
-	public StandardPlayer addPlayer(String name) {
-
-		StandardPlayer player = new StandardPlayer(
-				name,
-				resolver,
-				new StandardStatus(),
-				currentId++
-		);
-		players.add(player);
-
-		LoggedMessageSender messageSender = messageSenderFactory.create(player);
-		messageSenders.put(player, messageSender);
-		return player;
 	}
 
 	public MessageSender getMessageSender(StandardPlayer player) {
