@@ -16,7 +16,7 @@
     <script>
         var roleSection = new RoleSection();
 
-        var playerCanvas = new PlayerCanvas(roleSection);
+        var playerCanvas = new PlayerCanvas(true, roleSection);
         var canvas = playerCanvas.create();
         $('#playerCanvasContainer').append(canvas);
         playerCanvas.refresh();

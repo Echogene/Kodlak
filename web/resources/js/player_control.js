@@ -12,14 +12,16 @@ var Player;
 /**
  * A control representing a player.  Double click to edit the name and middle click to delete it.
  * @param {Player} player
+ * @param {boolean} editable whether the player can be deleted or roles unassigned
  * @param {RoleSection} roleSection
  * @constructor
  * @implements EditableControl
  */
-function PlayerControl(player, roleSection) {
+function PlayerControl(player, editable, roleSection) {
 	EditableControl.call(this);
 	this.player = player;
 	this.mode = 'read';
+	this._editable = editable;
 	this._rolesInOrder = [];
 	this._roleSection = roleSection;
 }
@@ -37,7 +39,7 @@ PlayerControl.prototype.create = function() {
 
 	var input = $('<input/>');
 	input.val(this.player.name);
-	input.keypress(function(e) {
+	input.keypress(function (e) {
 		if (e.keyCode === 13) {
 			owner.finish();
 		} else if (e.keyCode === 27) {
@@ -49,7 +51,7 @@ PlayerControl.prototype.create = function() {
 
 	var text = $('<span/>');
 	text.text(this.player.name);
-	text.dblclick(function(e) {
+	text.dblclick(function (e) {
 		owner.control.removeClass('read');
 		owner.mode = 'edit';
 		owner.control.addClass('edit');
@@ -57,11 +59,13 @@ PlayerControl.prototype.create = function() {
 		e.stopPropagation();
 	});
 	this.text = text;
-	text.mouseup(function(e) {
-		if (e.which == 2) {
-			owner.remove();
-		}
-	});
+	if (this._editable) {
+		text.mouseup(function (e) {
+			if (e.which == 2) {
+				owner.remove();
+			}
+		});
+	}
 	control.append(text);
 
 	control.append(this._createRoles());
@@ -119,11 +123,13 @@ PlayerControl.prototype._createRoles = function() {
 PlayerControl.prototype._createRoleText = function(rawRoleName) {
 	var roleText = $('<div/>').addClass('role');
 	var owner = this;
-	roleText.mouseup(function(e) {
-		if (e.which == 2) {
-			owner._unassignRole(rawRoleName);
-		}
-	});
+	if (owner._editable) {
+		roleText.mouseup(function(e) {
+			if (e.which == 2) {
+				owner._unassignRole(rawRoleName);
+			}
+		});
+	}
 	return roleText.text(rawRoleName.capitalizeFirstLetter())
 };
 

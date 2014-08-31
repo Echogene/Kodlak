@@ -1,10 +1,12 @@
 /**
  * A canvas on which players can be created, edited and deleted.
+ * @param {boolean} editable whether we can create or delete players
  * @param {RoleSection=} roleSection
  * @constructor
  * @implements Control
  */
-function PlayerCanvas(roleSection) {
+function PlayerCanvas(editable, roleSection) {
+	this._editable = editable;
 	this._roleSection = roleSection;
 }
 
@@ -17,21 +19,23 @@ PlayerCanvas.prototype.create = function() {
 	this.canvas = canvas;
 
 	var owner = this;
-	canvas.dblclick(function(e) {
-		var relativeX = (e.pageX - canvas.offset().left) / canvas.width() * 100;
-		var relativeY = (e.pageY - canvas.offset().top) / canvas.height() * 100;
-		var addPlayerControl = new AddPlayerControl(function(player) {
-			owner._renderPlayer(player);
+	if (this._editable) {
+		canvas.dblclick(function (e) {
+			var relativeX = (e.pageX - canvas.offset().left) / canvas.width() * 100;
+			var relativeY = (e.pageY - canvas.offset().top) / canvas.height() * 100;
+			var addPlayerControl = new AddPlayerControl(function (player) {
+				owner._renderPlayer(player);
+			});
+			var control = addPlayerControl.create();
+			canvas.append(control);
+			control.css({
+				position: 'absolute',
+				top: relativeY + '%',
+				left: relativeX + '%'
+			});
+			addPlayerControl.input.focus();
 		});
-		var control = addPlayerControl.create();
-		canvas.append(control);
-		control.css({
-			position: 'absolute',
-			top: relativeY + '%',
-			left: relativeX + '%'
-		});
-		addPlayerControl.input.focus();
-	});
+	}
 
 	return canvas;
 };
@@ -59,7 +63,7 @@ PlayerCanvas.prototype.refresh = function() {
  * @private
  */
 PlayerCanvas.prototype._renderPlayer = function(player) {
-	var playerControl = new PlayerControl(player, this._roleSection);
+	var playerControl = new PlayerControl(player, this._editable, this._roleSection);
 
 	var control =  playerControl.create();
 	this.canvas.append(control);

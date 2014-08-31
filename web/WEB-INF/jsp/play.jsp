@@ -10,7 +10,7 @@
         <div id="playerCanvasContainer"></div>
     </div>
     <script>
-        var playerCanvas = new PlayerCanvas();
+        var playerCanvas = new PlayerCanvas(false);
         var canvas = playerCanvas.create();
         $('#playerCanvasContainer').append(canvas);
         playerCanvas.refresh();
