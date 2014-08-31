@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Kodlak: Game in Progress</title>
-    <%@include file="common_scripts.jsp"%>
+    <%@include file="include_common.jsp"%>
 </head>
 <body>
     <div id="main">

@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Kodlak: Game Setup</title>
-    <%@include file="common_scripts.jsp"%>
+    <%@include file="include_common.jsp"%>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/add_player_control.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/role_control.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/role_section.js"></script>
