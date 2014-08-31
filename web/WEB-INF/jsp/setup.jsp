@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Welcome</title>
+    <title>Game Setup</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main.css" />
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/util.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/control.js"></script>
