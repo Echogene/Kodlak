@@ -1,5 +1,6 @@
 package server.components.dao.choice;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import server.components.dao.Dao;
 import server.components.dao.Identifier;
@@ -15,6 +16,7 @@ public class StandardSinglePlayerChoiceDao
 		extends StandardChoiceReader<StandardSinglePlayerChoice>
 		implements Dao<StandardSinglePlayerChoice, StandardSinglePlayerChoiceBuilder.ChoiceBuilder> {
 
+	@Autowired
 	public StandardSinglePlayerChoiceDao(Identifier identifier, ChoiceLock lock) {
 		super(identifier, lock);
 	}
