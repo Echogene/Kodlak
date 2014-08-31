@@ -11,6 +11,7 @@ import java.util.Collection;
 import static standardgame.choice.ChoiceLock.ChoiceCondition;
 
 /**
+ * The default implementation for a single player's choice of a player.
  * @author Steven Weston
  */
 public class StandardSinglePlayerChoice extends SingleChoice<StandardPlayer, StandardPlayer>
@@ -20,6 +21,13 @@ public class StandardSinglePlayerChoice extends SingleChoice<StandardPlayer, Sta
 	private final ChoiceLock lock;
 	private final ChoiceCondition chosen;
 
+	/**
+	 * Create a choice where the chooser has to choose from the choices.
+	 * @param id the identifier of this choice
+	 * @param chooser the player choosing
+	 * @param choices the players who can be chosen
+	 * @param lock a lock that waits for the choice
+	 */
 	public StandardSinglePlayerChoice(
 			long id,
 			@NotNull StandardPlayer chooser,
@@ -38,6 +46,7 @@ public class StandardSinglePlayerChoice extends SingleChoice<StandardPlayer, Sta
 		return choice;
 	}
 
+	@Override
 	public synchronized void choose(@NotNull StandardPlayer choice) throws ChoiceException {
 		if (!hasChosen()) {
 			this.choice = choice;

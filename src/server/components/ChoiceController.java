@@ -1,6 +1,7 @@
 package server.components;
 
 import model.choice.Choice;
+import model.choice.ChoiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import server.components.dao.choice.StandardChoiceReader;
 import server.components.dao.player.StandardPlayerDao;
 import standardgame.choice.ChoiceLock;
+import standardgame.choice.StandardChoice;
 import standardgame.game.StandardGame;
 import standardgame.player.StandardPlayer;
 
@@ -50,9 +52,10 @@ public class ChoiceController {
 	public void choose(
 			@RequestParam("choiceId") long choiceId,
 			@RequestParam("playerId") long playerId
-	) {
+	) throws ChoiceException {
 
 		StandardPlayer player = playerDao.getById(playerId);
-		Choice choice = choiceDao.getById(choiceId);
+		StandardChoice choice = choiceDao.getById(choiceId);
+		choice.choose(player);
 	}
 }
