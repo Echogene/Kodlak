@@ -14,8 +14,9 @@
 	<!-- Configures the @Controller programming model -->
 	<mvc:annotation-driven />
 
-	<!-- Forwards requests to the "/" resource to the "welcome" view -->
+	<!-- Forwards requests to the "/" resource to the "setup" view -->
 	<mvc:view-controller path="/" view-name="setup"/>
+	<mvc:view-controller path="/play" view-name="play"/>
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources/ directory -->
 	<mvc:resources mapping="/resources/**" location="/resources/" />
