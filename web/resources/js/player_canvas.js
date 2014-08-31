@@ -1,6 +1,6 @@
 /**
  * A canvas on which players can be created, edited and deleted.
- * @param {RoleSection} roleSection
+ * @param {RoleSection=} roleSection
  * @constructor
  * @implements Control
  */
