@@ -15,6 +15,7 @@ task closureCompiler(type:Exec) {
 }
 
 dependencies {
+    compile files('~/.lib/java/Ophelia/Ophelia.jar')
     compile 'org.springframework:spring-context:4.0.5.RELEASE'
     compile 'org.springframework:spring-web:4.0.5.RELEASE'
     compile 'org.springframework:spring-webmvc:4.0.5.RELEASE'
