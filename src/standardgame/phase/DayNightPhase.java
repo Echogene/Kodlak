@@ -1,11 +1,12 @@
 package standardgame.phase;
 
 import model.phase.Phase;
+import util.event.Observable;
 
 /**
  * @author Steven Weston
  */
-public class DayNightPhase implements Phase {
+public class DayNightPhase extends Observable<PhaseChangeEvent> implements Phase {
 
 	private Phase phase;
 
@@ -20,6 +21,7 @@ public class DayNightPhase implements Phase {
 	@Override
 	public void advance() {
 
+		fireEvent(new PhaseEndEvent(phase));
 		Phase newPhase;
 		if (Phase.NIGHT == phase) {
 			newPhase = Phase.DAY;
@@ -27,6 +29,7 @@ public class DayNightPhase implements Phase {
 			newPhase = Phase.NIGHT;
 		}
 		phase = newPhase;
+		fireEvent(new PhaseStartEvent(phase));
 	}
 
 	public static enum Phase {DAY, NIGHT}
