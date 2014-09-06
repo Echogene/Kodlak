@@ -21,7 +21,7 @@ public class DayNightPhase extends Observable<PhaseChangeEvent> implements Phase
 	@Override
 	public void advance() {
 
-		fireEvent(new PhaseEndEvent(phase));
+		fireEvent(PhaseEndEvent.MAP.get(phase));
 		Phase newPhase;
 		if (Phase.NIGHT == phase) {
 			newPhase = Phase.DAY;
@@ -29,7 +29,7 @@ public class DayNightPhase extends Observable<PhaseChangeEvent> implements Phase
 			newPhase = Phase.NIGHT;
 		}
 		phase = newPhase;
-		fireEvent(new PhaseStartEvent(phase));
+		fireEvent(PhaseStartEvent.MAP.get(phase));
 	}
 
 	public static enum Phase {DAY, NIGHT}
