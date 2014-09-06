@@ -1,4 +1,4 @@
-package server.components;
+package standardgame.server.components;
 
 import model.phase.Phase;
 import org.springframework.beans.factory.annotation.Autowired;

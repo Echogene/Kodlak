@@ -1,7 +1,7 @@
 package model.choice;
 
 import model.player.Player;
-import server.components.dao.Identifiable;
+import standardgame.server.components.dao.Identifiable;
 
 import java.util.Set;
 

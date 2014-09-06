@@ -1,4 +1,4 @@
-package server.components.messagesender;
+package standardgame.server.components.messagesender;
 
 import model.message.MessageSenderFactory;
 import model.player.Player;

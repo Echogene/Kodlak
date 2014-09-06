@@ -1,6 +1,6 @@
-package server.components.dao.choice;
+package standardgame.server.components.dao.choice;
 
-import server.components.dao.Builder;
+import standardgame.server.components.dao.Builder;
 import standardgame.choice.ChoiceLock;
 import standardgame.choice.StandardSinglePlayerChoice;
 import standardgame.player.StandardPlayer;

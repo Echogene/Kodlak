@@ -1,6 +1,6 @@
 package standardgame.role.werewolf;
 
-import server.components.dao.choice.StandardGroupPlayerChoiceFactory;
+import standardgame.server.components.dao.choice.StandardGroupPlayerChoiceFactory;
 import standardgame.role.StandardRoleFactory;
 import standardgame.player.StandardPlayer;
 

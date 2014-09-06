@@ -1,9 +1,9 @@
-package server.components.dao.choice;
+package standardgame.server.components.dao.choice;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import server.components.dao.Dao;
-import server.components.dao.Identifier;
+import standardgame.server.components.dao.Dao;
+import standardgame.server.components.dao.Identifier;
 import standardgame.choice.ChoiceLock;
 import standardgame.choice.StandardSinglePlayerChoice;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;

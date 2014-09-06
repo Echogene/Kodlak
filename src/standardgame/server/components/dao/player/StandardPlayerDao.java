@@ -1,10 +1,10 @@
-package server.components.dao.player;
+package standardgame.server.components.dao.player;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import server.components.dao.Identifier;
-import server.components.messagesender.LoggedMessageSender;
-import server.components.messagesender.LoggedMessageSenderFactory;
+import standardgame.server.components.dao.Identifier;
+import standardgame.server.components.messagesender.LoggedMessageSender;
+import standardgame.server.components.messagesender.LoggedMessageSenderFactory;
 import standardgame.player.StandardPlayer;
 
 import java.util.HashMap;

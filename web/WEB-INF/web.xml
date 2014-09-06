@@ -44,7 +44,7 @@
 
 	<filter>
 		<filter-name>debugFilter</filter-name>
-		<filter-class>server.DebugFilter</filter-class>
+		<filter-class>standardgame.server.DebugFilter</filter-class>
 	</filter>
 
 	<filter-mapping>
@@ -55,7 +55,7 @@
 	<servlet>
 		<!--suppress ServletWithoutMappingInspection -->
 		<servlet-name>startupShutdownListener</servlet-name>
-		<servlet-class>server.StartupShutdownListener</servlet-class>
+		<servlet-class>standardgame.server.StartupShutdownListener</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 

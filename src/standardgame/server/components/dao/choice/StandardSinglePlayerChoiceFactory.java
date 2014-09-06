@@ -1,4 +1,4 @@
-package server.components.dao.choice;
+package standardgame.server.components.dao.choice;
 
 import model.choice.single.SingleChoiceFactory;
 import org.springframework.beans.factory.annotation.Autowired;

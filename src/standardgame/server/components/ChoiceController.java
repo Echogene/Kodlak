@@ -1,4 +1,4 @@
-package server.components;
+package standardgame.server.components;
 
 import model.choice.Choice;
 import model.choice.ChoiceException;
@@ -7,8 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import server.components.dao.choice.StandardChoiceReader;
-import server.components.dao.player.StandardPlayerDao;
+import standardgame.server.components.dao.choice.StandardChoiceReader;
+import standardgame.server.components.dao.player.StandardPlayerDao;
 import standardgame.choice.ChoiceLock;
 import standardgame.choice.StandardChoice;
 import standardgame.game.StandardGame;

@@ -1,4 +1,4 @@
-package server;
+package standardgame.server;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;

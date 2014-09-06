@@ -1,7 +1,7 @@
-package server.components.dao.choice;
+package standardgame.server.components.dao.choice;
 
-import server.components.dao.Builder;
-import server.components.dao.IdentifiableBuilder;
+import standardgame.server.components.dao.Builder;
+import standardgame.server.components.dao.IdentifiableBuilder;
 import standardgame.choice.StandardChoice;
 
 /**

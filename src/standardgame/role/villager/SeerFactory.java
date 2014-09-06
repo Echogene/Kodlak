@@ -1,7 +1,7 @@
 package standardgame.role.villager;
 
 import model.message.MessageSender;
-import server.components.dao.choice.StandardSinglePlayerChoiceFactory;
+import standardgame.server.components.dao.choice.StandardSinglePlayerChoiceFactory;
 import standardgame.game.StandardGame;
 import standardgame.player.StandardPlayer;
 import standardgame.role.StandardRoleFactory;
@@ -35,7 +35,7 @@ public class SeerFactory extends StandardRoleFactory<Seer> {
 
 	@Override
 	public Seer create(StandardPlayer StandardPlayer) {
-		MessageSender messageSender = game.getMessageSender(StandardPlayer);
+		MessageSender messageSender = null; //todo
 		return new Seer(StandardPlayer, players, choiceFactory, messageSender);
 	}
 }

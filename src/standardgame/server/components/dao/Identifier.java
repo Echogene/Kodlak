@@ -1,4 +1,4 @@
-package server.components.dao;
+package standardgame.server.components.dao;
 
 import org.springframework.stereotype.Component;
 

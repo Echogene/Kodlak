@@ -2,6 +2,7 @@ package standardgame.game;
 
 import model.game.AbstractGame;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import standardgame.alignment.VillagerWerewolfAlignment;
 import standardgame.phase.DayNightPhase;
 import standardgame.phase.PhaseChangeEvent;
@@ -16,6 +17,7 @@ import static standardgame.phase.PhaseStartEvent.NIGHT_START;
 /**
  * @author Steven Weston
  */
+@Component
 public class StandardGame
 		extends AbstractGame<DayNightPhase, VillagerWerewolfAlignment, StandardStatus, StandardRole, StandardPlayer> {
 

@@ -1,4 +1,4 @@
-package server;
+package standardgame.server;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

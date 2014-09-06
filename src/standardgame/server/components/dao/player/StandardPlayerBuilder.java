@@ -1,8 +1,8 @@
-package server.components.dao.player;
+package standardgame.server.components.dao.player;
 
 import model.alignment.AlignmentResolver;
-import server.components.dao.Builder;
-import server.components.dao.IdentifiableBuilder;
+import standardgame.server.components.dao.Builder;
+import standardgame.server.components.dao.IdentifiableBuilder;
 import standardgame.alignment.VillagerWerewolfAlignment;
 import standardgame.player.StandardPlayer;
 import standardgame.player.status.StandardStatus;

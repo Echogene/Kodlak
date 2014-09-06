@@ -2,7 +2,7 @@ package standardgame.player;
 
 import model.alignment.AlignmentResolver;
 import model.player.AbstractPlayer;
-import server.components.dao.Identifiable;
+import standardgame.server.components.dao.Identifiable;
 import standardgame.alignment.VillagerWerewolfAlignment;
 import standardgame.phase.DayNightPhase;
 import standardgame.player.status.StandardStatus;

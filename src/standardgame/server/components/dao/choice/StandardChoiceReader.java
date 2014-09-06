@@ -1,7 +1,7 @@
-package server.components.dao.choice;
+package standardgame.server.components.dao.choice;
 
-import server.components.dao.Identifier;
-import server.components.dao.Reader;
+import standardgame.server.components.dao.Identifier;
+import standardgame.server.components.dao.Reader;
 import standardgame.choice.ChoiceLock;
 import standardgame.choice.StandardChoice;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;

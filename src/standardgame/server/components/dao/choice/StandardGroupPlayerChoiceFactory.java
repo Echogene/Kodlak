@@ -1,4 +1,4 @@
-package server.components.dao.choice;
+package standardgame.server.components.dao.choice;
 
 import model.choice.group.GroupChoice;
 import model.choice.group.GroupChoiceFactory;
