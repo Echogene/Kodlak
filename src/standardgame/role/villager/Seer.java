@@ -66,7 +66,7 @@ public class Seer extends AbstractVillagerRole {
 	private void revealAlignmentOf(StandardPlayer target) {
 
 		Alignment alignment = target.getVisibleAlignment();
-		messageSender.send(new SeerMessage(target, alignment));
+		messageSender.send(new SeerMessage(owner, target, alignment));
 	}
 
 	@Override
@@ -78,20 +78,31 @@ public class Seer extends AbstractVillagerRole {
 
 		private final StandardPlayer target;
 		private final Alignment alignment;
+		private final StandardPlayer seer;
 
-		private SeerMessage(StandardPlayer target, Alignment alignment) {
+		private SeerMessage(StandardPlayer seer, StandardPlayer target, Alignment alignment) {
+
+			this.seer = seer;
 			this.target = target;
 			this.alignment = alignment;
 		}
 
 		@Override
 		public String getMessage() {
-
 			return MessageFormat.format(
 					"{0} is {1} {2}.",
 					target.getName(),
 					alignment.getIndefiniteArticle(),
 					alignment.toString()
+			);
+		}
+
+		@Override
+		public String getSystemMessage() {
+			return MessageFormat.format(
+					"{0} saw that {1}",
+					seer.getName(),
+					getMessage()
 			);
 		}
 	}
