@@ -3,7 +3,7 @@ package standardgame.server.components.dao.player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import standardgame.server.components.dao.Identifier;
-import standardgame.server.components.messagesender.LoggedMessageSender;
+import standardgame.server.components.messagesender.PlayerMessageSender;
 import standardgame.server.components.messagesender.LoggedMessageSenderFactory;
 import standardgame.player.StandardPlayer;
 
@@ -23,7 +23,7 @@ public class StandardPlayerDao implements PlayerDao<StandardPlayer, StandardPlay
 
 	// todo: move these to a LoggedMessageSenderDao
 	private final LoggedMessageSenderFactory messageSenderFactory;
-	private final Map<StandardPlayer, LoggedMessageSender> messageSenders = new HashMap<>();
+	private final Map<StandardPlayer, PlayerMessageSender> messageSenders = new HashMap<>();
 
 	@Autowired
 	public StandardPlayerDao(Identifier identifier, LoggedMessageSenderFactory messageSenderFactory) {
@@ -62,7 +62,7 @@ public class StandardPlayerDao implements PlayerDao<StandardPlayer, StandardPlay
 				(player) -> {
 					players.add(player);
 
-					LoggedMessageSender messageSender = messageSenderFactory.create(player);
+					PlayerMessageSender messageSender = messageSenderFactory.create(player);
 					messageSenders.put(player, messageSender);
 				}
 		).build();

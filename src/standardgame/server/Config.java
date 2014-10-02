@@ -3,16 +3,17 @@ package standardgame.server;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import standardgame.server.components.dao.choice.StandardSinglePlayerChoiceFactory;
-import standardgame.server.components.dao.player.StandardPlayerDao;
-import standardgame.server.components.messagesender.LoggedMessageSenderFactory;
-import standardgame.server.components.messagesender.MessageLog;
 import standardgame.choice.ChoiceLock;
 import standardgame.game.StandardGame;
 import standardgame.role.StandardRoleAssigner;
 import standardgame.role.villager.SeerFactory;
 import standardgame.role.villager.VillagerFactory;
 import standardgame.role.werewolf.WerewolfFactory;
+import standardgame.server.components.dao.choice.StandardSinglePlayerChoiceFactory;
+import standardgame.server.components.dao.player.StandardPlayerDao;
+import standardgame.server.components.messagesender.LoggedMessageSenderFactory;
+import standardgame.server.components.messagesender.MessageLog;
+import standardgame.server.components.messagesender.SystemMessageSender;
 
 /**
  * @author Steven Weston
@@ -50,5 +51,10 @@ public class Config {
 	@Bean
 	public ChoiceLock getChoiceLock() {
 		return new ChoiceLock();
+	}
+
+	@Bean
+	public SystemMessageSender getSystemMessageSender() {
+		return new SystemMessageSender(getMessageLog());
 	}
 }

@@ -6,7 +6,7 @@ import model.player.Player;
 /**
  * @author Steven Weston
  */
-public class LoggedMessageSenderFactory implements MessageSenderFactory<LoggedMessageSender> {
+public class LoggedMessageSenderFactory implements MessageSenderFactory<PlayerMessageSender> {
 
 	private final MessageLog log;
 
@@ -15,8 +15,8 @@ public class LoggedMessageSenderFactory implements MessageSenderFactory<LoggedMe
 	}
 
 	@Override
-	public LoggedMessageSender create(Player<?, ?, ?, ?, ?> player) {
+	public PlayerMessageSender create(Player<?, ?, ?, ?, ?> player) {
 
-		return new LoggedMessageSender(log);
+		return new PlayerMessageSender(log, player);
 	}
 }
