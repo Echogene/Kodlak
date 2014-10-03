@@ -12,8 +12,8 @@ import static standardgame.alignment.VillagerWerewolfAlignment.VILLAGER;
  */
 public class Villager extends AbstractVillagerRole {
 
-	public Villager(StandardPlayer owner) {
-		super(owner);
+	public Villager(long id, StandardPlayer owner) {
+		super(id, owner);
 	}
 
 	@Override

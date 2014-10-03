@@ -9,11 +9,9 @@ import standardgame.phase.DayNightPhase;
 import standardgame.phase.PhaseChangeEvent;
 import standardgame.player.StandardPlayer;
 import standardgame.player.status.StandardStatus;
+import standardgame.role.RoleDao;
 import standardgame.role.StandardRole;
-import standardgame.server.components.messagesender.MessageLog;
 import standardgame.server.components.messagesender.SystemMessageSender;
-
-import java.text.MessageFormat;
 
 import static standardgame.phase.DayNightPhase.Phase.NIGHT;
 import static standardgame.phase.PhaseStartEvent.NIGHT_START;
@@ -26,11 +24,15 @@ public class StandardGame
 		extends AbstractGame<DayNightPhase, VillagerWerewolfAlignment, StandardStatus, StandardRole, StandardPlayer> {
 
 	private final SystemMessageSender messageSender;
+	private final RoleDao roleDao;
 
 	@Autowired
-	public StandardGame(SystemMessageSender messageSender) {
+	public StandardGame(SystemMessageSender messageSender, RoleDao roleDao) {
 		super(new DayNightPhase(NIGHT));
+
 		this.messageSender = messageSender;
+		this.roleDao = roleDao;
+
 		currentPhase.observe(NIGHT_START, this::onNightStart);
 	}
 

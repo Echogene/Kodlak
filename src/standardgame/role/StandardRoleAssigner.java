@@ -4,12 +4,10 @@ import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
 import model.role.RoleAssigner;
 import model.role.UnavailableRoleException;
+import org.springframework.beans.factory.annotation.Autowired;
 import standardgame.alignment.VillagerWerewolfAlignment;
 import standardgame.phase.DayNightPhase;
 import standardgame.player.StandardPlayer;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author Steven Weston
@@ -17,17 +15,18 @@ import java.util.Map;
 public class StandardRoleAssigner
 		implements RoleAssigner<DayNightPhase, VillagerWerewolfAlignment, StandardRole, StandardPlayer> {
 
-	private final Map<String, StandardRoleFactory<?>> factories;
+	private final RoleDao roleDao;
 
 	private final Multiset<String> availableRoles = HashMultiset.create();
 
-	public StandardRoleAssigner() {
-
-		this.factories = new HashMap<>();
+	@Autowired
+	public StandardRoleAssigner(RoleDao roleDao) {
+		this.roleDao = roleDao;
 	}
 
 	public void addRoleFactory(StandardRoleFactory<?> factory) {
-		factories.put(factory.getRoleName(), factory);
+		// todo: move this method
+		roleDao.addRoleFactory(factory);
 	}
 
 	@Override
@@ -38,11 +37,8 @@ public class StandardRoleAssigner
 		if (!availableRoles.contains(roleName)) {
 			throw new UnavailableRoleException();
 		}
-		StandardRoleFactory<?> factory = factories.get(roleName);
-		StandardRole role = factory.create(player);
-		player.getRoles().add(role);
 		availableRoles.remove(roleName);
-		return role;
+		return roleDao.create().create(roleName, player);
 	}
 
 	@Override
@@ -52,6 +48,7 @@ public class StandardRoleAssigner
 
 	@Override
 	public boolean isRoleSupported(String roleName) {
-		return factories.keySet().contains(roleName);
+		// todo: move this method and fix it
+		return true;
 	}
 }

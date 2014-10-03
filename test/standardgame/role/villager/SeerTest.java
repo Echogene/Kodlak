@@ -35,6 +35,7 @@ public class SeerTest {
 		when(player.getVisibleAlignment()).thenReturn(VILLAGER);
 
 		Seer seerRole = new Seer(
+				0,
 				player,
 				Collections.singleton(player),
 				new FirstSingleChoiceFactory<>(),
@@ -57,6 +58,7 @@ public class SeerTest {
 		when(otherPlayer.getVisibleAlignment()).thenReturn(VILLAGER);
 
 		Seer seerRole = new Seer(
+				0,
 				seer,
 				Arrays.asList(otherPlayer, seer),
 				new FirstSingleChoiceFactory<>(),
@@ -79,6 +81,7 @@ public class SeerTest {
 		when(otherPlayer.getVisibleAlignment()).thenReturn(WEREWOLF);
 
 		Seer seerRole = new Seer(
+				0,
 				seer,
 				Arrays.asList(otherPlayer, seer),
 				new FirstSingleChoiceFactory<>(),
@@ -97,6 +100,7 @@ public class SeerTest {
 		when(seer.getName()).thenReturn("Seer");
 
 		Seer seerRole = new Seer(
+				0,
 				seer,
 				Collections.singletonList(seer),
 				new FirstSingleChoiceFactory<>(),

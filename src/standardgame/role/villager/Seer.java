@@ -32,6 +32,7 @@ public class Seer extends AbstractVillagerRole {
 	private final MessageSender messageSender;
 
 	public Seer(
+			long id,
 			StandardPlayer owner,
 			Collection<StandardPlayer> players,
 			SingleChoiceFactory<
@@ -41,7 +42,7 @@ public class Seer extends AbstractVillagerRole {
 			> choiceFactory,
 			MessageSender messageSender
 	) {
-		super(owner);
+		super(id, owner);
 		this.players = players;
 		this.choiceFactory = choiceFactory;
 		this.messageSender = messageSender;

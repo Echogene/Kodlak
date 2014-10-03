@@ -10,7 +10,7 @@ import standardgame.player.StandardPlayer;
  */
 public abstract class StandardRole extends AbstractRole<DayNightPhase, VillagerWerewolfAlignment, StandardPlayer> {
 
-	public StandardRole(StandardPlayer owner) {
-		super(owner);
+	protected StandardRole(long id, StandardPlayer owner) {
+		super(id, owner);
 	}
 }

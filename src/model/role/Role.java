@@ -6,11 +6,12 @@ import model.alignment.Alignment;
 import model.effect.Effect;
 import model.phase.Phase;
 import model.player.Player;
+import standardgame.server.components.dao.Identifiable;
 
 /**
  * @author Steven Weston
  */
-public interface Role<P extends Phase, A extends Alignment, Y extends Player> extends Aligned<A> {
+public interface Role<P extends Phase, A extends Alignment, Y extends Player> extends Aligned<A>, Identifiable {
 
 	/**
 	 * @return the effect this role has during the given phase

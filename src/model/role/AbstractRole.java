@@ -10,14 +10,22 @@ import org.codehaus.jackson.annotate.JsonIgnore;
  */
 public abstract class AbstractRole<P extends Phase, A extends Alignment, Y extends Player> implements Role<P, A, Y> {
 
+	protected final long id;
+
 	@JsonIgnore
 	protected final Y owner;
 
-	public AbstractRole(Y owner) {
+	protected AbstractRole(long id, Y owner) {
+		this.id = id;
 		this.owner = owner;
 	}
 
 	public Y getOwner() {
 		return owner;
+	}
+
+	@Override
+	public long getId() {
+		return id;
 	}
 }

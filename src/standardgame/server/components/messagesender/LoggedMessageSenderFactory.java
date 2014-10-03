@@ -1,12 +1,12 @@
 package standardgame.server.components.messagesender;
 
 import model.message.MessageSenderFactory;
-import model.player.Player;
+import standardgame.player.StandardPlayer;
 
 /**
  * @author Steven Weston
  */
-public class LoggedMessageSenderFactory implements MessageSenderFactory<PlayerMessageSender> {
+public class LoggedMessageSenderFactory implements MessageSenderFactory<PlayerMessageSender, StandardPlayer> {
 
 	private final MessageLog log;
 
@@ -15,7 +15,7 @@ public class LoggedMessageSenderFactory implements MessageSenderFactory<PlayerMe
 	}
 
 	@Override
-	public PlayerMessageSender create(Player<?, ?, ?, ?, ?> player) {
+	public PlayerMessageSender create(StandardPlayer player) {
 
 		return new PlayerMessageSender(log, player);
 	}

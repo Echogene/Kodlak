@@ -5,7 +5,7 @@ import model.player.Player;
 /**
  * @author Steven Weston
  */
-public interface MessageSenderFactory<S extends MessageSender> {
+public interface MessageSenderFactory<S extends MessageSender, P extends Player<?, ?, ?, ?, ?>> {
 
-	S create(Player<?, ?, ?, ?, ?> player);
+	S create(P player);
 }

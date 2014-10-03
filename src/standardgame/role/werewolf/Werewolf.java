@@ -28,6 +28,7 @@ public class Werewolf extends StandardRole {
 	> choiceFactory;
 
 	public Werewolf(
+			long id,
 			StandardPlayer owner,
 			Set<StandardPlayer> werewolves,
 			Set<StandardPlayer> players,
@@ -37,7 +38,7 @@ public class Werewolf extends StandardRole {
 					? extends GroupChoice<StandardPlayer, StandardPlayer>
 			> choiceFactory
 	) {
-		super(owner);
+		super(id, owner);
 		this.werewolves = werewolves;
 		this.players = players;
 		this.choiceFactory = choiceFactory;
