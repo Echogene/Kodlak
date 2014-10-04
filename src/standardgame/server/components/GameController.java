@@ -27,4 +27,11 @@ public class GameController {
 	public Phase getCurrentPhase() {
 		return game.getCurrentPhase();
 	}
+
+	@RequestMapping(value = "/advancePhase.do", method = GET)
+	@ResponseBody
+	public void advanceCurrentPhase() {
+		// todo: probably should check that we're not in the middle of doing something for a phase
+		game.getCurrentPhase().advance();
+	}
 }
