@@ -5,13 +5,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import standardgame.choice.ChoiceLock;
 import standardgame.role.RoleDao;
-import standardgame.role.StandardRoleAssigner;
 import standardgame.role.villager.SeerFactory;
 import standardgame.role.villager.VillagerFactory;
 import standardgame.role.werewolf.WerewolfFactory;
 import standardgame.server.components.messagesender.LoggedMessageSenderFactory;
 import standardgame.server.components.messagesender.MessageLog;
 import standardgame.server.components.messagesender.SystemMessageSender;
+
+import javax.annotation.PostConstruct;
 
 /**
  * @author Steven Weston
@@ -24,17 +25,12 @@ public class Config {
 	@Autowired private SeerFactory seerFactory;
 	@Autowired private VillagerFactory villagerFactory;
 
-	@Bean
-	public StandardRoleAssigner getRoleFactory() {
-
-		StandardRoleAssigner assigner = new StandardRoleAssigner(roleDao);
-
+	@PostConstruct
+	public void populateFactories() {
 		// Add more factories here:
-		assigner.addRoleFactory(werewolfFactory);
-		assigner.addRoleFactory(villagerFactory);
-		assigner.addRoleFactory(seerFactory);
-
-		return assigner;
+		roleDao.addRoleFactory(werewolfFactory);
+		roleDao.addRoleFactory(villagerFactory);
+		roleDao.addRoleFactory(seerFactory);
 	}
 
 	@Bean

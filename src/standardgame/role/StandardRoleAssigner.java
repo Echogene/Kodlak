@@ -5,6 +5,7 @@ import com.google.common.collect.Multiset;
 import model.role.RoleAssigner;
 import model.role.UnavailableRoleException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import standardgame.alignment.VillagerWerewolfAlignment;
 import standardgame.phase.DayNightPhase;
 import standardgame.player.StandardPlayer;
@@ -12,6 +13,7 @@ import standardgame.player.StandardPlayer;
 /**
  * @author Steven Weston
  */
+@Component
 public class StandardRoleAssigner
 		implements RoleAssigner<DayNightPhase, VillagerWerewolfAlignment, StandardRole, StandardPlayer> {
 
@@ -22,11 +24,6 @@ public class StandardRoleAssigner
 	@Autowired
 	public StandardRoleAssigner(RoleDao roleDao) {
 		this.roleDao = roleDao;
-	}
-
-	public void addRoleFactory(StandardRoleFactory<?> factory) {
-		// todo: move this method
-		roleDao.addRoleFactory(factory);
 	}
 
 	@Override
