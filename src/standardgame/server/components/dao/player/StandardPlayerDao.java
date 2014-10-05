@@ -26,7 +26,10 @@ public class StandardPlayerDao implements PlayerDao<StandardPlayer, StandardPlay
 	private final Map<StandardPlayer, PlayerMessageSender> messageSenders = new HashMap<>();
 
 	@Autowired
-	public StandardPlayerDao(Identifier identifier, LoggedMessageSenderFactory messageSenderFactory) {
+	public StandardPlayerDao(
+			Identifier identifier,
+			LoggedMessageSenderFactory messageSenderFactory
+	) {
 
 		this.messageSenderFactory = messageSenderFactory;
 		this.players = new HashSet<>();
