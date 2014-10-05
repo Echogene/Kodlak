@@ -3,6 +3,7 @@
 <head>
     <title>Kodlak: Game in Progress</title>
     <%@include file="include_common.jsp"%>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/sidebar/action_section.js"></script>
 </head>
 <body>
     <div id="main">
@@ -16,6 +17,14 @@
         playerCanvas.refresh();
 
         var sidebar = new Sidebar();
+        sidebar.addSection(
+                new ActionSection(
+                        function() {
+                            alert('lol')
+                        },
+                        'Advance phase'
+                )
+        );
         var sidebarContent = sidebar.create();
         $('#sidebarContainer').append(sidebarContent);
     </script>
