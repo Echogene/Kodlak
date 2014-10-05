@@ -2,6 +2,7 @@ package standardgame.choice;
 
 import model.choice.Choice;
 import model.choice.ChoiceException;
+import org.springframework.stereotype.Component;
 
 import java.util.Collections;
 import java.util.Set;
@@ -13,6 +14,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * A lock for choices that keeps a list of them that are waiting to be chosen.
  * @author Steven Weston
  */
+@Component
 public class ChoiceLock {
 
 	private final ReentrantLock lock = new ReentrantLock();

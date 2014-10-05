@@ -2,6 +2,7 @@ package standardgame.server.components.messagesender;
 
 import model.message.Message;
 import org.jetbrains.annotations.Nullable;
+import org.springframework.stereotype.Component;
 import standardgame.player.StandardPlayer;
 import standardgame.server.components.dao.Identifiable;
 import util.MapUtils;
@@ -16,6 +17,7 @@ import static util.function.FunctionUtils.safeGet;
 /**
  * @author Steven Weston
  */
+@Component
 public class MessageLog {
 
 	private final Map<Long, List<Message>> messages = new HashMap<>();
