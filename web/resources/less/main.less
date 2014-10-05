@@ -101,6 +101,20 @@ button {
 		font-size: large;
 		padding: 5px 0px;
 	}
+
+	&:not(:last-child):after {
+		content: '';
+		margin-top: 4px;
+		margin-bottom: 4px;
+		border-bottom: 2px solid black;
+		display: block;
+	}
+}
+
+.link.section {
+	width: 100%;
+	text-align: center;
+	display: block;
 }
 
 .role.section {

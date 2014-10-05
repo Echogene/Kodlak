@@ -6,6 +6,7 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/add_player_control.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/role_control.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/role_section.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/link_section.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/add_role_control.js"></script>
 </head>
 <body>
@@ -23,6 +24,7 @@
 
         var sidebar = new Sidebar();
         sidebar.addSection(roleSection);
+        sidebar.addSection(new LinkSection('/play', 'Finish setup'));
         var sidebarContent = sidebar.create();
         $('#sidebarContainer').append(sidebarContent);
     </script>
