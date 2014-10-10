@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import standardgame.game.StandardGame;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 /**
  * @author Steven Weston
@@ -28,7 +29,7 @@ public class GameController {
 		return game.getCurrentPhase();
 	}
 
-	@RequestMapping(value = "/advancePhase.do", method = GET)
+	@RequestMapping(value = "/advancePhase.do", method = POST)
 	@ResponseBody
 	public void advanceCurrentPhase() {
 		// todo: probably should check that we're not in the middle of doing something for a phase

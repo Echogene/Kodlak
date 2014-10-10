@@ -10,7 +10,7 @@ function ActionSection(onClick, text) {
 	 * @type {string}
 	 * @private
 	 */
-	this._onClick = onClick;
+	this._onClick = onClick.bind(this);
 	/**
 	 * @type {string}
 	 * @private

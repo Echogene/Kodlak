@@ -18,12 +18,19 @@
 
         var sidebar = new Sidebar();
         sidebar.addSection(
-                new ActionSection(
+            new ActionSection(
+                function() {
+                    $.post(
+                        'advancePhase.do',
                         function() {
-                            alert('lol')
-                        },
-                        'Advance phase'
-                )
+                            flashBackground(this._control, '#20f020');
+                        }.bind(this)
+                    ).fail(function() {
+                        flashBackground(this._control, '#f03020');
+                    }.bind(this));
+                },
+                'Advance phase'
+            )
         );
         var sidebarContent = sidebar.create();
         $('#sidebarContainer').append(sidebarContent);
