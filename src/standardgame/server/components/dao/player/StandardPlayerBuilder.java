@@ -14,11 +14,16 @@ import java.util.function.Consumer;
  */
 public class StandardPlayerBuilder extends IdentifiableBuilder<StandardPlayer, StandardPlayerBuilder.PlayerBuilderRequiringName> {
 
-	private AlignmentResolver<VillagerWerewolfAlignment> resolver;
+	private final AlignmentResolver<VillagerWerewolfAlignment> resolver;
 	private final Consumer<StandardPlayer> onCreation;
 
-	public StandardPlayerBuilder(int id, Consumer<StandardPlayer> onCreation) {
+	public StandardPlayerBuilder(
+			int id,
+			AlignmentResolver<VillagerWerewolfAlignment> resolver,
+			Consumer<StandardPlayer> onCreation
+	) {
 		super(id);
+		this.resolver = resolver;
 		this.onCreation = onCreation;
 	}
 

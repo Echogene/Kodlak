@@ -2,12 +2,14 @@ package standardgame.alignment;
 
 import model.alignment.Aligned;
 import model.alignment.AlignmentResolver;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
  * @author Steven Weston
  */
+@Component
 public class VillagerWerewolfAlignmentResolver implements AlignmentResolver<VillagerWerewolfAlignment> {
 
 	@Override

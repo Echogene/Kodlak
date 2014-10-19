@@ -1,7 +1,9 @@
 package standardgame.server.components.dao.player;
 
+import model.alignment.AlignmentResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import standardgame.alignment.VillagerWerewolfAlignment;
 import standardgame.server.components.dao.Identifier;
 import standardgame.server.components.messagesender.PlayerMessageSender;
 import standardgame.server.components.messagesender.LoggedMessageSenderFactory;
@@ -20,6 +22,7 @@ public class StandardPlayerDao implements PlayerDao<StandardPlayer, StandardPlay
 
 	private final Set<StandardPlayer> players;
 	private final Identifier identifier;
+	private final AlignmentResolver<VillagerWerewolfAlignment> resolver;
 
 	// todo: move these to a LoggedMessageSenderDao
 	private final LoggedMessageSenderFactory messageSenderFactory;
@@ -28,9 +31,11 @@ public class StandardPlayerDao implements PlayerDao<StandardPlayer, StandardPlay
 	@Autowired
 	public StandardPlayerDao(
 			Identifier identifier,
+			AlignmentResolver<VillagerWerewolfAlignment> resolver,
 			LoggedMessageSenderFactory messageSenderFactory
 	) {
 
+		this.resolver = resolver;
 		this.messageSenderFactory = messageSenderFactory;
 		this.players = new HashSet<>();
 		this.identifier = identifier;
@@ -62,6 +67,7 @@ public class StandardPlayerDao implements PlayerDao<StandardPlayer, StandardPlay
 	public StandardPlayerBuilder.PlayerBuilderRequiringName create() {
 		return new StandardPlayerBuilder(
 				identifier.getNewId(),
+				resolver,
 				(player) -> {
 					players.add(player);
 
