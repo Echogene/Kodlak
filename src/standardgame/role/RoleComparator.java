@@ -1,7 +1,6 @@
 package standardgame.role;
 
 import org.springframework.stereotype.Component;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.Comparator;
 
@@ -14,6 +13,7 @@ public class RoleComparator implements Comparator<StandardRole> {
 	@Override
 	public int compare(StandardRole role1, StandardRole role2) {
 
-		throw new NotImplementedException();
+		// todo: apply a sensible order
+		return role1.getName().compareTo(role2.getName());
 	}
 }
