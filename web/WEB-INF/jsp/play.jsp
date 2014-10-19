@@ -16,7 +16,11 @@
         $('#playerCanvasContainer').append(canvas);
         playerCanvas.refresh();
 
-        // todo: add the night class name if the game starts at night
+        if ('NIGHT' === "${phase}") {
+            canvas.addClass('night');
+        } else {
+            canvas.removeClass('night');
+        }
 
         var sidebar = new Sidebar();
         sidebar.addSection(
