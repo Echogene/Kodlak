@@ -4,7 +4,6 @@ import com.sun.istack.internal.NotNull;
 import model.choice.ChoiceException;
 import model.choice.single.SingleChoice;
 import standardgame.player.StandardPlayer;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.Collection;
 
@@ -59,10 +58,5 @@ public class StandardSinglePlayerChoice extends SingleChoice<StandardPlayer, Sta
 	@Override
 	public boolean hasChosen() {
 		return choice != null;
-	}
-
-	@Override
-	public long getId() {
-		throw new NotImplementedException();
 	}
 }
